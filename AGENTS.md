@@ -23,8 +23,9 @@ entre. Eso condiciona todo lo que sigue.
 **No toques (salvo pedido explícito y consciente del usuario):**
 - `js/charts.js` — el helper de gráficos (envuelve a Chart.js). Infraestructura compartida.
 - `js/tema.js` — el interruptor de modo claro/oscuro del header. Ya anda solo.
-- `css/base.css` y `css/componentes.css` — estructura visual y componentes (botones, etc.).
-- `vendor/` — librerías de terceros (Chart.js). Nunca se edita.
+- `css/base.css`, `css/componentes.css` y `css/fuentes.css` — estructura visual,
+  componentes (botones, etc.) y la tipografía Inter.
+- `vendor/` y `assets/fonts/` — librerías y tipografía de terceros. Nunca se edita.
 - `.github/`, `.gitleaks.toml`, `.gitignore`, `SECURITY.md`, este archivo.
 
 Si una tarea parece necesitar editar `charts.js`, `tema.js`, `base.css` o
@@ -102,9 +103,9 @@ Repasá que el cambio pasaría la revisión automática (`.github/workflows/ci.y
 2. **Sin datos personales:** los archivos de `datos/` tienen solo datos agregados.
 3. **Sin recursos de internet:** no hay `src`/`href` con `http`/`https`.
 4. **Sin datos crudos ni planillas** versionados (nada en `datos-fuente/` va al repo, ningún `.xlsx`).
-5. **Design system intacto:** `index.html` sigue enlazando `tokens.css`, `base.css`,
-   `charts.js` y `tema.js`, y conserva el botón `#boton-tema`; no hay colores
-   escritos a mano.
+5. **Design system intacto:** `index.html` sigue enlazando `fuentes.css`, `tokens.css`,
+   `base.css`, `charts.js` y `tema.js`, y conserva el botón `#boton-tema`; no hay
+   colores escritos a mano.
 6. El tablero **carga y se ve** (probalo con `python3 -m http.server` y revisá
    que no haya errores en la consola del navegador). Probá también el botón de
    modo oscuro: el tablero entero y los gráficos tienen que cambiar de tema.

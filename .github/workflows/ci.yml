@@ -70,6 +70,7 @@ jobs:
       - name: El tablero usa el design system
         run: |
           miss=0
+          grep -q 'css/fuentes.css' index.html || { echo "::error::index.html no enlaza css/fuentes.css (la tipografía Inter)"; miss=1; }
           grep -q 'css/tokens.css' index.html || { echo "::error::index.html no enlaza css/tokens.css"; miss=1; }
           grep -q 'css/base.css'   index.html || { echo "::error::index.html no enlaza css/base.css"; miss=1; }
           grep -q 'js/charts.js'   index.html || { echo "::error::index.html no enlaza js/charts.js"; miss=1; }

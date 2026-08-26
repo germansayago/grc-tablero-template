@@ -14,16 +14,19 @@ colores y los chequeos de seguridad ya vienen resueltos.
 index.html          el tablero (la página). Editás títulos y paneles.
 guia-diseno.html    el sistema de diseño: colores, tipografía, botones, gráficos.
 css/
-  tokens.css        ← la paleta y la tipografía. Se toca SOLO acá.
+  fuentes.css       la tipografía (Inter). NO se toca.
+  tokens.css        ← la paleta y los tamaños. Se toca SOLO acá.
   base.css          header, footer, grilla, tarjetas. Casi nunca se toca.
   componentes.css   botones, estados y clases de texto. Casi nunca se toca.
 js/
   charts.js         el helper de gráficos (envuelve a Chart.js). NO se toca.
+  tema.js           el interruptor de modo claro/oscuro. NO se toca.
   tablero.js        ← TU lógica: cargar datos y dibujar. El archivo que editás.
 vendor/             librerías de terceros (Chart.js), guardadas en el repo. NO se toca.
 datos/              tus datos publicables (.json), ya agregados.
 datos-fuente/       datos crudos — NO se suben (está en .gitignore).
 assets/img/         imágenes y el logo.
+assets/fonts/       la tipografía Inter, guardada en el repo. NO se toca.
 SECURITY.md         las 3 reglas de seguridad. Leelo una vez.
 AGENTS.md           las reglas que sigue el agente de IA. La fuente de verdad.
 .github/workflows/  la revisión automática que corre en GitHub.
