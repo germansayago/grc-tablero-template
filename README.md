@@ -51,20 +51,24 @@ El resto ya funciona.**
 
 2. **Cloná tu repo** y abrilo en tu editor.
 
-3. **Vé el ejemplo funcionando.** Abrí `index.html` en el navegador (o, mejor,
-   levantá un servidor local para que cargue el JSON):
+3. **Vé el ejemplo funcionando.** ⚠️ **No abras el archivo con doble clic** —
+   el tablero carga sus datos con `fetch()`, y eso no funciona si lo abrís
+   directo desde la carpeta (se va a ver vacío, sin gráficos). Necesitás un
+   servidor local, así:
 
    ```bash
    python3 -m http.server 8000
    ```
 
-   y entrá a `http://localhost:8000`. Vas a ver un tablero de ejemplo completo.
+   y entrá a `http://localhost:8000` (Python ya viene instalado en Mac y
+   Linux). Vas a ver un tablero de ejemplo completo. Esto vale para
+   `index.html`, `guia-diseno.html` y `tablero-demo.html` por igual.
 
 4. **Poné tus datos.** Reemplazá `datos/ejemplo.json` por tu archivo (ya
    agregado, sin datos de personas — ver `SECURITY.md`).
 
 5. **Editá `js/tablero.js`.** Es el único archivo con lógica. Cambiá el nombre
-   del JSON y ajustá las llamadas a `Chart.crear(...)` para tus gráficos.
+   del JSON y ajustá las llamadas a `Grafico.crear(...)` para tus gráficos.
 
 6. **Editá los textos de `index.html`:** el título, la bajada y los títulos de
    cada panel.

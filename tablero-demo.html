@@ -194,9 +194,14 @@
 
       } catch (error) {
         const main = document.querySelector('main .contenedor');
+        const mensaje = location.protocol === 'file:'
+          ? 'Esta página se abrió directo desde la carpeta (doble clic) y por eso no puede cargar los datos. '
+            + 'Corré "python3 -m http.server" en la carpeta del proyecto y abrí http://localhost:8000 en el '
+            + 'navegador — ver README.md.'
+          : error.message;
         if (main) {
           main.innerHTML = '<div class="error"><strong>No se pudo mostrar el tablero.</strong><br>'
-            + escapar(error.message) + '</div>';
+            + escapar(mensaje) + '</div>';
         }
       }
     }

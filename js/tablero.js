@@ -46,7 +46,7 @@ async function iniciar() {
     });
 
   } catch (error) {
-    mostrarError(error.message);
+    mostrarError(mensajeDeError(error));
   }
 }
 
@@ -66,6 +66,18 @@ function pintarKpis(kpis) {
       <p class="valor">${Grafico.formatearNumero(k.valor)}</p>
       <p class="detalle">${escapar(k.detalle || '')}</p>
     </div>`).join('');
+}
+
+/* Si el archivo se abrió con doble clic (protocolo file://), fetch() no
+   puede traer los datos y el error real es críptico. Acá lo cambiamos por
+   uno que dice qué hacer. */
+function mensajeDeError(error) {
+  if (location.protocol === 'file:') {
+    return 'Este archivo se abrió directo desde la carpeta (doble clic) y por eso no puede cargar los datos. '
+      + 'Corré "python3 -m http.server" en esta carpeta y abrí http://localhost:8000 en el navegador '
+      + '— ver README.md.';
+  }
+  return error.message;
 }
 
 function mostrarError(mensaje) {
