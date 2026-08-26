@@ -35,18 +35,27 @@ body {
 .encabezado .contenedor {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .encabezado .logo {
-  height: 40px;
+  height: 46px;
   width: auto;
   flex: 0 0 auto;
 }
 
+/* Separador vertical entre el logo y el nombre del equipo. */
+.encabezado .separador {
+  width: 1px;
+  align-self: stretch;
+  background: var(--marca-texto);
+  opacity: 0.4;
+}
+
 .encabezado .titulos h1 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   line-height: 1.2;
 }
 

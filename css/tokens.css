@@ -16,23 +16,25 @@
   --texto:       #14140f;   /* texto principal */
   --texto-suave: #57564f;   /* subtítulos, notas, ejes */
 
-  /* --- Colores de marca (header / footer) --------------------------------- */
-  --marca:         #1f4f8f;  /* color institucional principal */
-  --marca-texto:   #ffffff;  /* texto sobre el color de marca */
+  /* --- Colores de marca (header / footer) ---------------------------------
+     Paleta oficial del Gobierno de Río Cuarto (riocuarto.gob.ar). */
+  --marca:         #009de0;  /* celeste institucional */
+  --marca-texto:   #ffffff;  /* texto/logo sobre el color de marca */
 
   /* --- Colores de serie para los gráficos ---------------------------------
-     Usalos SIEMPRE en orden (serie-1, luego serie-2, etc.). Están elegidos
-     para distinguirse entre sí también con daltonismo. No agregues colores
-     nuevos ni los mezcles: si necesitás más de 8 series, el gráfico es
-     demasiado denso y conviene repensarlo. */
-  --serie-1: #2a78d6;  /* azul */
-  --serie-2: #eb6834;  /* naranja */
-  --serie-3: #1baf7a;  /* verde agua */
-  --serie-4: #eda100;  /* amarillo */
-  --serie-5: #e87ba4;  /* magenta */
-  --serie-6: #4a3aa7;  /* violeta */
-  --serie-7: #008300;  /* verde */
-  --serie-8: #e34948;  /* rojo */
+     Basados en la paleta oficial (celeste, naranja, verde, rosa). Usalos
+     SIEMPRE en orden (serie-1, luego serie-2, etc.). Los primeros cuatro son
+     los colores de marca; el resto se sumaron para que sigan distinguiéndose
+     entre sí. No agregues colores nuevos: si necesitás más de 8 series, el
+     gráfico es demasiado denso y conviene repensarlo. */
+  --serie-1: #009de0;  /* celeste (marca) */
+  --serie-2: #ff7825;  /* naranja (marca) */
+  --serie-3: #00a85a;  /* verde (marca) */
+  --serie-4: #ff3cb2;  /* rosa (marca) */
+  --serie-5: #6a4cff;  /* violeta */
+  --serie-6: #f2b705;  /* amarillo */
+  --serie-7: #0a6079;  /* petróleo */
+  --serie-8: #e23b3b;  /* rojo */
 
   /* --- Estados (reservados: NO los uses como color de serie) --------------- */
   --ok:     #008300;
@@ -57,16 +59,16 @@
     --texto:       #f6f6f2;
     --texto-suave: #b9b8ad;
 
-    --marca:       #2a5ca0;
+    --marca:       #0a86bd;   /* celeste institucional, algo más profundo para fondo oscuro */
     --marca-texto: #ffffff;
 
-    --serie-1: #3987e5;
-    --serie-2: #d95926;
-    --serie-3: #199e70;
-    --serie-4: #c98500;
-    --serie-5: #d55181;
-    --serie-6: #9085e9;
-    --serie-7: #2a9d2a;
-    --serie-8: #e66767;
+    --serie-1: #35b4ea;
+    --serie-2: #ff8f4d;
+    --serie-3: #1fc47c;
+    --serie-4: #ff63c4;
+    --serie-5: #9585ff;
+    --serie-6: #ffca3a;
+    --serie-7: #4fa6bf;
+    --serie-8: #ef6a6a;
   }
 }
