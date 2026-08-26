@@ -15,18 +15,22 @@ entre. Eso condiciona todo lo que sigue.
 
 **Editá libremente:**
 - `index.html` — títulos, textos, y los paneles (`<div class="grafico" id="...">`).
-- `js/tablero.js` — la lógica del tablero: cargar los datos y llamar a `Chart.crear`.
+- `js/tablero.js` — la lógica del tablero: cargar los datos y llamar a `Grafico.crear`.
 - `datos/` — los archivos de datos publicables (`.json`).
 - `css/tokens.css` — SOLO los **valores** de las variables (colores, tipografía),
   si te piden cambiar la estética. No borres variables ni cambies sus nombres.
 
 **No toques (salvo pedido explícito y consciente del usuario):**
-- `js/charts.js` — el helper de gráficos. Es infraestructura compartida.
-- `css/base.css` — la estructura visual (header, footer, grilla, tarjetas).
+- `js/charts.js` — el helper de gráficos (envuelve a Chart.js). Infraestructura compartida.
+- `css/base.css` y `css/componentes.css` — estructura visual y componentes (botones, etc.).
+- `vendor/` — librerías de terceros (Chart.js). Nunca se edita.
 - `.github/`, `.gitleaks.toml`, `.gitignore`, `SECURITY.md`, este archivo.
 
-Si una tarea parece necesitar editar `charts.js` o `base.css`, **pará y
-explicá por qué** antes de hacerlo. Casi siempre hay otra forma.
+Si una tarea parece necesitar editar `charts.js`, `base.css` o `vendor/`, **pará
+y explicá por qué** antes de hacerlo. Casi siempre hay otra forma.
+
+Para ver el design system completo (colores, tipografía, botones, gráficos),
+abrí `guia-diseno.html`.
 
 ---
 
@@ -36,14 +40,16 @@ explicá por qué** antes de hacerlo. Casi siempre hay otra forma.
   CSS. Todo color sale de las variables de `css/tokens.css` (`--serie-1..8`,
   `--marca`, `--texto`, etc.). Si necesitás un color que no existe, es señal de
   que algo está mal: preguntá.
-- **Los gráficos se hacen SOLO con `Chart.crear(selector, config)`** (ver
-  `README.md`). Tipos disponibles: `'barras'`, `'lineas'`, `'dona'`. No agregues
-  otra librería de gráficos ni dibujes SVG a mano en `tablero.js`.
+- **Los gráficos se hacen SOLO con `Grafico.crear(selector, config)`** (ver
+  `README.md`). Tipos: `'barras'`, `'lineas'`, `'area'`, `'dona'`. Por debajo usa
+  Chart.js, pero **no llames a `new Chart(...)` directo**: se sale del diseño.
 - Para agregar un gráfico: primero un contenedor en el HTML
   (`<div class="grafico" id="g-loquesea"></div>`), después la llamada a
-  `Chart.crear('#g-loquesea', {...})` en `tablero.js`.
+  `Grafico.crear('#g-loquesea', {...})` en `tablero.js`.
+- Los botones usan la clase `.boton` (+ variante); la tipografía, las clases
+  `.titulo-*`. No inventes estilos: mirá `guia-diseno.html`.
 - No agregues dependencias de diseño (Bootstrap, Tailwind, fuentes de Google,
-  íconos de un CDN). El estilo ya está resuelto en el design system.
+  íconos de un CDN, otra librería de gráficos). El estilo ya está resuelto.
 
 ---
 

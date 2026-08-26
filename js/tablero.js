@@ -6,7 +6,7 @@
    system (css/tokens.css + js/charts.js). Vos solo decís qué mostrar.
 
    Este ejemplo carga datos/ejemplo.json y arma cuatro gráficos. Usalo de
-   molde: reemplazá el JSON por el tuyo y ajustá las llamadas a Chart.crear.
+   molde: reemplazá el JSON por el tuyo y ajustá las llamadas a Grafico.crear.
    ========================================================================== */
 
 // 1) Cargá tus datos. Deben ser datos YA AGREGADOS y publicables
@@ -21,7 +21,7 @@ async function iniciar() {
     pintarKpis(datos.kpis);
 
     // 2) Un gráfico de líneas con dos series (evolución en el tiempo).
-    Chart.crear('#g-evolucion', {
+    Grafico.crear('#g-evolucion', {
       tipo: 'lineas',
       titulo: 'Evolución mensual',
       etiquetas: datos.evolucion.meses,
@@ -32,14 +32,14 @@ async function iniciar() {
     });
 
     // 3) Barras: comparar categorías (forma simple, una serie).
-    Chart.crear('#g-areas', {
+    Grafico.crear('#g-areas', {
       tipo: 'barras',
       titulo: 'Trámites por área',
       datos: datos.porArea
     });
 
     // 4) Dona: composición / porcentajes.
-    Chart.crear('#g-canales', {
+    Grafico.crear('#g-canales', {
       tipo: 'dona',
       titulo: 'Trámites por canal',
       datos: datos.canales
@@ -63,7 +63,7 @@ function pintarKpis(kpis) {
   cont.innerHTML = kpis.map(k => `
     <div class="kpi">
       <p class="etiqueta">${escapar(k.etiqueta)}</p>
-      <p class="valor">${Chart.formatearNumero(k.valor)}</p>
+      <p class="valor">${Grafico.formatearNumero(k.valor)}</p>
       <p class="detalle">${escapar(k.detalle || '')}</p>
     </div>`).join('');
 }

@@ -6,9 +6,10 @@
   <!-- CAMBIÁ el título por el de tu tablero -->
   <title>Tablero — Gobierno de Río Cuarto</title>
 
-  <!-- El design system. No hace falta tocar estas dos líneas. -->
+  <!-- El design system. No hace falta tocar estas líneas. -->
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
 </head>
 <body>
 
@@ -69,7 +70,8 @@
     </div>
   </footer>
 
-  <!-- El helper de gráficos y TU lógica. charts.js primero. -->
+  <!-- Chart.js (vendorizado), el helper del design system y TU lógica. En este orden. -->
+  <script src="vendor/chart.umd.js"></script>
   <script src="js/charts.js"></script>
   <script src="js/tablero.js"></script>
 </body>

@@ -12,12 +12,15 @@ colores y los chequeos de seguridad ya vienen resueltos.
 
 ```
 index.html          el tablero (la página). Editás títulos y paneles.
+guia-diseno.html    el sistema de diseño: colores, tipografía, botones, gráficos.
 css/
   tokens.css        ← la paleta y la tipografía. Se toca SOLO acá.
   base.css          header, footer, grilla, tarjetas. Casi nunca se toca.
+  componentes.css   botones, estados y clases de texto. Casi nunca se toca.
 js/
-  charts.js         el helper de gráficos. NO se toca.
+  charts.js         el helper de gráficos (envuelve a Chart.js). NO se toca.
   tablero.js        ← TU lógica: cargar datos y dibujar. El archivo que editás.
+vendor/             librerías de terceros (Chart.js), guardadas en el repo. NO se toca.
 datos/              tus datos publicables (.json), ya agregados.
 datos-fuente/       datos crudos — NO se suben (está en .gitignore).
 assets/img/         imágenes y el logo.
@@ -70,12 +73,13 @@ El resto ya funciona.**
 
 ## Cómo se hace un gráfico
 
-Todo pasa por una sola función, `Chart.crear(selector, config)`. Los colores y
-el estilo salen del design system: vos solo pasás los datos.
+Todo pasa por una sola función, `Grafico.crear(selector, config)`. Por debajo
+usa **Chart.js** (guardado en `vendor/`, no se carga de internet), pero vos no
+lo tocás: los colores y el estilo salen solos del design system.
 
 ```js
 // Barras (una serie) — comparar categorías
-Chart.crear('#g-areas', {
+Grafico.crear('#g-areas', {
   tipo: 'barras',
   datos: [
     { etiqueta: 'Obras',    valor: 520 },
@@ -84,8 +88,8 @@ Chart.crear('#g-areas', {
 });
 
 // Líneas (una o varias series) — evolución en el tiempo
-Chart.crear('#g-evolucion', {
-  tipo: 'lineas',
+Grafico.crear('#g-evolucion', {
+  tipo: 'lineas',                  // 'area' para el mismo gráfico con relleno
   etiquetas: ['Ene', 'Feb', 'Mar'],
   series: [
     { nombre: 'Iniciados', valores: [280, 310, 295] },
@@ -94,7 +98,7 @@ Chart.crear('#g-evolucion', {
 });
 
 // Dona — composición / porcentajes
-Chart.crear('#g-canales', {
+Grafico.crear('#g-canales', {
   tipo: 'dona',
   datos: [
     { etiqueta: 'Web', valor: 900 },
@@ -103,8 +107,14 @@ Chart.crear('#g-canales', {
 });
 ```
 
-Para que un gráfico aparezca, en `index.html` tiene que haber un contenedor con
-ese id: `<div class="grafico" id="g-areas"></div>`.
+Tipos: `barras`, `lineas`, `area`, `dona`. Para que un gráfico aparezca, en
+`index.html` tiene que haber un contenedor con ese id:
+`<div class="grafico" id="g-areas"></div>`. Para un caso muy particular podés
+pasar `opciones: {...}` (se fusiona con Chart.js), pero usalo poco.
+
+**Botones y textos:** usá las clases `.boton` (+ `.boton--primario`, etc.) y
+`.titulo-*`. Todas están, en vivo, en **[`guia-diseno.html`](guia-diseno.html)**
+(abrila en el navegador).
 
 ---
 

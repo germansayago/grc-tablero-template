@@ -128,21 +128,10 @@ main { padding: 24px 0 8px; }
 .panel h3 { margin: 0 0 2px; font-size: 1rem; }
 .panel .nota { margin: 0 0 12px; font-size: 0.8rem; color: var(--texto-suave); }
 
-/* Contenedor donde el helper de gráficos dibuja el SVG. */
-.grafico { width: 100%; }
-.grafico svg { display: block; width: 100%; height: auto; }
-
-/* Leyenda de series (la dibuja charts.js). */
-.grafico-leyenda {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 10px;
-  font-size: 0.82rem;
-  color: var(--texto-suave);
-}
-.grafico-leyenda span { display: inline-flex; align-items: center; gap: 6px; }
-.grafico-leyenda i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+/* Contenedor donde Grafico.crear dibuja el gráfico (Chart.js usa <canvas>,
+   que necesita una altura fija en su contenedor). */
+.grafico { position: relative; height: 300px; width: 100%; }
+.grafico canvas { max-width: 100%; }
 
 /* --- Tabla ---------------------------------------------------------------- */
 

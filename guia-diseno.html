@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de diseño — Tableros Río Cuarto</title>
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/componentes.css">
+
+  <style>
+    /* Estilos propios SOLO de esta página de referencia. */
+    .seccion { margin: 36px 0; }
+    .seccion > h2 { font-size: 1.25rem; margin: 0 0 4px; }
+    .seccion > .ayuda { margin: 0 0 18px; color: var(--texto-suave); max-width: 70ch; }
+
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+    .swatch {
+      border: 1px solid var(--borde); border-radius: var(--radio);
+      overflow: hidden; background: var(--superficie);
+    }
+    .swatch .muestra { height: 64px; }
+    .swatch .info { padding: 8px 10px; }
+    .swatch .nombre { font-size: 0.85rem; font-weight: 600; }
+    .swatch .valor { font-size: 0.78rem; color: var(--texto-suave); font-variant-numeric: tabular-nums; }
+
+    .fila { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .muestra-tipo { border-bottom: 1px dashed var(--borde); padding: 8px 0; }
+    .muestra-tipo small { color: var(--texto-suave); font-size: 0.72rem; display: block; margin-top: 2px; }
+    code { background: color-mix(in srgb, var(--texto-suave) 12%, transparent); padding: 1px 6px; border-radius: 5px; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+
+  <header class="encabezado">
+    <div class="contenedor">
+      <img class="logo" src="assets/img/logo-gobierno.webp" alt="Gobierno de Río Cuarto">
+      <span class="separador" aria-hidden="true"></span>
+      <div class="titulos"><h1>Sistema de diseño</h1></div>
+    </div>
+  </header>
+
+  <main>
+    <div class="contenedor">
+
+      <section class="intro">
+        <h2 class="titulo-l">Sistema de diseño de los tableros</h2>
+        <p class="bajada">Los colores, la tipografía, los botones y los gráficos que usan todos los
+          tableros. Está construido con los mismos archivos que un tablero real
+          (<code>css/tokens.css</code>, <code>css/componentes.css</code>, <code>js/charts.js</code>),
+          así que lo que ves acá es exactamente lo que vas a obtener.</p>
+      </section>
+
+      <!-- ================= COLORES ================= -->
+      <section class="seccion">
+        <h2>Colores</h2>
+        <p class="ayuda">Se definen en <code>css/tokens.css</code>. Para cambiar la estética, cambiá
+          ahí los valores: se propagan a todo (gráficos y modo oscuro incluidos).</p>
+
+        <h3 class="titulo-s">Marca y superficies</h3>
+        <div class="swatches" id="sw-base" style="margin:8px 0 22px"></div>
+
+        <h3 class="titulo-s">Colores de serie (gráficos)</h3>
+        <p class="ayuda" style="margin:4px 0 8px">Se usan siempre en orden: la primera serie toma <code>--serie-1</code>, la segunda <code>--serie-2</code>, etc.</p>
+        <div class="swatches" id="sw-series" style="margin-bottom:22px"></div>
+
+        <h3 class="titulo-s">Estados</h3>
+        <div class="swatches" id="sw-estados" style="margin-top:8px"></div>
+      </section>
+
+      <!-- ================= TIPOGRAFÍA ================= -->
+      <section class="seccion">
+        <h2>Tipografía</h2>
+        <p class="ayuda">Una sola familia, la del sistema operativo (rápida y legible, sin descargar
+          fuentes). Clases de tamaño en <code>css/componentes.css</code>.</p>
+        <div class="muestra-tipo"><span class="titulo-xl">Título XL</span><small>.titulo-xl · 2rem / 700</small></div>
+        <div class="muestra-tipo"><span class="titulo-l">Título L</span><small>.titulo-l · 1.5rem / 700</small></div>
+        <div class="muestra-tipo"><span class="titulo-m">Título M</span><small>.titulo-m · 1.1rem / 600</small></div>
+        <div class="muestra-tipo"><span class="titulo-s">Título S</span><small>.titulo-s · 0.95rem / 600</small></div>
+        <div class="muestra-tipo"><span class="texto">Texto de párrafo normal. La base de lectura del tablero.</span><small>.texto · 1rem</small></div>
+        <div class="muestra-tipo"><span class="texto texto-suave">Texto suave, para notas y aclaraciones.</span><small>.texto-suave</small></div>
+        <div class="muestra-tipo"><span class="texto-chico texto-suave">Texto chico, para pies y referencias.</span><small>.texto-chico</small></div>
+        <div class="muestra-tipo"><span class="titulo-l texto-numero">1.234.567</span><small>.texto-numero · números alineados (tabular)</small></div>
+      </section>
+
+      <!-- ================= BOTONES ================= -->
+      <section class="seccion">
+        <h2>Botones</h2>
+        <p class="ayuda">En un tablero se usan poco (filtros, "descargar datos"). Clase base <code>.boton</code> + una variante.</p>
+        <div class="fila" style="margin-bottom:14px">
+          <button class="boton boton--primario">Primario</button>
+          <button class="boton boton--secundario">Secundario</button>
+          <button class="boton boton--sutil">Sutil</button>
+          <button class="boton boton--peligro">Peligro</button>
+          <button class="boton boton--primario" disabled>Deshabilitado</button>
+        </div>
+        <div class="fila">
+          <button class="boton boton--primario boton--chico">Chico</button>
+          <button class="boton boton--primario">Normal</button>
+          <button class="boton boton--primario boton--grande">Grande</button>
+        </div>
+      </section>
+
+      <!-- ================= ESTADOS ================= -->
+      <section class="seccion">
+        <h2>Etiquetas de estado</h2>
+        <div class="fila">
+          <span class="estado estado--ok">En regla</span>
+          <span class="estado estado--alerta">Con demora</span>
+          <span class="estado estado--grave">Vencido</span>
+          <span class="estado estado--neutro">Sin datos</span>
+        </div>
+      </section>
+
+      <!-- ================= GRÁFICOS ================= -->
+      <section class="seccion">
+        <h2>Gráficos</h2>
+        <p class="ayuda">Todos se hacen con <code>Grafico.crear('#id', {...})</code> (envuelve a Chart.js
+          y aplica la paleta solo). Tipos: <code>barras</code>, <code>lineas</code>, <code>area</code>, <code>dona</code>.</p>
+        <div class="grilla">
+          <div class="panel"><h3>barras</h3><p class="nota">Comparar categorías.</p><div class="grafico" id="d-barras"></div></div>
+          <div class="panel"><h3>lineas</h3><p class="nota">Evolución en el tiempo (varias series).</p><div class="grafico" id="d-lineas"></div></div>
+          <div class="panel"><h3>area</h3><p class="nota">Evolución con volumen.</p><div class="grafico" id="d-area"></div></div>
+          <div class="panel"><h3>dona</h3><p class="nota">Composición / porcentajes.</p><div class="grafico" id="d-dona"></div></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p>Sistema de diseño · Equipo de Estadísticas · Gobierno de Río Cuarto</p>
+      <p>Esta página se arma con los mismos archivos que un tablero.</p>
+    </div>
+  </footer>
+
+  <script src="vendor/chart.umd.js"></script>
+  <script src="js/charts.js"></script>
+  <script>
+    // --- Swatches de color, leídos en vivo desde tokens.css ---
+    function valorToken(nombre) {
+      return getComputedStyle(document.documentElement).getPropertyValue(nombre).trim();
+    }
+    function pintarSwatches(idContenedor, tokens) {
+      const cont = document.getElementById(idContenedor);
+      cont.innerHTML = tokens.map(t => `
+        <div class="swatch">
+          <div class="muestra" style="background: var(${t.v})"></div>
+          <div class="info">
+            <div class="nombre">${t.n}</div>
+            <div class="valor">${t.v} · ${valorToken(t.v) || '—'}</div>
+          </div>
+        </div>`).join('');
+    }
+
+    pintarSwatches('sw-base', [
+      { n: 'Marca',      v: '--marca' },
+      { n: 'Fondo',      v: '--fondo' },
+      { n: 'Superficie', v: '--superficie' },
+      { n: 'Borde',      v: '--borde' },
+      { n: 'Texto',      v: '--texto' },
+      { n: 'Texto suave',v: '--texto-suave' }
+    ]);
+    pintarSwatches('sw-series',
+      Array.from({ length: 8 }, (_, i) => ({ n: 'Serie ' + (i + 1), v: '--serie-' + (i + 1) })));
+    pintarSwatches('sw-estados', [
+      { n: 'OK',     v: '--ok' },
+      { n: 'Alerta', v: '--alerta' },
+      { n: 'Grave',  v: '--grave' }
+    ]);
+
+    // --- Gráficos de ejemplo ---
+    const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'];
+    Grafico.crear('#d-barras', {
+      tipo: 'barras',
+      datos: [
+        { etiqueta: 'Obras', valor: 520 }, { etiqueta: 'Habilit.', valor: 410 },
+        { etiqueta: 'Ambiente', valor: 300 }, { etiqueta: 'Tránsito', valor: 360 }
+      ]
+    });
+    Grafico.crear('#d-lineas', {
+      tipo: 'lineas', etiquetas: meses,
+      series: [
+        { nombre: 'Iniciados', valores: [280, 310, 295, 340, 305, 310] },
+        { nombre: 'Resueltos', valores: [210, 245, 260, 280, 255, 262] }
+      ]
+    });
+    Grafico.crear('#d-area', {
+      tipo: 'area', etiquetas: meses,
+      series: [{ nombre: 'Consultas', valores: [120, 180, 160, 240, 300, 280] }]
+    });
+    Grafico.crear('#d-dona', {
+      tipo: 'dona',
+      datos: [
+        { etiqueta: 'Presencial', valor: 620 },
+        { etiqueta: 'Web', valor: 900 },
+        { etiqueta: 'App', valor: 320 }
+      ]
+    });
+  </script>
+</body>
+</html>
