@@ -48,10 +48,22 @@
   --ancho-max: 1120px;
 }
 
-/* Modo oscuro: los mismos roles, con valores pensados para fondo oscuro.
-   El navegador lo activa solo según la preferencia del sistema del visitante. */
+/* ==========================================================================
+   Modo oscuro — los mismos roles, con valores pensados para fondo oscuro.
+
+   Se activa de DOS formas, que conviven:
+   1. Automática: si el sistema del visitante está en oscuro y no eligió nada
+      a mano (bloque @media de abajo, con :not([data-tema="claro"])).
+   2. Manual: el botón del header (js/tema.js) fuerza data-tema="oscuro" o
+      "claro" en el <html> y lo guarda, sin importar el sistema operativo.
+
+   Los dos bloques repiten los mismos valores a propósito (no hay forma de
+   compartirlos en CSS puro): si cambiás un color acá abajo, cambialo en los
+   dos.
+   ========================================================================== */
+
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-tema="claro"]) {
     color-scheme: dark;
     --fondo:       #121211;
     --superficie:  #1b1b19;
@@ -71,4 +83,25 @@
     --serie-7: #4fa6bf;
     --serie-8: #ef6a6a;
   }
+}
+
+:root[data-tema="oscuro"] {
+  color-scheme: dark;
+  --fondo:       #121211;
+  --superficie:  #1b1b19;
+  --borde:       #37372f;
+  --texto:       #f6f6f2;
+  --texto-suave: #b9b8ad;
+
+  --marca:       #0a86bd;
+  --marca-texto: #ffffff;
+
+  --serie-1: #35b4ea;
+  --serie-2: #ff8f4d;
+  --serie-3: #1fc47c;
+  --serie-4: #ff63c4;
+  --serie-5: #9585ff;
+  --serie-6: #ffca3a;
+  --serie-7: #4fa6bf;
+  --serie-8: #ef6a6a;
 }

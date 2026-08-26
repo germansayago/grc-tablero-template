@@ -22,12 +22,20 @@ entre. Eso condiciona todo lo que sigue.
 
 **No toques (salvo pedido explícito y consciente del usuario):**
 - `js/charts.js` — el helper de gráficos (envuelve a Chart.js). Infraestructura compartida.
+- `js/tema.js` — el interruptor de modo claro/oscuro del header. Ya anda solo.
 - `css/base.css` y `css/componentes.css` — estructura visual y componentes (botones, etc.).
 - `vendor/` — librerías de terceros (Chart.js). Nunca se edita.
 - `.github/`, `.gitleaks.toml`, `.gitignore`, `SECURITY.md`, este archivo.
 
-Si una tarea parece necesitar editar `charts.js`, `base.css` o `vendor/`, **pará
-y explicá por qué** antes de hacerlo. Casi siempre hay otra forma.
+Si una tarea parece necesitar editar `charts.js`, `tema.js`, `base.css` o
+`vendor/`, **pará y explicá por qué** antes de hacerlo. Casi siempre hay otra forma.
+
+**El modo oscuro ya está resuelto: no lo reimplementes.** El tablero sigue el
+tema del sistema operativo solo, y el botón `#boton-tema` del header (que ya
+viene en `index.html`) permite elegirlo a mano. Si copiás/adaptás el header
+para otro archivo (por ejemplo una segunda página), llevate también el botón,
+el script inline anti-titileo del `<head>` y el `<script src="js/tema.js">`
+— los tres juntos, o ninguno.
 
 Para ver el design system completo (colores, tipografía, botones, gráficos),
 abrí `guia-diseno.html`.
@@ -94,10 +102,12 @@ Repasá que el cambio pasaría la revisión automática (`.github/workflows/ci.y
 2. **Sin datos personales:** los archivos de `datos/` tienen solo datos agregados.
 3. **Sin recursos de internet:** no hay `src`/`href` con `http`/`https`.
 4. **Sin datos crudos ni planillas** versionados (nada en `datos-fuente/` va al repo, ningún `.xlsx`).
-5. **Design system intacto:** `index.html` sigue enlazando `tokens.css`, `base.css`
-   y `charts.js`; no hay colores escritos a mano.
+5. **Design system intacto:** `index.html` sigue enlazando `tokens.css`, `base.css`,
+   `charts.js` y `tema.js`, y conserva el botón `#boton-tema`; no hay colores
+   escritos a mano.
 6. El tablero **carga y se ve** (probalo con `python3 -m http.server` y revisá
-   que no haya errores en la consola del navegador).
+   que no haya errores en la consola del navegador). Probá también el botón de
+   modo oscuro: el tablero entero y los gráficos tienen que cambiar de tema.
 
 Si algo de esto no se cumple, no cierres la tarea: arreglalo o avisá.
 

@@ -73,6 +73,8 @@ jobs:
           grep -q 'css/tokens.css' index.html || { echo "::error::index.html no enlaza css/tokens.css"; miss=1; }
           grep -q 'css/base.css'   index.html || { echo "::error::index.html no enlaza css/base.css"; miss=1; }
           grep -q 'js/charts.js'   index.html || { echo "::error::index.html no enlaza js/charts.js"; miss=1; }
+          grep -q 'js/tema.js'     index.html || { echo "::error::index.html no enlaza js/tema.js (el botón de modo oscuro queda sin función)"; miss=1; }
+          grep -q 'id="boton-tema"' index.html || { echo "::error::index.html no tiene el botón #boton-tema del header"; miss=1; }
           [ "$miss" = 0 ] && echo "OK: el design system está enlazado."
           exit $miss
 

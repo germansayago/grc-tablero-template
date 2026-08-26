@@ -118,6 +118,18 @@ pasar `opciones: {...}` (se fusiona con Chart.js), pero usalo poco.
 
 ---
 
+## Modo oscuro
+
+Ya viene resuelto en la plantilla, no hay que hacer nada. El tablero sigue el
+modo del sistema operativo del visitante solo, y además tiene un botón (◐) en
+la esquina del header para elegirlo a mano — la elección queda guardada en ese
+navegador. Los gráficos se redibujan solos con los colores correctos al
+cambiar. Si armás una página nueva a partir de `index.html`, copiá el header
+completo (incluye el botón y el script anti-titileo del `<head>`) y el
+`<script src="js/tema.js">` del final.
+
+---
+
 ## Cambiar los colores o el logo (para el que arma el estándar)
 
 - **Paleta y tipografía:** `css/tokens.css`. Cambiás los valores de arriba y

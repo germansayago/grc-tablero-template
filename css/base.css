@@ -65,6 +65,36 @@ body {
   opacity: 0.85;
 }
 
+/* Interruptor de modo claro/oscuro (lo maneja js/tema.js). Va pegado al
+   borde derecho del header. */
+.boton-tema {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin-left: auto;
+  flex: 0 0 auto;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--marca-texto);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.boton-tema:hover { background: rgba(255, 255, 255, 0.28); }
+.boton-tema:focus-visible { outline: 2px solid var(--marca-texto); outline-offset: 2px; }
+.boton-tema svg { width: 19px; height: 19px; }
+
+/* Qué ícono se ve: lo decide js/tema.js con la clase .es-oscuro (contempla
+   tanto la elección manual como el modo del sistema operativo). Por defecto
+   se ve la luna, que invita a pasar a oscuro. */
+.boton-tema .icono-sol { display: none; }
+.boton-tema .icono-luna { display: block; }
+.boton-tema.es-oscuro .icono-sol { display: block; }
+.boton-tema.es-oscuro .icono-luna { display: none; }
+
 /* --- Cuerpo --------------------------------------------------------------- */
 
 main { padding: 24px 0 8px; }

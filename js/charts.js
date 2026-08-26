@@ -204,12 +204,13 @@ const Grafico = (function () {
     dibujar(selector, config);
   }
 
-  // Redibujar cuando el visitante cambia entre modo claro y oscuro.
+  // Redibujar cuando cambia el modo claro/oscuro: por el sistema operativo,
+  // o porque el visitante tocó el botón del header (js/tema.js).
+  function redibujarTodo() { registro.forEach(r => dibujar(r.selector, r.config)); }
   if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      registro.forEach(r => dibujar(r.selector, r.config));
-    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', redibujarTodo);
   }
+  document.addEventListener('tema:cambio', redibujarTodo);
 
   return { crear, formatearNumero: (v) => nf.format(v) };
 })();
