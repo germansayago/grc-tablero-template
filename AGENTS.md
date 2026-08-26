@@ -14,24 +14,23 @@ entre. Eso condiciona todo lo que sigue.
 ## 1. Qué podés editar y qué no
 
 **Editá libremente:**
-- `index.html` — títulos, textos, y los paneles (`<div class="grafico" id="...">`).
-- `js/tablero.js` — la lógica del tablero: cargar los datos y llamar a `Grafico.crear`.
+- `index.html` — títulos, textos, y el contenido de tu tablero.
+- `js/tablero.js` — la lógica del tablero: cargar los datos y mostrarlos.
 - `datos/` — los archivos de datos publicables (`.json`).
 - `css/tokens.css` — SOLO los **valores** de las variables (colores, tipografía),
   si te piden cambiar la estética. No borres variables ni cambies sus nombres.
 
 **No toques (salvo pedido explícito y consciente del usuario):**
-- `js/charts.js` — el helper de gráficos (envuelve a Chart.js). Infraestructura compartida.
 - `js/tema.js` — el interruptor de modo claro/oscuro del header. Ya anda solo.
 - `css/base.css`, `css/componentes.css` y `css/fuentes.css` — estructura visual,
   componentes (botones, etc.) y la tipografía Inter.
-- `vendor/` y `assets/fonts/` — librerías y tipografía de terceros. Nunca se edita.
-- `guia-diseno.html` y `tablero-demo.html` — páginas de referencia de la
-  plantilla, no de tu tablero. Se pueden mirar y copiar de ahí, no editar.
+- `assets/fonts/` — la tipografía Inter, de terceros. Nunca se edita.
+- `guia-diseno.html` — página de referencia del sistema de diseño, no de tu
+  tablero. Se puede mirar y copiar de ahí, no editar.
 - `.github/`, `.gitleaks.toml`, `.gitignore`, `SECURITY.md`, este archivo.
 
-Si una tarea parece necesitar editar `charts.js`, `tema.js`, `base.css` o
-`vendor/`, **pará y explicá por qué** antes de hacerlo. Casi siempre hay otra forma.
+Si una tarea parece necesitar editar `tema.js` o `base.css`, **pará y explicá
+por qué** antes de hacerlo. Casi siempre hay otra forma.
 
 **El modo oscuro ya está resuelto: no lo reimplementes.** El tablero sigue el
 tema del sistema operativo solo, y el botón `#boton-tema` del header (que ya
@@ -40,7 +39,7 @@ para otro archivo (por ejemplo una segunda página), llevate también el botón,
 el script inline anti-titileo del `<head>` y el `<script src="js/tema.js">`
 — los tres juntos, o ninguno.
 
-Para ver el design system completo (colores, tipografía, botones, gráficos),
+Para ver el design system completo (colores, tipografía, botones, estados),
 abrí `guia-diseno.html`.
 
 ---
@@ -48,20 +47,17 @@ abrí `guia-diseno.html`.
 ## 2. Diseño: usá el design system, no inventes
 
 - **Nunca escribas un color en el código.** Ni en JS, ni en HTML, ni suelto en
-  CSS. Todo color sale de las variables de `css/tokens.css` (`--serie-1..8`,
-  `--marca`, `--texto`, etc.). Si necesitás un color que no existe, es señal de
-  que algo está mal: preguntá.
-- **Los gráficos se hacen SOLO con `Grafico.crear(selector, config)`** (ver
-  `README.md`). Tipos: `'barras'`, `'lineas'`, `'area'`, `'dona'`, `'radar'`,
-  `'polar'` — los seis en acción en `tablero-demo.html`. Por debajo usa
-  Chart.js, pero **no llames a `new Chart(...)` directo**: se sale del diseño.
-- Para agregar un gráfico: primero un contenedor en el HTML
-  (`<div class="grafico" id="g-loquesea"></div>`), después la llamada a
-  `Grafico.crear('#g-loquesea', {...})` en `tablero.js`.
+  CSS. Todo color sale de las variables de `css/tokens.css` (`--marca`, `--texto`,
+  etc.). Si necesitás un color que no existe, es señal de que algo está mal:
+  preguntá.
 - Los botones usan la clase `.boton` (+ variante); la tipografía, las clases
   `.titulo-*`. No inventes estilos: mirá `guia-diseno.html`.
 - No agregues dependencias de diseño (Bootstrap, Tailwind, fuentes de Google,
-  íconos de un CDN, otra librería de gráficos). El estilo ya está resuelto.
+  íconos de un CDN). El estilo ya está resuelto.
+- **Todavía no hay una librería de gráficos elegida para la plantilla.** Si una
+  tarea pide un gráfico, **no sumes ninguna por tu cuenta** (ni Chart.js, ni
+  D3, ni SVG a mano) — avisá y esperá que se decida en conjunto. Mientras
+  tanto, mostrá los números en tarjetas `.kpi` o en una tabla.
 
 ---
 
@@ -94,7 +90,6 @@ abrí `guia-diseno.html`.
   Node, npm, bundlers, TypeScript ni un servidor.
 - **Cambios chicos y explicados.** Después de cada cambio, decí en una línea qué
   tocaste y por qué.
-- **No borres el ejemplo hasta que el tablero real ande.** Sirve de referencia.
 
 ---
 
@@ -107,11 +102,11 @@ Repasá que el cambio pasaría la revisión automática (`.github/workflows/ci.y
 3. **Sin recursos de internet:** no hay `src`/`href` con `http`/`https`.
 4. **Sin datos crudos ni planillas** versionados (nada en `datos-fuente/` va al repo, ningún `.xlsx`).
 5. **Design system intacto:** `index.html` sigue enlazando `fuentes.css`, `tokens.css`,
-   `base.css`, `charts.js` y `tema.js`, y conserva el botón `#boton-tema`; no hay
-   colores escritos a mano.
+   `base.css` y `tema.js`, y conserva el botón `#boton-tema`; no hay colores
+   escritos a mano.
 6. El tablero **carga y se ve** (probalo con `python3 -m http.server` y revisá
    que no haya errores en la consola del navegador). Probá también el botón de
-   modo oscuro: el tablero entero y los gráficos tienen que cambiar de tema.
+   modo oscuro: el tablero entero tiene que cambiar de tema.
 
 Si algo de esto no se cumple, no cierres la tarea: arreglalo o avisá.
 

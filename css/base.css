@@ -138,7 +138,7 @@ main { padding: 24px 0 8px; }
 .kpi .valor    { font-size: 1.9rem; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .kpi .detalle  { font-size: 0.8rem; color: var(--texto-suave); margin: 4px 0 0; }
 
-/* --- Paneles con gráfico -------------------------------------------------- */
+/* --- Paneles (tarjetas de contenido) --------------------------------------- */
 
 .grilla {
   display: grid;
@@ -152,16 +152,11 @@ main { padding: 24px 0 8px; }
   border: 1px solid var(--borde);
   border-radius: var(--radio);
   padding: 16px;
-  min-width: 0;   /* permite que el gráfico se achique en pantallas chicas */
+  min-width: 0;
 }
 
 .panel h3 { margin: 0 0 2px; font-size: 1rem; }
 .panel .nota { margin: 0 0 12px; font-size: 0.8rem; color: var(--texto-suave); }
-
-/* Contenedor donde Grafico.crear dibuja el gráfico (Chart.js usa <canvas>,
-   que necesita una altura fija en su contenedor). */
-.grafico { position: relative; height: 300px; width: 100%; }
-.grafico canvas { max-width: 100%; }
 
 /* --- Tabla ---------------------------------------------------------------- */
 

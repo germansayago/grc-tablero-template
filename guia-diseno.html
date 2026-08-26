@@ -69,10 +69,10 @@
 
       <section class="intro">
         <h2 class="titulo-l">Sistema de diseño de los tableros</h2>
-        <p class="bajada">Los colores, la tipografía, los botones y los gráficos que usan todos los
-          tableros. Está construido con los mismos archivos que un tablero real
-          (<code>css/tokens.css</code>, <code>css/componentes.css</code>, <code>js/charts.js</code>),
-          así que lo que ves acá es exactamente lo que vas a obtener.</p>
+        <p class="bajada">Los colores, la tipografía y los botones que usan todos los tableros. Está
+          construido con los mismos archivos que un tablero real
+          (<code>css/tokens.css</code>, <code>css/componentes.css</code>), así que lo que ves acá es
+          exactamente lo que vas a obtener. Todavía no incluye gráficos — eso se define más adelante.</p>
       </section>
 
       <!-- ================= MODO OSCURO ================= -->
@@ -82,21 +82,23 @@
           sistema operativo del visitante automáticamente, y además tienen el botón
           <strong>◐</strong> del header (arriba a la derecha) para elegirlo a mano — la elección
           queda guardada en ese navegador. Probalo ahora mismo con el botón de esta página.
-          No hay que declarar nada por tablero: viene resuelto en <code>css/tokens.css</code>,
-          <code>js/tema.js</code> y <code>js/charts.js</code> (los gráficos se redibujan solos).</p>
+          No hay que declarar nada por tablero: viene resuelto en <code>css/tokens.css</code> y
+          <code>js/tema.js</code>.</p>
       </section>
 
       <!-- ================= COLORES ================= -->
       <section class="seccion">
         <h2>Colores</h2>
         <p class="ayuda">Se definen en <code>css/tokens.css</code>. Para cambiar la estética, cambiá
-          ahí los valores: se propagan a todo (gráficos y modo oscuro incluidos).</p>
+          ahí los valores: se propagan a todo (modo oscuro incluido).</p>
 
         <h3 class="titulo-s">Marca y superficies</h3>
         <div class="swatches" id="sw-base" style="margin:8px 0 22px"></div>
 
-        <h3 class="titulo-s">Colores de serie (gráficos)</h3>
-        <p class="ayuda" style="margin:4px 0 8px">Se usan siempre en orden: la primera serie toma <code>--serie-1</code>, la segunda <code>--serie-2</code>, etc.</p>
+        <h3 class="titulo-s">Colores complementarios</h3>
+        <p class="ayuda" style="margin:4px 0 8px">Reservados para cuando se sumen gráficos u otras
+          categorías/etiquetas. Usalos siempre en orden: <code>--serie-1</code>, después
+          <code>--serie-2</code>, etc.</p>
         <div class="swatches" id="sw-series" style="margin-bottom:22px"></div>
 
         <h3 class="titulo-s">Estados</h3>
@@ -150,20 +152,22 @@
         </div>
       </section>
 
-      <!-- ================= GRÁFICOS ================= -->
+      <!-- ================= TARJETAS DE INDICADOR ================= -->
       <section class="seccion">
-        <h2>Gráficos</h2>
-        <p class="ayuda">Todos se hacen con <code>Grafico.crear('#id', {...})</code> (envuelve a Chart.js
-          y aplica la paleta solo). Tipos: <code>barras</code>, <code>lineas</code>, <code>area</code>,
-          <code>dona</code>, <code>radar</code>, <code>polar</code>. Los seis vienen animados al aparecer
-          — ver <a href="tablero-demo.html">tablero-demo.html</a> para un ejemplo completo.</p>
-        <div class="grilla">
-          <div class="panel"><h3>barras</h3><p class="nota">Comparar categorías.</p><div class="grafico" id="d-barras"></div></div>
-          <div class="panel"><h3>lineas</h3><p class="nota">Evolución en el tiempo (varias series).</p><div class="grafico" id="d-lineas"></div></div>
-          <div class="panel"><h3>area</h3><p class="nota">Evolución con volumen.</p><div class="grafico" id="d-area"></div></div>
-          <div class="panel"><h3>dona</h3><p class="nota">Composición / porcentajes.</p><div class="grafico" id="d-dona"></div></div>
-          <div class="panel"><h3>radar</h3><p class="nota">Comparar varias categorías a la vez (una o más series).</p><div class="grafico" id="d-radar"></div></div>
-          <div class="panel"><h3>polar</h3><p class="nota">Como la dona, pero el tamaño de cada porción también dice algo.</p><div class="grafico" id="d-polar"></div></div>
+        <h2>Tarjetas de indicador</h2>
+        <p class="ayuda">Para mostrar un número (mientras no haya gráficos, o junto a ellos más
+          adelante). Clase <code>.kpi</code>, dentro de un contenedor <code>.indicadores</code>.</p>
+        <div class="indicadores" style="margin:0">
+          <div class="kpi">
+            <p class="etiqueta">Trámites iniciados</p>
+            <p class="valor">1.840</p>
+            <p class="detalle">en el semestre</p>
+          </div>
+          <div class="kpi">
+            <p class="etiqueta">Resueltos</p>
+            <p class="valor">1.512</p>
+            <p class="detalle">82% del total</p>
+          </div>
         </div>
       </section>
 
@@ -177,15 +181,12 @@
         <p>Esta página se arma con los mismos archivos que un tablero.</p>
       </div>
       <nav class="enlaces-paginas" aria-label="Páginas de la plantilla">
-        <a href="tablero-demo.html">Tablero de muestra</a>
         <a href="index.html">Inicio</a>
       </nav>
     </div>
   </footer>
 
   <script src="js/tema.js"></script>
-  <script src="vendor/chart.umd.js"></script>
-  <script src="js/charts.js"></script>
   <script>
     // --- Swatches de color, leídos en vivo desde tokens.css ---
     // Se repintan al cargar y cada vez que cambia el tema (manual o del
@@ -228,50 +229,6 @@
     if (window.matchMedia) {
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', pintarTodosLosSwatches);
     }
-
-    // --- Gráficos de ejemplo ---
-    const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'];
-    Grafico.crear('#d-barras', {
-      tipo: 'barras',
-      datos: [
-        { etiqueta: 'Obras', valor: 520 }, { etiqueta: 'Habilit.', valor: 410 },
-        { etiqueta: 'Ambiente', valor: 300 }, { etiqueta: 'Tránsito', valor: 360 }
-      ]
-    });
-    Grafico.crear('#d-lineas', {
-      tipo: 'lineas', etiquetas: meses,
-      series: [
-        { nombre: 'Iniciados', valores: [280, 310, 295, 340, 305, 310] },
-        { nombre: 'Resueltos', valores: [210, 245, 260, 280, 255, 262] }
-      ]
-    });
-    Grafico.crear('#d-area', {
-      tipo: 'area', etiquetas: meses,
-      series: [{ nombre: 'Consultas', valores: [120, 180, 160, 240, 300, 280] }]
-    });
-    Grafico.crear('#d-dona', {
-      tipo: 'dona',
-      datos: [
-        { etiqueta: 'Presencial', valor: 620 },
-        { etiqueta: 'Web', valor: 900 },
-        { etiqueta: 'App', valor: 320 }
-      ]
-    });
-    Grafico.crear('#d-radar', {
-      tipo: 'radar',
-      etiquetas: ['Limpieza', 'Seguridad', 'Accesibilidad', 'Señalética', 'Iluminación'],
-      series: [
-        { nombre: 'Parque Sarmiento', valores: [8.6, 7.9, 8.1, 7.2, 8.8] },
-        { nombre: 'Parque del Sur',   valores: [7.8, 8.4, 6.9, 6.5, 7.4] }
-      ]
-    });
-    Grafico.crear('#d-polar', {
-      tipo: 'polar',
-      datos: [
-        { etiqueta: 'Canchas', valor: 420 }, { etiqueta: 'Salones', valor: 180 },
-        { etiqueta: 'Quinchos', valor: 260 }, { etiqueta: 'Gimnasios', valor: 310 }
-      ]
-    });
   </script>
 </body>
 </html>

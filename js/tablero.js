@@ -1,49 +1,26 @@
 /* ==========================================================================
    tablero.js — EL ÚNICO ARCHIVO QUE TENÉS QUE TOCAR.
 
-   Acá va la lógica de TU tablero: cargar tus datos y dibujar tus gráficos.
-   El diseño, los colores y el formato ya vienen resueltos por el design
-   system (css/tokens.css + js/charts.js). Vos solo decís qué mostrar.
+   Acá va la lógica de TU tablero: cargar tus datos y mostrarlos. El diseño
+   (colores, tipografía, botones, tarjetas) ya viene resuelto — usá las
+   clases de css/componentes.css (ver guia-diseno.html para verlas todas).
 
-   Este ejemplo carga datos/ejemplo.json y arma cuatro gráficos. Usalo de
-   molde: reemplazá el JSON por el tuyo y ajustá las llamadas a Grafico.crear.
+   Todavía no hay una librería de gráficos elegida para la plantilla. Mientras
+   tanto, para mostrar números podés usar tarjetas .kpi (ver guia-diseno.html)
+   o una tabla. Si tu tablero necesita gráficos, avisá antes de sumar una
+   librería por tu cuenta — se define en conjunto (ver AGENTS.md).
    ========================================================================== */
 
-// 1) Cargá tus datos. Deben ser datos YA AGREGADOS y publicables
-//    (ver SECURITY.md). Nunca pongas acá una clave ni una fila por persona.
 async function iniciar() {
   try {
-    const respuesta = await fetch('datos/ejemplo.json');
-    if (!respuesta.ok) { throw new Error('No pude cargar los datos (' + respuesta.status + ')'); }
-    const datos = await respuesta.json();
-
-    pintarFecha(datos.actualizado);
-    pintarKpis(datos.kpis);
-
-    // 2) Un gráfico de líneas con dos series (evolución en el tiempo).
-    Grafico.crear('#g-evolucion', {
-      tipo: 'lineas',
-      titulo: 'Evolución mensual',
-      etiquetas: datos.evolucion.meses,
-      series: [
-        { nombre: 'Iniciados', valores: datos.evolucion.iniciados },
-        { nombre: 'Resueltos', valores: datos.evolucion.resueltos }
-      ]
-    });
-
-    // 3) Barras: comparar categorías (forma simple, una serie).
-    Grafico.crear('#g-areas', {
-      tipo: 'barras',
-      titulo: 'Trámites por área',
-      datos: datos.porArea
-    });
-
-    // 4) Dona: composición / porcentajes.
-    Grafico.crear('#g-canales', {
-      tipo: 'dona',
-      titulo: 'Trámites por canal',
-      datos: datos.canales
-    });
+    // 1) Cargá tus datos. Deben ser datos YA AGREGADOS y publicables
+    //    (ver SECURITY.md). Nunca pongas acá una clave ni una fila por persona.
+    //
+    // const respuesta = await fetch('datos/tu-archivo.json');
+    // if (!respuesta.ok) { throw new Error('No pude cargar los datos (' + respuesta.status + ')'); }
+    // const datos = await respuesta.json();
+    //
+    // 2) Mostralos en el HTML (tarjetas .kpi, una tabla, lo que necesites).
 
   } catch (error) {
     mostrarError(mensajeDeError(error));
@@ -51,22 +28,6 @@ async function iniciar() {
 }
 
 /* --- Ayudantes de presentación (podés dejarlos como están) --------------- */
-
-function pintarFecha(fecha) {
-  const el = document.getElementById('actualizado');
-  if (el && fecha) { el.textContent = 'Datos actualizados al ' + fecha; }
-}
-
-function pintarKpis(kpis) {
-  const cont = document.getElementById('indicadores');
-  if (!cont || !kpis) { return; }
-  cont.innerHTML = kpis.map(k => `
-    <div class="kpi">
-      <p class="etiqueta">${escapar(k.etiqueta)}</p>
-      <p class="valor">${Grafico.formatearNumero(k.valor)}</p>
-      <p class="detalle">${escapar(k.detalle || '')}</p>
-    </div>`).join('');
-}
 
 /* Si el archivo se abrió con doble clic (protocolo file://), fetch() no
    puede traer los datos y el error real es críptico. Acá lo cambiamos por

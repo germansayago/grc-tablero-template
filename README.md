@@ -11,19 +11,16 @@ colores y los chequeos de seguridad ya vienen resueltos.
 ## Qué hay acá adentro
 
 ```
-index.html          el tablero (la página). Editás títulos y paneles.
-guia-diseno.html    el sistema de diseño: colores, tipografía, botones, gráficos.
-tablero-demo.html   tablero de ejemplo completo, con los seis tipos de gráfico (datos inventados).
+index.html          el tablero (la página), vacío — arrancás desde acá.
+guia-diseno.html    el sistema de diseño: colores, tipografía, botones, estados.
 css/
   fuentes.css       la tipografía (Inter). NO se toca.
   tokens.css        ← la paleta y los tamaños. Se toca SOLO acá.
   base.css          header, footer, grilla, tarjetas. Casi nunca se toca.
   componentes.css   botones, estados y clases de texto. Casi nunca se toca.
 js/
-  charts.js         el helper de gráficos (envuelve a Chart.js). NO se toca.
   tema.js           el interruptor de modo claro/oscuro. NO se toca.
-  tablero.js        ← TU lógica: cargar datos y dibujar. El archivo que editás.
-vendor/             librerías de terceros (Chart.js), guardadas en el repo. NO se toca.
+  tablero.js        ← TU lógica: cargar datos y mostrarlos. El archivo que editás.
 datos/              tus datos publicables (.json), ya agregados.
 datos-fuente/       datos crudos — NO se suben (está en .gitignore).
 assets/img/         imágenes y el logo.
@@ -41,6 +38,10 @@ AGENTS.md           las reglas que sigue el agente de IA. La fuente de verdad.
 Regla mental: **tocás `index.html`, `js/tablero.js`, `css/tokens.css` y `datos/`.
 El resto ya funciona.**
 
+**Todavía no hay una librería de gráficos elegida** para la plantilla — se
+define más adelante. Mientras tanto, para mostrar números usá tarjetas `.kpi`
+(ver `guia-diseno.html`) o una tabla.
+
 ---
 
 ## Empezar tu primer tablero
@@ -51,27 +52,24 @@ El resto ya funciona.**
 
 2. **Cloná tu repo** y abrilo en tu editor.
 
-3. **Vé el ejemplo funcionando.** ⚠️ **No abras el archivo con doble clic** —
+3. **Vé la plantilla funcionando.** ⚠️ **No abras el archivo con doble clic** —
    el tablero carga sus datos con `fetch()`, y eso no funciona si lo abrís
-   directo desde la carpeta (se va a ver vacío, sin gráficos). Necesitás un
-   servidor local, así:
+   directo desde la carpeta. Necesitás un servidor local, así:
 
    ```bash
    python3 -m http.server 8000
    ```
 
    y entrá a `http://localhost:8000` (Python ya viene instalado en Mac y
-   Linux). Vas a ver un tablero de ejemplo completo. Esto vale para
-   `index.html`, `guia-diseno.html` y `tablero-demo.html` por igual.
+   Linux). Esto vale para `index.html` y `guia-diseno.html` por igual.
 
-4. **Poné tus datos.** Reemplazá `datos/ejemplo.json` por tu archivo (ya
-   agregado, sin datos de personas — ver `SECURITY.md`).
+4. **Poné tus datos.** Un archivo `.json` en `datos/`, ya agregado y
+   publicable, sin datos de personas — ver `SECURITY.md`.
 
-5. **Editá `js/tablero.js`.** Es el único archivo con lógica. Cambiá el nombre
-   del JSON y ajustá las llamadas a `Grafico.crear(...)` para tus gráficos.
+5. **Editá `js/tablero.js`.** Es el único archivo con lógica: cargá tu JSON
+   con `fetch` y mostralo (tarjetas `.kpi`, una tabla, lo que necesites).
 
-6. **Editá los textos de `index.html`:** el título, la bajada y los títulos de
-   cada panel.
+6. **Editá los textos de `index.html`:** el título y la bajada.
 
 7. **Subí el cambio.** Al hacer push, GitHub revisa solo que no se filtre
    ninguna clave y que el tablero cumpla las reglas. Verde = listo para publicar
@@ -79,66 +77,18 @@ El resto ya funciona.**
 
 ---
 
-## Cómo se hace un gráfico
+## El sistema de diseño
 
-Todo pasa por una sola función, `Grafico.crear(selector, config)`. Por debajo
-usa **Chart.js** (guardado en `vendor/`, no se carga de internet), pero vos no
-lo tocás: los colores y el estilo salen solos del design system.
+Colores, tipografía, botones, estados y tarjetas de indicador — todos en vivo
+en **[`guia-diseno.html`](guia-diseno.html)** (abrila con el servidor local,
+igual que el tablero).
 
-```js
-// Barras (una serie) — comparar categorías
-Grafico.crear('#g-areas', {
-  tipo: 'barras',
-  datos: [
-    { etiqueta: 'Obras',    valor: 520 },
-    { etiqueta: 'Ambiente', valor: 300 }
-  ]
-});
-
-// Líneas (una o varias series) — evolución en el tiempo
-Grafico.crear('#g-evolucion', {
-  tipo: 'lineas',                  // 'area' para el mismo gráfico con relleno
-  etiquetas: ['Ene', 'Feb', 'Mar'],
-  series: [
-    { nombre: 'Iniciados', valores: [280, 310, 295] },
-    { nombre: 'Resueltos', valores: [210, 245, 260] }
-  ]
-});
-
-// Dona — composición / porcentajes
-Grafico.crear('#g-canales', {
-  tipo: 'dona',
-  datos: [
-    { etiqueta: 'Web', valor: 900 },
-    { etiqueta: 'App', valor: 320 }
-  ]
-});
-
-// Radar — comparar varias categorías a la vez (acá, dos series)
-Grafico.crear('#g-satisfaccion', {
-  tipo: 'radar',
-  etiquetas: ['Limpieza', 'Seguridad', 'Accesibilidad'],
-  series: [
-    { nombre: 'Parque A', valores: [8.6, 7.9, 8.1] },
-    { nombre: 'Parque B', valores: [7.8, 8.4, 6.9] }
-  ]
-});
-```
-
-Tipos: `barras`, `lineas`, `area`, `dona`, `radar`, `polar` (como la dona, pero
-el tamaño de cada porción también importa). Para que un gráfico aparezca, en
-el HTML tiene que haber un contenedor con ese id: `<div class="grafico" id="g-areas"></div>`.
-Para un caso muy particular podés pasar `opciones: {...}` (se fusiona con
-Chart.js — por ejemplo para una animación de entrada escalonada, como en
-`tablero-demo.html`), pero usalo poco.
-
-**Los seis tipos, funcionando, están en [`tablero-demo.html`](tablero-demo.html)**
-— un tablero de ejemplo completo (con datos inventados) que podés usar de
-inspiración o copiar patrones de ahí a tu `tablero.js`.
-
-**Botones y textos:** usá las clases `.boton` (+ `.boton--primario`, etc.) y
-`.titulo-*`. Todas están, en vivo, en **[`guia-diseno.html`](guia-diseno.html)**
-(abrila en el navegador).
+- **Botones:** clase `.boton` + una variante (`.boton--primario`, `--secundario`,
+  `--sutil`, `--peligro`).
+- **Tipografía:** clases `.titulo-xl` a `.titulo-s`, `.texto`, `.texto-suave`.
+- **Números:** tarjetas `.kpi`, dentro de un contenedor `.indicadores`.
+- **Paleta:** todo sale de `css/tokens.css`. Cambiás un valor ahí y se propaga
+  a todo el tablero, modo oscuro incluido.
 
 ---
 
@@ -147,8 +97,7 @@ inspiración o copiar patrones de ahí a tu `tablero.js`.
 Ya viene resuelto en la plantilla, no hay que hacer nada. El tablero sigue el
 modo del sistema operativo del visitante solo, y además tiene un botón (◐) en
 la esquina del header para elegirlo a mano — la elección queda guardada en ese
-navegador. Los gráficos se redibujan solos con los colores correctos al
-cambiar. Si armás una página nueva a partir de `index.html`, copiá el header
+navegador. Si armás una página nueva a partir de `index.html`, copiá el header
 completo (incluye el botón y el script anti-titileo del `<head>`) y el
 `<script src="js/tema.js">` del final.
 
@@ -157,10 +106,10 @@ completo (incluye el botón y el script anti-titileo del `<head>`) y el
 ## Cambiar los colores o el logo (para el que arma el estándar)
 
 - **Paleta y tipografía:** `css/tokens.css`. Cambiás los valores de arriba y
-  cambia todo el tablero, incluidos los gráficos y el modo oscuro.
+  cambia todo el tablero, modo oscuro incluido.
 - **Nombre del organismo / header:** el texto está en `index.html` (sección
   `<header>`); el color, en `--marca` dentro de `css/tokens.css`.
-- **Logo:** reemplazá `assets/img/logo.svg` por el oficial (mismo nombre).
+- **Logo:** reemplazá `assets/img/logo-gobierno.webp` por el oficial (mismo nombre).
 
 ---
 

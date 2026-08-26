@@ -27,7 +27,8 @@
     document.documentElement.setAttribute('data-tema', siguiente);
     guardar(siguiente);
     sincronizarBoton();
-    // Los gráficos (js/charts.js) escuchan este evento para redibujarse.
+    // Otras partes de la página (por ejemplo guia-diseno.html) pueden
+    // escuchar este evento para actualizarse cuando cambia el tema.
     document.dispatchEvent(new CustomEvent('tema:cambio', { detail: { tema: siguiente } }));
   }
 

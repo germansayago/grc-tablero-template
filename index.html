@@ -57,32 +57,11 @@
       <section class="intro">
         <h2>Título del tablero</h2>
         <p class="bajada">Una línea que explica qué muestra este tablero y para qué sirve.</p>
-        <p class="actualizado" id="actualizado"></p>
       </section>
 
-      <!-- Tarjetas de indicadores: las llena tablero.js -->
-      <section class="indicadores" id="indicadores"></section>
-
-      <!-- Paneles con gráficos. Cada .grafico lo dibuja tablero.js por su id. -->
-      <section class="grilla">
-        <div class="panel">
-          <h3>Evolución mensual</h3>
-          <p class="nota">Trámites iniciados y resueltos por mes.</p>
-          <div class="grafico" id="g-evolucion"></div>
-        </div>
-
-        <div class="panel">
-          <h3>Trámites por área</h3>
-          <p class="nota">Total del semestre por área.</p>
-          <div class="grafico" id="g-areas"></div>
-        </div>
-
-        <div class="panel">
-          <h3>Trámites por canal</h3>
-          <p class="nota">Cómo llegan los trámites.</p>
-          <div class="grafico" id="g-canales"></div>
-        </div>
-      </section>
+      <!-- Empezá tu tablero acá. Usá las clases de css/componentes.css
+           (.kpi, .panel, .boton, .titulo-*, .estado — ver guia-diseno.html)
+           y escribí la lógica en js/tablero.js. -->
 
     </div>
   </main>
@@ -96,16 +75,12 @@
       </div>
       <nav class="enlaces-paginas" aria-label="Páginas de la plantilla">
         <a href="guia-diseno.html">Sistema de diseño</a>
-        <a href="tablero-demo.html">Tablero de muestra</a>
       </nav>
     </div>
   </footer>
 
-  <!-- El interruptor de tema, Chart.js (vendorizado), el helper del design
-       system y TU lógica. -->
+  <!-- El interruptor de tema y TU lógica. -->
   <script src="js/tema.js"></script>
-  <script src="vendor/chart.umd.js"></script>
-  <script src="js/charts.js"></script>
   <script src="js/tablero.js"></script>
 </body>
 </html>
