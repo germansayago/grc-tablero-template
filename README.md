@@ -22,8 +22,14 @@ datos/              tus datos publicables (.json), ya agregados.
 datos-fuente/       datos crudos — NO se suben (está en .gitignore).
 assets/img/         imágenes y el logo.
 SECURITY.md         las 3 reglas de seguridad. Leelo una vez.
+AGENTS.md           las reglas que sigue el agente de IA. La fuente de verdad.
 .github/workflows/  la revisión automática que corre en GitHub.
 ```
+
+> **¿Usás un agente de IA (Claude Code, Cursor, Antigravity) para armar el
+> tablero?** Ya lee `AGENTS.md` solo al abrir la carpeta: conoce el design
+> system y las reglas de seguridad sin que se las expliques. Pedile igual, al
+> empezar: *"Leé AGENTS.md antes de tocar nada"*.
 
 Regla mental: **tocás `index.html`, `js/tablero.js`, `css/tokens.css` y `datos/`.
 El resto ya funciona.**
