@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CAMBIÁ el título por el de tu tablero -->
+  <title>Tablero — Gobierno de Río Cuarto</title>
+
+  <!-- El design system. No hace falta tocar estas dos líneas. -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+
+  <!-- ================= HEADER (igual en todos los tableros) ================ -->
+  <header class="encabezado">
+    <div class="contenedor">
+      <!-- Poné el logo en assets/img/logo.svg. Si no hay, borrá esta línea. -->
+      <img class="logo" src="assets/img/logo.svg" alt="Logo" onerror="this.style.display='none'">
+      <div class="titulos">
+        <h1>Gobierno de Río Cuarto</h1>
+        <p>Equipo de Estadísticas</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================= CONTENIDO ================================== -->
+  <main>
+    <div class="contenedor">
+
+      <!-- CAMBIÁ el título y la bajada por los de tu tablero -->
+      <section class="intro">
+        <h2>Título del tablero</h2>
+        <p class="bajada">Una línea que explica qué muestra este tablero y para qué sirve.</p>
+        <p class="actualizado" id="actualizado"></p>
+      </section>
+
+      <!-- Tarjetas de indicadores: las llena tablero.js -->
+      <section class="indicadores" id="indicadores"></section>
+
+      <!-- Paneles con gráficos. Cada .grafico lo dibuja tablero.js por su id. -->
+      <section class="grilla">
+        <div class="panel">
+          <h3>Evolución mensual</h3>
+          <p class="nota">Trámites iniciados y resueltos por mes.</p>
+          <div class="grafico" id="g-evolucion"></div>
+        </div>
+
+        <div class="panel">
+          <h3>Trámites por área</h3>
+          <p class="nota">Total del semestre por área.</p>
+          <div class="grafico" id="g-areas"></div>
+        </div>
+
+        <div class="panel">
+          <h3>Trámites por canal</h3>
+          <p class="nota">Cómo llegan los trámites.</p>
+          <div class="grafico" id="g-canales"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER (igual en todos los tableros) ================ -->
+  <footer class="pie">
+    <div class="contenedor">
+      <p>Equipo de Estadísticas · Gobierno de Río Cuarto</p>
+      <p>Fuente: elaboración propia con datos agregados y publicables.</p>
+    </div>
+  </footer>
+
+  <!-- El helper de gráficos y TU lógica. charts.js primero. -->
+  <script src="js/charts.js"></script>
+  <script src="js/tablero.js"></script>
+</body>
+</html>

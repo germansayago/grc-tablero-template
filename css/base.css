@@ -1,0 +1,181 @@
+/* ==========================================================================
+   base.css — Estructura visual del tablero: header, footer, grilla, tarjetas
+   y paneles de gráfico. No define colores propios: usa las variables de
+   tokens.css. Normalmente no necesitás tocar este archivo.
+   ========================================================================== */
+
+* { box-sizing: border-box; }
+
+html, body { overflow-x: hidden; }   /* la página nunca scrollea de costado */
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--fuente);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.contenedor {
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: 0 var(--espacio);
+}
+
+/* --- Header --------------------------------------------------------------- */
+
+.encabezado {
+  background: var(--marca);
+  color: var(--marca-texto);
+  padding: 18px 0;
+}
+
+.encabezado .contenedor {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.encabezado .logo {
+  height: 40px;
+  width: auto;
+  flex: 0 0 auto;
+}
+
+.encabezado .titulos h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.encabezado .titulos p {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* --- Cuerpo --------------------------------------------------------------- */
+
+main { padding: 24px 0 8px; }
+
+.intro { margin-bottom: 20px; }
+
+.intro h2 {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+}
+
+.intro .bajada {
+  margin: 0;
+  color: var(--texto-suave);
+  max-width: 65ch;
+}
+
+.intro .actualizado {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+/* --- Tarjetas de indicador (KPI) ----------------------------------------- */
+
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.kpi {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 14px 16px;
+}
+
+.kpi .etiqueta { font-size: 0.8rem; color: var(--texto-suave); margin: 0 0 6px; }
+.kpi .valor    { font-size: 1.9rem; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.kpi .detalle  { font-size: 0.8rem; color: var(--texto-suave); margin: 4px 0 0; }
+
+/* --- Paneles con gráfico -------------------------------------------------- */
+
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.panel {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 16px;
+  min-width: 0;   /* permite que el gráfico se achique en pantallas chicas */
+}
+
+.panel h3 { margin: 0 0 2px; font-size: 1rem; }
+.panel .nota { margin: 0 0 12px; font-size: 0.8rem; color: var(--texto-suave); }
+
+/* Contenedor donde el helper de gráficos dibuja el SVG. */
+.grafico { width: 100%; }
+.grafico svg { display: block; width: 100%; height: auto; }
+
+/* Leyenda de series (la dibuja charts.js). */
+.grafico-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+}
+.grafico-leyenda span { display: inline-flex; align-items: center; gap: 6px; }
+.grafico-leyenda i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+
+/* --- Tabla ---------------------------------------------------------------- */
+
+.tabla-scroll { overflow-x: auto; }   /* la tabla scrollea adentro; el body no */
+
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+
+th, td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--borde);
+  white-space: nowrap;
+}
+
+th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--texto-suave);
+  font-weight: 600;
+}
+
+td.numero, th.numero { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* --- Footer --------------------------------------------------------------- */
+
+.pie {
+  margin-top: 32px;
+  border-top: 1px solid var(--borde);
+  padding: 16px 0 28px;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+.pie .contenedor { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
+.pie p { margin: 0; }
+
+/* --- Mensaje de error (lo muestra tablero.js si algo falla) --------------- */
+
+.error {
+  background: var(--superficie);
+  border: 1px solid var(--grave);
+  border-radius: var(--radio);
+  padding: 16px;
+  color: var(--texto);
+}
