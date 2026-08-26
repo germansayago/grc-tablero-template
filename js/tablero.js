@@ -5,40 +5,36 @@
    (colores, tipografía, botones, tarjetas) ya viene resuelto — usá las
    clases de css/componentes.css (ver guia-diseno.html para verlas todas).
 
+   Cómo cargués tus datos es tu decisión (fetch a un JSON, un <script> con
+   un objeto JS, lo que te convenga). Lo único no negociable es de dónde
+   pueden venir esos datos: ver SECURITY.md antes de escribir nada acá.
+
    Todavía no hay una librería de gráficos elegida para la plantilla. Mientras
    tanto, para mostrar números podés usar tarjetas .kpi (ver guia-diseno.html)
    o una tabla. Si tu tablero necesita gráficos, avisá antes de sumar una
    librería por tu cuenta — se define en conjunto (ver AGENTS.md).
    ========================================================================== */
 
-async function iniciar() {
+function iniciar() {
   try {
-    // 1) Cargá tus datos. Deben ser datos YA AGREGADOS y publicables
-    //    (ver SECURITY.md). Nunca pongas acá una clave ni una fila por persona.
-    //
-    // const respuesta = await fetch('datos/tu-archivo.json');
-    // if (!respuesta.ok) { throw new Error('No pude cargar los datos (' + respuesta.status + ')'); }
-    // const datos = await respuesta.json();
-    //
-    // 2) Mostralos en el HTML (tarjetas .kpi, una tabla, lo que necesites).
+    // Tu lógica acá: cargá los datos y mostralos.
 
   } catch (error) {
-    mostrarError(mensajeDeError(error));
+    mostrarError(error.message);
   }
 }
 
 /* --- Ayudantes de presentación (podés dejarlos como están) --------------- */
 
-/* Si el archivo se abrió con doble clic (protocolo file://), fetch() no
-   puede traer los datos y el error real es críptico. Acá lo cambiamos por
-   uno que dice qué hacer. */
-function mensajeDeError(error) {
-  if (location.protocol === 'file:') {
-    return 'Este archivo se abrió directo desde la carpeta (doble clic) y por eso no puede cargar los datos. '
-      + 'Corré "python3 -m http.server" en esta carpeta y abrí http://localhost:8000 en el navegador '
-      + '— ver README.md.';
-  }
-  return error.message;
+function pintarKpis(kpis) {
+  const cont = document.getElementById('indicadores');
+  if (!cont || !kpis) { return; }
+  cont.innerHTML = kpis.map(k => `
+    <div class="kpi">
+      <p class="etiqueta">${escapar(k.etiqueta)}</p>
+      <p class="valor">${escapar(String(k.valor))}</p>
+      <p class="detalle">${escapar(k.detalle || '')}</p>
+    </div>`).join('');
 }
 
 function mostrarError(mensaje) {

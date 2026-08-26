@@ -24,8 +24,8 @@ el resultado ya agregado:
 
 ```
 Base de datos  →  script tuyo, en tu máquina (la clave vive acá, en .env)
-               →  datos/mi-tablero.json   (agregado, sin personas)
-               →  el tablero lee ese JSON
+               →  datos/tu-archivo   (agregado, sin personas)
+               →  el tablero lo carga (fetch, <script>, lo que uses)
 ```
 
 **"Es la anon key de Supabase, es pública."** Aun así, no la pongas sin

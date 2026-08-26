@@ -16,7 +16,7 @@ entre. Eso condiciona todo lo que sigue.
 **Editá libremente:**
 - `index.html` — títulos, textos, y el contenido de tu tablero.
 - `js/tablero.js` — la lógica del tablero: cargar los datos y mostrarlos.
-- `datos/` — los archivos de datos publicables (`.json`).
+- `datos/` — tus datos publicables, en el formato que prefieras.
 - `css/tokens.css` — SOLO los **valores** de las variables (colores, tipografía),
   si te piden cambiar la estética. No borres variables ni cambies sus nombres.
 
@@ -87,7 +87,11 @@ abrí `guia-diseno.html`.
 - **Rutas relativas siempre:** `css/tokens.css`, nunca `/css/tokens.css` (el
   tablero se publica en un subpath, las rutas absolutas lo rompen).
 - **Vanilla, sin build:** HTML, CSS y JS que corren directo. No introduzcas
-  Node, npm, bundlers, TypeScript ni un servidor.
+  Node, npm, bundlers ni TypeScript.
+- **Cómo cargás tus datos es tu decisión** (`fetch` a un `.json`, un `<script>`
+  con un objeto JS, lo que te convenga). Si usás `fetch`, avisá al usuario que
+  para probarlo va a necesitar un servidor local (el archivo no va a andar
+  con doble clic) — no es un problema, solo algo para saber de antemano.
 - **Cambios chicos y explicados.** Después de cada cambio, decí en una línea qué
   tocaste y por qué.
 
@@ -104,9 +108,10 @@ Repasá que el cambio pasaría la revisión automática (`.github/workflows/ci.y
 5. **Design system intacto:** `index.html` sigue enlazando `fuentes.css`, `tokens.css`,
    `base.css` y `tema.js`, y conserva el botón `#boton-tema`; no hay colores
    escritos a mano.
-6. El tablero **carga y se ve** (probalo con `python3 -m http.server` y revisá
-   que no haya errores en la consola del navegador). Probá también el botón de
-   modo oscuro: el tablero entero tiene que cambiar de tema.
+6. El tablero **carga y se ve** (abriendo el `.html` directo, o con un
+   servidor local si tu `tablero.js` usa `fetch`) y no hay errores en la
+   consola del navegador. Probá también el botón de modo oscuro: el tablero
+   entero tiene que cambiar de tema.
 
 Si algo de esto no se cumple, no cierres la tarea: arreglalo o avisá.
 

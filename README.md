@@ -1,8 +1,9 @@
 # Template de tableros — Equipo de Estadísticas
 
 Plantilla para crear tableros con datos, todos con el **mismo diseño** y las
-**mismas reglas de seguridad**. Vos te ocupás de tus datos; el diseño, los
-colores y los chequeos de seguridad ya vienen resueltos.
+**mismas reglas de seguridad**. Vos te ocupás de tus datos y de cómo los
+cargás; el diseño, los colores y los chequeos de seguridad ya vienen
+resueltos. HTML, CSS y JS simples, sin build.
 
 > **¿Primera vez?** Andá directo a [Empezar](#empezar-tu-primer-tablero) más abajo.
 
@@ -11,7 +12,7 @@ colores y los chequeos de seguridad ya vienen resueltos.
 ## Qué hay acá adentro
 
 ```
-index.html          el tablero (la página), vacío — arrancás desde acá.
+index.html          el tablero (la página). Editás el título y el contenido.
 guia-diseno.html    el sistema de diseño: colores, tipografía, botones, estados.
 css/
   fuentes.css       la tipografía (Inter). NO se toca.
@@ -20,8 +21,8 @@ css/
   componentes.css   botones, estados y clases de texto. Casi nunca se toca.
 js/
   tema.js           el interruptor de modo claro/oscuro. NO se toca.
-  tablero.js        ← TU lógica: cargar datos y mostrarlos. El archivo que editás.
-datos/              tus datos publicables (.json), ya agregados.
+  tablero.js        ← TU lógica: cargar tus datos y mostrarlos. El archivo que editás.
+datos/              ← TUS DATOS, ya agregados y publicables (el formato es tu decisión).
 datos-fuente/       datos crudos — NO se suben (está en .gitignore).
 assets/img/         imágenes y el logo.
 assets/fonts/       la tipografía Inter, guardada en el repo. NO se toca.
@@ -35,8 +36,8 @@ AGENTS.md           las reglas que sigue el agente de IA. La fuente de verdad.
 > system y las reglas de seguridad sin que se las expliques. Pedile igual, al
 > empezar: *"Leé AGENTS.md antes de tocar nada"*.
 
-Regla mental: **tocás `index.html`, `js/tablero.js`, `css/tokens.css` y `datos/`.
-El resto ya funciona.**
+Regla mental: **tocás `index.html`, `js/tablero.js`, `css/tokens.css` y
+`datos/`. El resto ya funciona.**
 
 **Todavía no hay una librería de gráficos elegida** para la plantilla — se
 define más adelante. Mientras tanto, para mostrar números usá tarjetas `.kpi`
@@ -50,24 +51,19 @@ define más adelante. Mientras tanto, para mostrar números usá tarjetas `.kpi`
    "Create a new repository"** en GitHub. Ponele un nombre (ej. `tablero-tramites`).
    Vas a tener tu propia copia, con el diseño y la seguridad ya adentro.
 
-2. **Cloná tu repo** y abrilo en tu editor.
+2. **Cloná tu repo.**
 
-3. **Vé la plantilla funcionando.** ⚠️ **No abras el archivo con doble clic** —
-   el tablero carga sus datos con `fetch()`, y eso no funciona si lo abrís
-   directo desde la carpeta. Necesitás un servidor local, así:
+3. **Vé la plantilla funcionando.** Abrí `index.html` en el navegador. Si tu
+   `tablero.js` termina usando `fetch` para traer datos, vas a necesitar un
+   servidor local para probarlo (`python3 -m http.server`, la extensión Live
+   Server de VS Code, o cualquiera que prefieras) — el navegador bloquea esa
+   carga si abrís el archivo directo. No es un problema, solo algo para saber.
 
-   ```bash
-   python3 -m http.server 8000
-   ```
+4. **Poné tus datos en `datos/`.** Ya agregados y publicables, sin datos de
+   personas — ver `SECURITY.md`. El formato es tu decisión.
 
-   y entrá a `http://localhost:8000` (Python ya viene instalado en Mac y
-   Linux). Esto vale para `index.html` y `guia-diseno.html` por igual.
-
-4. **Poné tus datos.** Un archivo `.json` en `datos/`, ya agregado y
-   publicable, sin datos de personas — ver `SECURITY.md`.
-
-5. **Editá `js/tablero.js`.** Es el único archivo con lógica: cargá tu JSON
-   con `fetch` y mostralo (tarjetas `.kpi`, una tabla, lo que necesites).
+5. **Editá `js/tablero.js`.** Es el único archivo con lógica: cargá tus datos
+   y mostralos (tarjetas `.kpi`, una tabla, lo que necesites).
 
 6. **Editá los textos de `index.html`:** el título y la bajada.
 
@@ -80,8 +76,7 @@ define más adelante. Mientras tanto, para mostrar números usá tarjetas `.kpi`
 ## El sistema de diseño
 
 Colores, tipografía, botones, estados y tarjetas de indicador — todos en vivo
-en **[`guia-diseno.html`](guia-diseno.html)** (abrila con el servidor local,
-igual que el tablero).
+en **[`guia-diseno.html`](guia-diseno.html)** (abrila en el navegador).
 
 - **Botones:** clase `.boton` + una variante (`.boton--primario`, `--secundario`,
   `--sutil`, `--peligro`).
