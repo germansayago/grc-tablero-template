@@ -154,12 +154,16 @@
       <section class="seccion">
         <h2>Gráficos</h2>
         <p class="ayuda">Todos se hacen con <code>Grafico.crear('#id', {...})</code> (envuelve a Chart.js
-          y aplica la paleta solo). Tipos: <code>barras</code>, <code>lineas</code>, <code>area</code>, <code>dona</code>.</p>
+          y aplica la paleta solo). Tipos: <code>barras</code>, <code>lineas</code>, <code>area</code>,
+          <code>dona</code>, <code>radar</code>, <code>polar</code>. Los seis vienen animados al aparecer
+          — ver <a href="tablero-demo.html">tablero-demo.html</a> para un ejemplo completo.</p>
         <div class="grilla">
           <div class="panel"><h3>barras</h3><p class="nota">Comparar categorías.</p><div class="grafico" id="d-barras"></div></div>
           <div class="panel"><h3>lineas</h3><p class="nota">Evolución en el tiempo (varias series).</p><div class="grafico" id="d-lineas"></div></div>
           <div class="panel"><h3>area</h3><p class="nota">Evolución con volumen.</p><div class="grafico" id="d-area"></div></div>
           <div class="panel"><h3>dona</h3><p class="nota">Composición / porcentajes.</p><div class="grafico" id="d-dona"></div></div>
+          <div class="panel"><h3>radar</h3><p class="nota">Comparar varias categorías a la vez (una o más series).</p><div class="grafico" id="d-radar"></div></div>
+          <div class="panel"><h3>polar</h3><p class="nota">Como la dona, pero el tamaño de cada porción también dice algo.</p><div class="grafico" id="d-polar"></div></div>
         </div>
       </section>
 
@@ -168,8 +172,14 @@
 
   <footer class="pie">
     <div class="contenedor">
-      <p>Sistema de diseño · Equipo de Estadísticas · Gobierno de Río Cuarto</p>
-      <p>Esta página se arma con los mismos archivos que un tablero.</p>
+      <div class="pie-textos">
+        <p>Sistema de diseño · Equipo de Estadísticas · Gobierno de Río Cuarto</p>
+        <p>Esta página se arma con los mismos archivos que un tablero.</p>
+      </div>
+      <nav class="enlaces-paginas" aria-label="Páginas de la plantilla">
+        <a href="tablero-demo.html">Tablero de muestra</a>
+        <a href="index.html">Inicio</a>
+      </nav>
     </div>
   </footer>
 
@@ -245,6 +255,21 @@
         { etiqueta: 'Presencial', valor: 620 },
         { etiqueta: 'Web', valor: 900 },
         { etiqueta: 'App', valor: 320 }
+      ]
+    });
+    Grafico.crear('#d-radar', {
+      tipo: 'radar',
+      etiquetas: ['Limpieza', 'Seguridad', 'Accesibilidad', 'Señalética', 'Iluminación'],
+      series: [
+        { nombre: 'Parque Sarmiento', valores: [8.6, 7.9, 8.1, 7.2, 8.8] },
+        { nombre: 'Parque del Sur',   valores: [7.8, 8.4, 6.9, 6.5, 7.4] }
+      ]
+    });
+    Grafico.crear('#d-polar', {
+      tipo: 'polar',
+      datos: [
+        { etiqueta: 'Canchas', valor: 420 }, { etiqueta: 'Salones', valor: 180 },
+        { etiqueta: 'Quinchos', valor: 260 }, { etiqueta: 'Gimnasios', valor: 310 }
       ]
     });
   </script>

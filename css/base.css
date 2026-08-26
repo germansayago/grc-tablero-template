@@ -195,8 +195,27 @@ td.numero, th.numero { text-align: right; font-variant-numeric: tabular-nums; }
   font-size: 0.8rem;
   color: var(--texto-suave);
 }
-.pie .contenedor { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
+.pie .contenedor { display: flex; flex-direction: column; gap: 12px; }
+.pie-textos { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
 .pie p { margin: 0; }
+
+/* Links entre las páginas de la plantilla (inicio, guía de diseño, tablero
+   de muestra). Van al pie de cada una. */
+.enlaces-paginas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  padding-top: 12px;
+  border-top: 1px solid var(--borde);
+}
+.enlaces-paginas a {
+  color: var(--marca);
+  text-decoration: none;
+  font-weight: 600;
+}
+.enlaces-paginas a:hover,
+.enlaces-paginas a:focus-visible { text-decoration: underline; }
+.enlaces-paginas a::after { content: " →"; }
 
 /* --- Mensaje de error (lo muestra tablero.js si algo falla) --------------- */
 

@@ -26,6 +26,8 @@ entre. Eso condiciona todo lo que sigue.
 - `css/base.css`, `css/componentes.css` y `css/fuentes.css` — estructura visual,
   componentes (botones, etc.) y la tipografía Inter.
 - `vendor/` y `assets/fonts/` — librerías y tipografía de terceros. Nunca se edita.
+- `guia-diseno.html` y `tablero-demo.html` — páginas de referencia de la
+  plantilla, no de tu tablero. Se pueden mirar y copiar de ahí, no editar.
 - `.github/`, `.gitleaks.toml`, `.gitignore`, `SECURITY.md`, este archivo.
 
 Si una tarea parece necesitar editar `charts.js`, `tema.js`, `base.css` o
@@ -50,7 +52,8 @@ abrí `guia-diseno.html`.
   `--marca`, `--texto`, etc.). Si necesitás un color que no existe, es señal de
   que algo está mal: preguntá.
 - **Los gráficos se hacen SOLO con `Grafico.crear(selector, config)`** (ver
-  `README.md`). Tipos: `'barras'`, `'lineas'`, `'area'`, `'dona'`. Por debajo usa
+  `README.md`). Tipos: `'barras'`, `'lineas'`, `'area'`, `'dona'`, `'radar'`,
+  `'polar'` — los seis en acción en `tablero-demo.html`. Por debajo usa
   Chart.js, pero **no llames a `new Chart(...)` directo**: se sale del diseño.
 - Para agregar un gráfico: primero un contenedor en el HTML
   (`<div class="grafico" id="g-loquesea"></div>`), después la llamada a

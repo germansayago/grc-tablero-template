@@ -12,14 +12,14 @@
    USO (desde tablero.js):
 
      Grafico.crear('#mi-panel', {
-       tipo: 'barras',                 // 'barras' | 'lineas' | 'dona' | 'area'
+       tipo: 'barras',                 // 'barras' | 'lineas' | 'area' | 'dona' | 'radar' | 'polar'
        datos: [                        // forma simple: una serie
          { etiqueta: 'Enero',   valor: 120 },
          { etiqueta: 'Febrero', valor: 98  }
        ]
      });
 
-     // Varias series (para 'lineas', 'barras' o 'area'):
+     // Varias series (para 'lineas', 'barras', 'area' o 'radar'):
      Grafico.crear('#otro-panel', {
        tipo: 'lineas',
        etiquetas: ['Ene', 'Feb', 'Mar'],
@@ -28,6 +28,11 @@
          { nombre: 'Resueltos', valores: [80, 90, 110] }
        ]
      });
+
+   'radar' compara varias categorías a la vez (usa `etiquetas` + `series`, como
+   líneas). 'polar' es como 'dona' pero con el tamaño de cada porción según su
+   valor (usa `datos`, una sola serie). Los seis tipos ya vienen animados por
+   Chart.js al aparecer; ver tablero-demo.html para los seis en acción.
 
    Para un caso avanzado podés pasar `opciones: {...}` y se fusiona con las
    opciones de Chart.js. Usalo poco: rompe la uniformidad si te vas de tema.
@@ -80,13 +85,15 @@ const Grafico = (function () {
     const barra = (tipo === 'barras');
     const area  = (tipo === 'area');
     const dona  = (tipo === 'dona');
+    const polar = (tipo === 'polar');
+    const radar = (tipo === 'radar');
 
-    if (dona) {
+    if (dona || polar) {
       // Una serie; un color por porción.
       const s = datos.series[0] || { valores: [] };
       return [{
         data: s.valores,
-        backgroundColor: s.valores.map((_, i) => colorSerie(i)),
+        backgroundColor: s.valores.map((_, i) => colorSerie(i) + (polar ? 'b3' : '')), // b3 = ~70%, para que se vea la grilla debajo
         borderColor: leerVar('--superficie', '#ffffff'),
         borderWidth: 2
       }];
@@ -97,11 +104,11 @@ const Grafico = (function () {
       return {
         label: s.nombre || ('Serie ' + (i + 1)),
         data: s.valores,
-        backgroundColor: barra ? c : (area ? c + '33' : c),   // 33 = ~20% alpha
+        backgroundColor: barra ? c : ((area || radar) ? c + '33' : c),   // 33 = ~20% alpha
         borderColor: c,
         borderWidth: barra ? 0 : 2.5,
         borderRadius: barra ? 4 : 0,
-        fill: area,
+        fill: area || radar,
         tension: 0.25,
         pointRadius: 3,
         pointHoverRadius: 6,
@@ -117,17 +124,20 @@ const Grafico = (function () {
     const suave = leerVar('--texto-suave', '#57564f');
     const borde = leerVar('--borde', '#e2e1dc');
     const fuente = leerVar('--fuente', 'system-ui, sans-serif');
-    const dona = (tipo === 'dona');
+    const dona  = (tipo === 'dona');
+    const polar = (tipo === 'polar');
+    const radar = (tipo === 'radar');
+    const porPorcion = dona || polar;         // una etiqueta por porción, no por serie
     const unaSerie = datos.series.length < 2;
 
     const o = {
       responsive: true,
       maintainAspectRatio: false,
       font: { family: fuente },
-      interaction: { mode: 'index', intersect: false },
+      interaction: porPorcion ? {} : { mode: 'index', intersect: false },
       plugins: {
         legend: {
-          display: dona || !unaSerie,        // sin leyenda si es una sola serie con barras/líneas
+          display: porPorcion || !unaSerie,   // sin leyenda si es una sola serie con barras/líneas/radar
           position: 'bottom',
           labels: { color: suave, boxWidth: 12, boxHeight: 12, usePointStyle: true, font: { family: fuente } }
         },
@@ -139,8 +149,9 @@ const Grafico = (function () {
           callbacks: {
             label: (ctx) => {
               const v = ctx.parsed.y != null ? ctx.parsed.y
+                      : ctx.parsed.r != null ? ctx.parsed.r
                       : ctx.parsed.x != null ? ctx.parsed.x : ctx.parsed;
-              const etiqueta = dona ? ctx.label : ctx.dataset.label;
+              const etiqueta = porPorcion ? ctx.label : ctx.dataset.label;
               return ' ' + etiqueta + ': ' + nf.format(v);
             }
           }
@@ -148,7 +159,23 @@ const Grafico = (function () {
       }
     };
 
-    if (!dona) {
+    if (dona) {
+      o.cutout = '62%';
+    } else if (polar || radar) {
+      // Escala radial (un solo eje "r", en círculo) en vez de x/y.
+      o.scales = {
+        r: {
+          beginAtZero: true,
+          angleLines: { color: borde },
+          grid: { color: borde },
+          pointLabels: { color: suave, font: { family: fuente } },   // solo se ve en radar
+          ticks: {
+            color: suave, backdropColor: 'transparent',
+            font: { family: fuente }, callback: (v) => nf.format(v)
+          }
+        }
+      };
+    } else {
       o.scales = {
         x: {
           grid: { display: false },
@@ -162,8 +189,6 @@ const Grafico = (function () {
           ticks: { color: suave, font: { family: fuente }, callback: (v) => nf.format(v) }
         }
       };
-    } else {
-      o.cutout = '62%';
     }
     return o;
   }
@@ -176,6 +201,8 @@ const Grafico = (function () {
   function tipoChartjs(tipo) {
     if (tipo === 'lineas' || tipo === 'area') { return 'line'; }
     if (tipo === 'dona') { return 'doughnut'; }
+    if (tipo === 'polar') { return 'polarArea'; }
+    if (tipo === 'radar') { return 'radar'; }
     return 'bar';
   }
 

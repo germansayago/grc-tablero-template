@@ -61,7 +61,9 @@ jobs:
 
       - name: No se subieron datos crudos ni planillas
         run: |
-          if git ls-files | grep -qiE '(^datos-fuente/|\.xlsx?$)'; then
+          # datos-fuente/LEEME.md es la única excepción permitida (el instructivo
+          # de la carpeta; por eso sigue versionado pese al .gitignore).
+          if git ls-files | grep -iE '(^datos-fuente/|\.xlsx?$)' | grep -qvi '^datos-fuente/LEEME\.md$'; then
             echo "::error::Hay datos crudos o una planilla en el repo. Solo se publica el resultado agregado en datos/."
             exit 1
           fi

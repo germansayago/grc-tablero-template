@@ -13,6 +13,7 @@ colores y los chequeos de seguridad ya vienen resueltos.
 ```
 index.html          el tablero (la página). Editás títulos y paneles.
 guia-diseno.html    el sistema de diseño: colores, tipografía, botones, gráficos.
+tablero-demo.html   tablero de ejemplo completo, con los seis tipos de gráfico (datos inventados).
 css/
   fuentes.css       la tipografía (Inter). NO se toca.
   tokens.css        ← la paleta y los tamaños. Se toca SOLO acá.
@@ -108,12 +109,28 @@ Grafico.crear('#g-canales', {
     { etiqueta: 'App', valor: 320 }
   ]
 });
+
+// Radar — comparar varias categorías a la vez (acá, dos series)
+Grafico.crear('#g-satisfaccion', {
+  tipo: 'radar',
+  etiquetas: ['Limpieza', 'Seguridad', 'Accesibilidad'],
+  series: [
+    { nombre: 'Parque A', valores: [8.6, 7.9, 8.1] },
+    { nombre: 'Parque B', valores: [7.8, 8.4, 6.9] }
+  ]
+});
 ```
 
-Tipos: `barras`, `lineas`, `area`, `dona`. Para que un gráfico aparezca, en
-`index.html` tiene que haber un contenedor con ese id:
-`<div class="grafico" id="g-areas"></div>`. Para un caso muy particular podés
-pasar `opciones: {...}` (se fusiona con Chart.js), pero usalo poco.
+Tipos: `barras`, `lineas`, `area`, `dona`, `radar`, `polar` (como la dona, pero
+el tamaño de cada porción también importa). Para que un gráfico aparezca, en
+el HTML tiene que haber un contenedor con ese id: `<div class="grafico" id="g-areas"></div>`.
+Para un caso muy particular podés pasar `opciones: {...}` (se fusiona con
+Chart.js — por ejemplo para una animación de entrada escalonada, como en
+`tablero-demo.html`), pero usalo poco.
+
+**Los seis tipos, funcionando, están en [`tablero-demo.html`](tablero-demo.html)**
+— un tablero de ejemplo completo (con datos inventados) que podés usar de
+inspiración o copiar patrones de ahí a tu `tablero.js`.
 
 **Botones y textos:** usá las clases `.boton` (+ `.boton--primario`, etc.) y
 `.titulo-*`. Todas están, en vivo, en **[`guia-diseno.html`](guia-diseno.html)**
