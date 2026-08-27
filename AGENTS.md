@@ -50,14 +50,20 @@ abrí `guia-diseno.html`.
   CSS. Todo color sale de las variables de `css/tokens.css` (`--marca`, `--texto`,
   etc.). Si necesitás un color que no existe, es señal de que algo está mal:
   preguntá.
-- **Ojo con `--marca` / `--marca-enlace` y `--grave` / `--grave-texto`: no son
-  intercambiables.** Cada par existe porque el mismo color no pasa el
-  contraste mínimo (WCAG AA) en sus dos usos distintos. `--marca` y `--grave`
-  son para FONDOS (header, botones); `--marca-enlace` y `--grave-texto` son
-  para cuando ese color ES el texto (links, `.boton--sutil`, etiquetas de
-  estado). Si vas a usar alguno como color de texto sobre un fondo claro,
-  usá la variante `-enlace`/`-texto`; si es un fondo, la variante base. El
-  porqué completo y cómo repetir la verificación están en `ACCESIBILIDAD.md`.
+- **`--marca` / `--marca-enlace` no son intercambiables.** `--marca` es el
+  celeste oficial, para FONDOS (header, botones). `--marca-enlace` es una
+  versión más oscura, solo para cuando ese celeste ES el texto (links,
+  `.boton--sutil`) — el oficial no tiene contraste suficiente para eso. Si
+  vas a usar el celeste como color de texto sobre un fondo claro, usá
+  `--marca-enlace`; si es un fondo, `--marca`.
+- **Las etiquetas de estado (`.estado--ok/--alerta/--grave`) usan fondo
+  SÓLIDO con el color real**, no un tinte pastel — así "alerta" se ve
+  amarillo de verdad, no marrón. El contraste lo pone el color del texto
+  (blanco o `--texto-fijo-oscuro`, ya elegido para cada uno), no el tono del
+  color de fondo. No cambies esto a un `color-mix` tenue "para que se vea
+  más suave": ya se probó y perdía legibilidad semántica.
+- El porqué completo de estas decisiones y cómo repetir la verificación de
+  contraste están en `ACCESIBILIDAD.md`.
 - **Si agregás o cambiás un color, revisá el contraste antes de cerrar la
   tarea** (ver `ACCESIBILIDAD.md`, sección 1) — con
   [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)

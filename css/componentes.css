@@ -9,15 +9,50 @@
    de títulos y un par de ayudas de texto, para que todos los tableros usen los
    mismos tamaños. */
 
-.titulo-xl { font-size: 2rem;    font-weight: 700; line-height: 1.15; margin: 0; }
-.titulo-l  { font-size: 1.5rem;  font-weight: 700; line-height: 1.2;  margin: 0; }
-.titulo-m  { font-size: 1.1rem;  font-weight: 600; line-height: 1.25; margin: 0; }
-.titulo-s  { font-size: 0.95rem; font-weight: 600; line-height: 1.3;  margin: 0; }
+.titulo-xl {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+}
 
-.texto        { font-size: 1rem;    color: var(--texto); }
-.texto-suave  { color: var(--texto-suave); }
-.texto-chico  { font-size: 0.85rem; }
-.texto-numero { font-variant-numeric: tabular-nums; }
+.titulo-l {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.titulo-m {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.titulo-s {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.texto {
+  font-size: 1rem;
+  color: var(--texto);
+}
+
+.texto-suave {
+  color: var(--texto-suave);
+}
+
+.texto-chico {
+  font-size: 0.85rem;
+}
+
+.texto-numero {
+  font-variant-numeric: tabular-nums;
+}
 
 /* --- Botones -------------------------------------------------------------
    Base + variantes. En un tablero los botones se usan poco (filtros, "descargar
@@ -42,8 +77,13 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.boton:hover { filter: brightness(0.96); }
-.boton:active { filter: brightness(0.92); }
+.boton:hover {
+  filter: brightness(0.96);
+}
+
+.boton:active {
+  filter: brightness(0.92);
+}
 
 .boton:focus-visible {
   outline: 2px solid var(--marca);
@@ -59,10 +99,10 @@
 
 /* Primario: acción principal. Usa el color de marca. Texto oscuro fijo (no
    blanco): a este tamaño de letra, el celeste no tiene contraste suficiente
-   para texto blanco — ver --texto-sobre-marca en tokens.css. */
+   para texto blanco — ver ACCESIBILIDAD.md. */
 .boton--primario {
   background: var(--marca);
-  color: var(--texto-sobre-marca);
+  color: var(--texto-fijo-oscuro);
   border-color: var(--marca);
 }
 
@@ -72,7 +112,10 @@
   color: var(--texto);
   border-color: var(--borde);
 }
-.boton--secundario:hover { background: var(--fondo); }
+
+.boton--secundario:hover {
+  background: var(--fondo);
+}
 
 /* Sutil: para acciones terciarias, sin caja. --marca-enlace (no --marca): acá
    el celeste ES el texto, y el oficial no tiene contraste suficiente para eso. */
@@ -81,7 +124,10 @@
   color: var(--marca-enlace);
   border-color: transparent;
 }
-.boton--sutil:hover { background: color-mix(in srgb, var(--marca) 12%, transparent); }
+
+.boton--sutil:hover {
+  background: color-mix(in srgb, var(--marca) 12%, transparent);
+}
 
 /* Peligro: acciones destructivas (borrar, etc.). Usar con moderación. */
 .boton--peligro {
@@ -91,8 +137,15 @@
 }
 
 /* Tamaños */
-.boton--chico  { padding: 6px 12px;  font-size: 0.85rem; }
-.boton--grande { padding: 13px 22px; font-size: 1.05rem; }
+.boton--chico {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+.boton--grande {
+  padding: 13px 22px;
+  font-size: 1.05rem;
+}
 
 /* --- Etiquetas de estado (badges) ---------------------------------------- */
 
@@ -106,16 +159,37 @@
   border-radius: 999px;
   border: 1px solid transparent;
 }
+
 .estado::before {
   content: "";
-  width: 7px; height: 7px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: currentColor;
 }
 
-.estado--ok     { color: var(--ok);     background: color-mix(in srgb, var(--ok) 14%, transparent); }
-.estado--alerta { color: var(--alerta); background: color-mix(in srgb, var(--alerta) 16%, transparent); }
-/* --grave-texto, no --grave: acá es el color del texto de la etiqueta, un uso
-   distinto (y con otro valor necesario) que el de fondo de .boton--peligro. */
-.estado--grave  { color: var(--grave-texto);  background: color-mix(in srgb, var(--grave-texto) 14%, transparent); }
-.estado--neutro { color: var(--texto-suave); background: color-mix(in srgb, var(--texto-suave) 12%, transparent); }
+/* Fondo SÓLIDO con el color real (no un tinte pastel): así "alerta" se ve
+   amarillo de verdad, no un marrón deslavado. El contraste lo pone el color
+   del texto, blanco o --texto-fijo-oscuro según cuál se lea mejor sobre cada
+   fondo — ver ACCESIBILIDAD.md. */
+.estado--ok {
+  color: #ffffff;
+  background: var(--ok);
+}
+
+.estado--alerta {
+  color: var(--texto-fijo-oscuro);
+  background: var(--alerta);
+}
+
+.estado--grave {
+  color: #ffffff;
+  background: var(--grave);
+}
+
+/* Neutro se queda con el tinte suave: no es un color que necesite "leerse"
+   de un vistazo como los otros tres. */
+.estado--neutro {
+  color: var(--texto-suave);
+  background: color-mix(in srgb, var(--texto-suave) 12%, transparent);
+}

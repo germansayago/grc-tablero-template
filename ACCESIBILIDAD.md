@@ -27,25 +27,44 @@ este mínimo. El detalle completo de qué fallaba y por qué está en el
 historial de git (commit "Auditoría de contraste WCAG AA..."), pero la parte
 que necesitás saber para seguir trabajando es esta:
 
-### Dos colores están duplicados a propósito — no los confundas
+### El celeste institucional está duplicado a propósito
 
 | Color | Para FONDOS (con texto encima) | Para cuando el color ES el texto |
 |---|---|---|
 | Celeste institucional | `--marca` | `--marca-enlace` |
-| Rojo de "grave/vencido" | `--grave` | `--grave-texto` |
 
-**Por qué existen los dos:** el celeste oficial y el rojo de "grave" no
-tienen contraste suficiente para funcionar en los dos roles con un solo
-valor. `--marca` (el celeste real de riocuarto.gob.ar) funciona como fondo
-grande con texto encima (el header, `.boton--primario`); pero si ese mismo
-celeste pasa a ser el color del *texto* (un link, `.boton--sutil`), no se lee
-bien sobre un fondo claro — por eso existe `--marca-enlace`, una versión más
-oscura, solo para eso. Mismo caso con `--grave`.
+**Por qué existen los dos:** el celeste oficial de riocuarto.gob.ar no tiene
+contraste suficiente para funcionar en los dos roles con un solo valor.
+`--marca` funciona como fondo grande con texto encima (el header,
+`.boton--primario`); pero si ese mismo celeste pasa a ser el color del
+*texto* (un link, `.boton--sutil`), no se lee bien sobre un fondo claro —
+por eso existe `--marca-enlace`, una versión más oscura, solo para eso.
 
 **Regla práctica:** antes de escribir `color: var(--marca)` o
 `background: var(--marca)`, preguntate qué es el celeste ahí — ¿un fondo, o
-el texto mismo? Fondo → la variable base. Texto → la variante `-enlace` o
-`-texto`.
+el texto mismo? Fondo → `--marca`. Texto → `--marca-enlace`.
+
+### Las etiquetas de estado (`.estado--ok/--alerta/--grave`) usan fondo sólido, no un tinte
+
+La primera versión de este ajuste oscurecía el color de estado y lo usaba
+como texto sobre un tinte pastel del mismo color — la forma más común de
+hacer una "etiqueta" en un design system. El problema: para que un amarillo
+pase 4.5:1 *como texto*, hay que oscurecerlo tanto que deja de leerse como
+amarillo — terminaba pareciendo marrón. Un "alerta" que no se reconoce como
+alerta de un vistazo es un problema real de uso, no solo estético.
+
+La solución: el color de estado (`--ok`, `--alerta`, `--grave`) es el
+**fondo sólido** de la etiqueta, tal cual, sin oscurecer — así se sigue
+viendo verde, amarillo o rojo de verdad. El contraste lo pone el color del
+*texto* encima: blanco donde alcanza (`--ok`, `--grave`) o
+`--texto-fijo-oscuro` donde el fondo es demasiado claro para el blanco
+(`--alerta`). Los tres pasan 4.5:1 así, sin perder el color real.
+
+**Si agregás un estado nuevo:** no repitas el patrón "texto de color sobre
+tinte pastel" — probá primero fondo sólido + texto blanco, y si no alcanza
+4.5:1, fondo sólido + `--texto-fijo-oscuro`. Casi siempre alguno de los dos
+funciona, porque ahí el contraste lo decide un blanco o un negro puro contra
+un solo color, no dos tonos parecidos entre sí.
 
 ### Si agregás un color nuevo
 

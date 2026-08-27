@@ -108,9 +108,9 @@ completo (incluye el botón y el script anti-titileo del `<head>`) y el
   `<header>`); el color, en `--marca` dentro de `css/tokens.css`.
 - **Logo:** reemplazá `assets/img/logo-gobierno.webp` por el oficial (mismo nombre).
 - ⚠️ **Si tocás un color, revisá `ACCESIBILIDAD.md` primero.** Ya hubo una
-  ronda de ajustes por contraste (WCAG AA) — algunos tokens vienen duplicados
-  a propósito (`--marca`/`--marca-enlace`, `--grave`/`--grave-texto`) y no son
-  intercambiables.
+  ronda de ajustes por contraste (WCAG AA) — por ejemplo, `--marca` (celeste,
+  para fondos) y `--marca-enlace` (mismo celeste, más oscuro, para cuando es
+  el texto) no son intercambiables.
 
 ---
 
