@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/iconos.css">
 
   <style>
     /* Estilos propios SOLO de esta página de referencia. */
@@ -40,6 +41,25 @@
     .muestra-tipo { border-bottom: 1px dashed var(--borde); padding: 8px 0; }
     .muestra-tipo small { color: var(--texto-suave); font-size: 0.72rem; display: block; margin-top: 2px; }
     code { background: color-mix(in srgb, var(--texto-suave) 12%, transparent); padding: 1px 6px; border-radius: 5px; font-size: 0.85em; }
+
+    .iconos-muestra { display: flex; flex-wrap: wrap; gap: 10px; }
+    .icono-item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      width: 96px; padding: 14px 8px;
+      border: 1px solid var(--borde); border-radius: var(--radio);
+      background: var(--superficie);
+    }
+    .icono-item .icono { font-size: 26px; }
+    .icono-item code { font-size: 0.7rem; text-align: center; word-break: break-word; }
+
+    .ods-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+    .ods-item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 10px; border: 1px solid var(--borde); border-radius: var(--radio);
+      background: var(--superficie);
+    }
+    .ods-item img { width: 64px; height: 64px; border-radius: 6px; }
+    .ods-item span { font-size: 0.72rem; text-align: center; color: var(--texto-suave); line-height: 1.25; }
   </style>
 </head>
 <body>
@@ -170,6 +190,56 @@
             <p class="valor">1.512</p>
             <p class="detalle">82% del total</p>
           </div>
+        </div>
+      </section>
+
+      <!-- ================= ÍCONOS ================= -->
+      <section class="seccion">
+        <h2>Íconos</h2>
+        <p class="ayuda">Material Symbols de Google, autoalojados (<code>css/iconos.css</code>) — no
+          se cargan de internet. Buscá el que necesites en
+          <a href="https://fonts.google.com/icons" target="_blank" rel="noopener">fonts.google.com/icons</a>
+          y usá su nombre tal cual, como texto: <code>&lt;span class="icono"&gt;home&lt;/span&gt;</code>.</p>
+        <div class="iconos-muestra">
+          <div class="icono-item"><span class="icono" aria-hidden="true">home</span><code>home</code></div>
+          <div class="icono-item"><span class="icono" aria-hidden="true">search</span><code>search</code></div>
+          <div class="icono-item"><span class="icono" aria-hidden="true">download</span><code>download</code></div>
+          <div class="icono-item"><span class="icono" aria-hidden="true">filter_alt</span><code>filter_alt</code></div>
+          <div class="icono-item"><span class="icono" aria-hidden="true">info</span><code>info</code></div>
+          <div class="icono-item"><span class="icono" aria-hidden="true">calendar_month</span><code>calendar_month</code></div>
+        </div>
+        <p class="ayuda" style="margin-top:14px">
+          <strong>Accesibilidad:</strong> el ícono solo (sin texto al lado) no dice nada por sí mismo.
+          Siempre <code>aria-hidden="true"</code> en el ícono, y si va solo dentro de un botón o link,
+          <code>aria-label="lo que hace"</code> en el elemento que lo contiene — ver <code>css/iconos.css</code>.
+        </p>
+      </section>
+
+      <!-- ================= ODS ================= -->
+      <section class="seccion">
+        <h2>Objetivos de Desarrollo Sostenible (ODS)</h2>
+        <p class="ayuda">Íconos oficiales de la ONU, guardados en <code>assets/img/ods/</code> — no se
+          cargan de internet. Usalos si tu tablero muestra el avance de un programa vinculado a algún
+          objetivo. No se pueden recolorear ni deformar — ver
+          <code>assets/img/ods/LEEME.md</code> antes de usarlos.</p>
+        <div class="ods-grid">
+          <div class="ods-item"><img src="assets/img/ods/ods-01.png" alt="ODS 1: Fin de la pobreza" loading="lazy"><span>1. Fin de la pobreza</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-02.png" alt="ODS 2: Hambre cero" loading="lazy"><span>2. Hambre cero</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-03.png" alt="ODS 3: Salud y bienestar" loading="lazy"><span>3. Salud y bienestar</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-04.png" alt="ODS 4: Educación de calidad" loading="lazy"><span>4. Educación de calidad</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-05.png" alt="ODS 5: Igualdad de género" loading="lazy"><span>5. Igualdad de género</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-06.png" alt="ODS 6: Agua limpia y saneamiento" loading="lazy"><span>6. Agua limpia y saneamiento</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-07.png" alt="ODS 7: Energía asequible y no contaminante" loading="lazy"><span>7. Energía asequible y no contaminante</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-08.png" alt="ODS 8: Trabajo decente y crecimiento económico" loading="lazy"><span>8. Trabajo decente y crecimiento económico</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-09.png" alt="ODS 9: Industria, innovación e infraestructura" loading="lazy"><span>9. Industria, innovación e infraestructura</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-10.png" alt="ODS 10: Reducción de las desigualdades" loading="lazy"><span>10. Reducción de las desigualdades</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-11.png" alt="ODS 11: Ciudades y comunidades sostenibles" loading="lazy"><span>11. Ciudades y comunidades sostenibles</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-12.png" alt="ODS 12: Producción y consumo responsables" loading="lazy"><span>12. Producción y consumo responsables</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-13.png" alt="ODS 13: Acción por el clima" loading="lazy"><span>13. Acción por el clima</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-14.png" alt="ODS 14: Vida submarina" loading="lazy"><span>14. Vida submarina</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-15.png" alt="ODS 15: Vida de ecosistemas terrestres" loading="lazy"><span>15. Vida de ecosistemas terrestres</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-16.png" alt="ODS 16: Paz, justicia e instituciones sólidas" loading="lazy"><span>16. Paz, justicia e instituciones sólidas</span></div>
+          <div class="ods-item"><img src="assets/img/ods/ods-17.png" alt="ODS 17: Alianzas para lograr los objetivos" loading="lazy"><span>17. Alianzas para lograr los objetivos</span></div>
         </div>
       </section>
 

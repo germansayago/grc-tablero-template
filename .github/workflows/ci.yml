@@ -42,11 +42,15 @@ jobs:
 
       - name: Nada cargado desde internet (sin CDN externo)
         run: |
+          # Solo mira <link>, <script src> e <img src> (lo que el navegador
+          # carga solo). Un <a href="https://..."> normal — un link para que
+          # alguien lo abra a mano, como los de las guías — no cuenta: eso no
+          # es "cargar un recurso", es una referencia para leer.
           # Se excluye vendor/ (librerías de terceros vendorizadas, de confianza).
-          if grep -rniE '(src|href)[[:space:]]*=[[:space:]]*["'"'"']https?://' \
+          if grep -rnE '<(link|script|img)[^>]*(src|href)[[:space:]]*=[[:space:]]*["'"'"']https?://' \
                --include='*.html' --include='*.js' \
                --exclude-dir=vendor --exclude-dir=.git . ; then
-            echo "::error::Hay recursos cargados desde internet. Todo debe estar en el repo (css/, js/, vendor/, assets/)."
+            echo "::error::Hay un <link>, <script> o <img> que carga algo desde internet. Todo debe estar en el repo (css/, js/, vendor/, assets/)."
             exit 1
           fi
           echo "OK: no se carga nada desde internet."

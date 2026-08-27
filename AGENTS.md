@@ -22,9 +22,11 @@ entre. Eso condiciona todo lo que sigue.
 
 **No toques (salvo pedido explícito y consciente del usuario):**
 - `js/tema.js` — el interruptor de modo claro/oscuro del header. Ya anda solo.
-- `css/base.css`, `css/componentes.css` y `css/fuentes.css` — estructura visual,
-  componentes (botones, etc.) y la tipografía Inter.
-- `assets/fonts/` — la tipografía Inter, de terceros. Nunca se edita.
+- `css/base.css`, `css/componentes.css`, `css/fuentes.css` y `css/iconos.css` —
+  estructura visual, componentes (botones, etc.), tipografía e íconos.
+- `assets/fonts/` — tipografía e íconos de terceros. Nunca se edita.
+- `assets/img/ods/` — íconos oficiales de la ONU. No se recolorean ni se
+  deforman (ver su `LEEME.md`); se usan tal cual o no se usan.
 - `guia-diseno.html` — página de referencia del sistema de diseño, no de tu
   tablero. Se puede mirar y copiar de ahí, no editar.
 - `.github/`, `.gitleaks.toml`, `.gitignore`, `SECURITY.md`, `ACCESIBILIDAD.md`, este archivo.

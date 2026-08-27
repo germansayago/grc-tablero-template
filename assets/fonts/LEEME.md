@@ -1,4 +1,22 @@
-# assets/fonts/ — tipografía, guardada en el repo
+# assets/fonts/ — tipografía e íconos, guardados en el repo
+
+## material-symbols-outlined.woff2
+
+- **Qué es:** [Material Symbols](https://fonts.google.com/icons) de Google,
+  estilo "Outlined", peso 400. Un solo archivo cubre TODOS los íconos de la
+  librería (varios miles) — se usan por nombre, como texto (ver `css/iconos.css`).
+- **Licencia:** Apache License 2.0 — de uso y redistribución libres.
+- No se carga de internet: por eso está acá.
+
+### Para actualizarla (solo quien mantiene el template)
+
+```bash
+curl -sL "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" \
+  -A "Mozilla/5.0" | grep -o 'https://fonts.gstatic.com[^)]*' | head -1
+# Descargar esa URL a assets/fonts/material-symbols-outlined.woff2
+```
+
+---
 
 ## inter-latin-variable.woff2
 

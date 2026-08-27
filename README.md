@@ -20,13 +20,15 @@ css/
   tokens.css        ← la paleta y los tamaños. Se toca SOLO acá.
   base.css          header, footer, grilla, tarjetas. Casi nunca se toca.
   componentes.css   botones, estados y clases de texto. Casi nunca se toca.
+  iconos.css        íconos (Material Symbols). Casi nunca se toca.
 js/
   tema.js           el interruptor de modo claro/oscuro. NO se toca.
   tablero.js        ← TU lógica: cargar tus datos y mostrarlos. El archivo que editás.
 datos/              ← TUS DATOS, ya agregados y publicables (el formato es tu decisión).
 datos-fuente/       datos crudos — NO se suben (está en .gitignore).
 assets/img/         imágenes y el logo.
-assets/fonts/       la tipografía Inter, guardada en el repo. NO se toca.
+assets/img/ods/     íconos oficiales de los Objetivos de Desarrollo Sostenible (ONU).
+assets/fonts/       tipografía (Inter) e íconos (Material Symbols), guardados en el repo. NO se toca.
 SECURITY.md         las 3 reglas de seguridad. Leelo una vez.
 ACCESIBILIDAD.md    contraste de color y accesibilidad. Leelo si vas a tocar colores.
 AGENTS.md           las reglas que sigue el agente de IA. La fuente de verdad.
@@ -84,6 +86,10 @@ en **[`guia-diseno.html`](guia-diseno.html)** (abrila en el navegador).
   `--sutil`, `--peligro`).
 - **Tipografía:** clases `.titulo-xl` a `.titulo-s`, `.texto`, `.texto-suave`.
 - **Números:** tarjetas `.kpi`, dentro de un contenedor `.indicadores`.
+- **Íconos:** clase `.icono`, con el nombre del ícono como texto (buscalo en
+  [fonts.google.com/icons](https://fonts.google.com/icons)) — ver `css/iconos.css`.
+- **ODS:** si tu tablero se vincula a un Objetivo de Desarrollo Sostenible, los
+  17 íconos oficiales están en `assets/img/ods/` (ver su `LEEME.md`).
 - **Paleta:** todo sale de `css/tokens.css`. Cambiás un valor ahí y se propaga
   a todo el tablero, modo oscuro incluido.
 
