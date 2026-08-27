@@ -1,9 +1,10 @@
 # Template de tableros — Equipo de Estadísticas
 
-Plantilla para crear tableros con datos, todos con el **mismo diseño** y las
-**mismas reglas de seguridad**. Vos te ocupás de tus datos y de cómo los
-cargás; el diseño, los colores y los chequeos de seguridad ya vienen
-resueltos. HTML, CSS y JS simples, sin build.
+Plantilla para crear tableros con datos, todos con el **mismo diseño**, las
+**mismas reglas de seguridad** y **accesibles** (WCAG AA) de fábrica. Vos te
+ocupás de tus datos y de cómo los cargás; el diseño, los colores, el
+contraste y los chequeos de seguridad ya vienen resueltos. HTML, CSS y JS
+simples, sin build.
 
 > **¿Primera vez?** Andá directo a [Empezar](#empezar-tu-primer-tablero) más abajo.
 
