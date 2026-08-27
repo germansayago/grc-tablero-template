@@ -4,9 +4,15 @@
    tokens.css. Normalmente no necesitás tocar este archivo.
    ========================================================================== */
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body { overflow-x: hidden; }   /* la página nunca scrollea de costado */
+/* La página nunca scrollea de costado. */
+html,
+body {
+  overflow-x: hidden;
+}
 
 body {
   margin: 0;
@@ -87,23 +93,49 @@ body {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.boton-tema:hover { background: rgba(255, 255, 255, 0.28); }
-.boton-tema:focus-visible { outline: 2px solid var(--marca-texto); outline-offset: 2px; }
-.boton-tema svg { width: 19px; height: 19px; }
+
+.boton-tema:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.boton-tema:focus-visible {
+  outline: 2px solid var(--marca-texto);
+  outline-offset: 2px;
+}
+
+.boton-tema svg {
+  width: 19px;
+  height: 19px;
+}
 
 /* Qué ícono se ve: lo decide js/tema.js con la clase .es-oscuro (contempla
    tanto la elección manual como el modo del sistema operativo). Por defecto
    se ve la luna, que invita a pasar a oscuro. */
-.boton-tema .icono-sol { display: none; }
-.boton-tema .icono-luna { display: block; }
-.boton-tema.es-oscuro .icono-sol { display: block; }
-.boton-tema.es-oscuro .icono-luna { display: none; }
+.boton-tema .icono-sol {
+  display: none;
+}
+
+.boton-tema .icono-luna {
+  display: block;
+}
+
+.boton-tema.es-oscuro .icono-sol {
+  display: block;
+}
+
+.boton-tema.es-oscuro .icono-luna {
+  display: none;
+}
 
 /* --- Cuerpo --------------------------------------------------------------- */
 
-main { padding: 24px 0 8px; }
+main {
+  padding: 24px 0 8px;
+}
 
-.intro { margin-bottom: 20px; }
+.intro {
+  margin-bottom: 20px;
+}
 
 .intro h2 {
   margin: 0 0 4px;
@@ -138,9 +170,24 @@ main { padding: 24px 0 8px; }
   padding: 14px 16px;
 }
 
-.kpi .etiqueta { font-size: 0.8rem; color: var(--texto-suave); margin: 0 0 6px; }
-.kpi .valor    { font-size: 1.9rem; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
-.kpi .detalle  { font-size: 0.8rem; color: var(--texto-suave); margin: 4px 0 0; }
+.kpi .etiqueta {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  margin: 0 0 6px;
+}
+
+.kpi .valor {
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi .detalle {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  margin: 4px 0 0;
+}
 
 /* --- Paneles (tarjetas de contenido) --------------------------------------- */
 
@@ -159,16 +206,33 @@ main { padding: 24px 0 8px; }
   min-width: 0;
 }
 
-.panel h3 { margin: 0 0 2px; font-size: 1rem; }
-.panel .nota { margin: 0 0 12px; font-size: 0.8rem; color: var(--texto-suave); }
+.panel h3 {
+  margin: 0 0 2px;
+  font-size: 1rem;
+}
+
+.panel .nota {
+  margin: 0 0 12px;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
 
 /* --- Tabla ---------------------------------------------------------------- */
 
-.tabla-scroll { overflow-x: auto; }   /* la tabla scrollea adentro; el body no */
+.tabla-scroll {
+  overflow-x: auto;
+}
 
-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+/* la tabla scrollea adentro; el body no */
 
-th, td {
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+th,
+td {
   text-align: left;
   padding: 8px 10px;
   border-bottom: 1px solid var(--borde);
@@ -183,7 +247,11 @@ th {
   font-weight: 600;
 }
 
-td.numero, th.numero { text-align: right; font-variant-numeric: tabular-nums; }
+td.numero,
+th.numero {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
 
 /* --- Footer --------------------------------------------------------------- */
 
@@ -194,9 +262,23 @@ td.numero, th.numero { text-align: right; font-variant-numeric: tabular-nums; }
   font-size: 0.8rem;
   color: var(--texto-suave);
 }
-.pie .contenedor { display: flex; flex-direction: column; gap: 12px; }
-.pie-textos { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; }
-.pie p { margin: 0; }
+
+.pie .contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pie-textos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+  justify-content: space-between;
+}
+
+.pie p {
+  margin: 0;
+}
 
 /* Links entre las páginas de la plantilla (inicio, guía de diseño, tablero
    de muestra). Van al pie de cada una. */
@@ -207,14 +289,21 @@ td.numero, th.numero { text-align: right; font-variant-numeric: tabular-nums; }
   padding-top: 12px;
   border-top: 1px solid var(--borde);
 }
+
 .enlaces-paginas a {
   color: var(--marca-enlace);
   text-decoration: none;
   font-weight: 600;
 }
+
 .enlaces-paginas a:hover,
-.enlaces-paginas a:focus-visible { text-decoration: underline; }
-.enlaces-paginas a::after { content: " →"; }
+.enlaces-paginas a:focus-visible {
+  text-decoration: underline;
+}
+
+.enlaces-paginas a::after {
+  content: " →";
+}
 
 /* --- Mensaje de error (lo muestra tablero.js si algo falla) --------------- */
 
