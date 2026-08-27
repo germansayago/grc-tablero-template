@@ -21,6 +21,7 @@ css/
   base.css          header, footer, grilla, tarjetas. Casi nunca se toca.
   componentes.css   botones, estados y clases de texto. Casi nunca se toca.
   iconos.css        íconos (Material Symbols). Casi nunca se toca.
+  tablero.css       ← TUS estilos propios. Acá va el CSS que escribas.
 js/
   tema.js           el interruptor de modo claro/oscuro. NO se toca.
   tablero.js        ← TU lógica: cargar tus datos y mostrarlos. El archivo que editás.
@@ -40,8 +41,12 @@ AGENTS.md           las reglas que sigue el agente de IA. La fuente de verdad.
 > system y las reglas de seguridad sin que se las expliques. Pedile igual, al
 > empezar: *"Leé AGENTS.md antes de tocar nada"*.
 
-Regla mental: **tocás `index.html`, `js/tablero.js`, `css/tokens.css` y
-`datos/`. El resto ya funciona.**
+Regla mental: **tocás `index.html`, `js/tablero.js`, `css/tablero.css`,
+`css/tokens.css` y `datos/`. El resto ya funciona.**
+
+¿Necesitás un estilo que el sistema no tiene? Va en `css/tablero.css`, que se
+carga último y es local a tu tablero. No lo pongas en `componentes.css`: eso
+es lo compartido con los demás.
 
 **Todavía no hay una librería de gráficos elegida** para la plantilla — se
 define más adelante. Mientras tanto, para mostrar números usá tarjetas `.kpi`

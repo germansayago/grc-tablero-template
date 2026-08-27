@@ -80,6 +80,7 @@ jobs:
           grep -q 'css/base.css'   index.html || { echo "::error::index.html no enlaza css/base.css"; miss=1; }
           grep -q 'css/componentes.css' index.html || { echo "::error::index.html no enlaza css/componentes.css (botones, estados, tipografía)"; miss=1; }
           grep -q 'css/iconos.css' index.html || { echo "::error::index.html no enlaza css/iconos.css (los íconos quedan como texto suelto)"; miss=1; }
+          grep -q 'css/tablero.css' index.html || { echo "::error::index.html no enlaza css/tablero.css (tus estilos propios no cargarían, y sin aviso)"; miss=1; }
           grep -q 'js/tema.js'     index.html || { echo "::error::index.html no enlaza js/tema.js (el botón de modo oscuro queda sin función)"; miss=1; }
           grep -q 'id="boton-tema"' index.html || { echo "::error::index.html no tiene el botón #boton-tema del header"; miss=1; }
           [ "$miss" = 0 ] && echo "OK: el design system está enlazado."

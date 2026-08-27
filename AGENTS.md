@@ -1,146 +1,115 @@
-# AGENTS.md — Reglas para el agente de IA
+# AGENTS.md — Cómo trabajar en este tablero
 
-Este archivo son las reglas que debés seguir para trabajar en este proyecto.
-Leelo entero antes de tocar nada. Son la fuente de verdad: si algo que te
-piden contradice estas reglas, avisá y no lo hagas sin confirmación.
+Esto es un **tablero estático**: HTML, CSS y JS que el navegador entiende
+directo. No hay build, no hay backend. Se publica tal cual, así que todo lo
+que esté en el repo queda visible para cualquiera que entre.
 
-Este proyecto es un **tablero estático** (HTML + CSS + JavaScript que el
-navegador entiende directo). No hay build, no hay backend, no hay framework.
-Se publica tal cual: todos los archivos quedan visibles para cualquiera que
-entre. Eso condiciona todo lo que sigue.
-
----
-
-## 1. Qué podés editar y qué no
-
-**Editá libremente:**
-- `index.html` — títulos, textos, y el contenido de tu tablero.
-- `js/tablero.js` — la lógica del tablero: cargar los datos y mostrarlos.
-- `datos/` — tus datos publicables, en el formato que prefieras.
-- `css/tokens.css` — SOLO los **valores** de las variables (colores, tipografía),
-  si te piden cambiar la estética. No borres variables ni cambies sus nombres.
-
-**No toques (salvo pedido explícito y consciente del usuario):**
-- `js/tema.js` — el interruptor de modo claro/oscuro del header. Ya anda solo.
-- `css/base.css`, `css/componentes.css`, `css/fuentes.css` y `css/iconos.css` —
-  estructura visual, componentes (botones, etc.), tipografía e íconos.
-- `assets/fonts/` — tipografía e íconos de terceros. Nunca se edita.
-- `assets/img/ods/` — íconos oficiales de la ONU. No se recolorean ni se
-  deforman (ver su `LEEME.md`); se usan tal cual o no se usan.
-- `guia-diseno.html` — página de referencia del sistema de diseño, no de tu
-  tablero. Se puede mirar y copiar de ahí, no editar.
-- `.github/`, `.gitleaks.toml`, `.gitignore`, `SECURITY.md`, `ACCESIBILIDAD.md`, este archivo.
-
-Si una tarea parece necesitar editar `tema.js` o `base.css`, **pará y explicá
-por qué** antes de hacerlo. Casi siempre hay otra forma.
-
-**El modo oscuro ya está resuelto: no lo reimplementes.** El tablero sigue el
-tema del sistema operativo solo, y el botón `#boton-tema` del header (que ya
-viene en `index.html`) permite elegirlo a mano. Si copiás/adaptás el header
-para otro archivo (por ejemplo una segunda página), llevate también el botón,
-el script inline anti-titileo del `<head>` y el `<script src="js/tema.js">`
-— los tres juntos, o ninguno.
-
-Para ver el design system completo (colores, tipografía, botones, estados),
-abrí `guia-diseno.html`.
+El diseño ya está resuelto y es compartido con los tableros de todo el
+equipo. Tu trabajo es el contenido y los datos; el sistema visual te lo dan
+hecho para que no tengas que decidirlo cada vez.
 
 ---
 
-## 2. Diseño: usá el design system, no inventes
+## 1. Dónde va cada cosa
 
-- **Nunca escribas un color en el código.** Ni en JS, ni en HTML, ni suelto en
-  CSS. Todo color sale de las variables de `css/tokens.css` (`--marca`, `--texto`,
-  etc.). Si necesitás un color que no existe, es señal de que algo está mal:
-  preguntá.
-- **`--marca` / `--marca-enlace` no son intercambiables.** `--marca` es el
-  celeste oficial, para FONDOS (header, botones). `--marca-enlace` es una
-  versión más oscura, solo para cuando ese celeste ES el texto (links,
-  `.boton--sutil`) — el oficial no tiene contraste suficiente para eso. Si
-  vas a usar el celeste como color de texto sobre un fondo claro, usá
-  `--marca-enlace`; si es un fondo, `--marca`.
-- **En las etiquetas de estado (`.estado--*`) el color va en el fondo y en el
-  punto, nunca en el texto.** El texto usa `--texto` (el neutro del tema) y
-  el punto usa `--color-estado`. Si ponés el color del estado en `color`,
-  para que pase contraste hay que oscurecerlo hasta que el amarillo se ve
-  marrón — ya pasó una vez. El porqué está en `ACCESIBILIDAD.md`.
-- El porqué completo de estas decisiones y cómo repetir la verificación de
-  contraste están en `ACCESIBILIDAD.md`.
-- **Si agregás o cambiás un color, revisá el contraste antes de cerrar la
-  tarea** (ver `ACCESIBILIDAD.md`, sección 1) — con
-  [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
-  alcanza. No repitas el error que ya se corrigió: un color de marca lindo
-  pero ilegible.
-- Los botones usan la clase `.boton` (+ variante); la tipografía, las clases
-  `.titulo-*`. No inventes estilos: mirá `guia-diseno.html`.
-- No agregues dependencias de diseño (Bootstrap, Tailwind, fuentes de Google,
-  íconos de un CDN). El estilo ya está resuelto.
-- **Todavía no hay una librería de gráficos elegida para la plantilla.** Si una
-  tarea pide un gráfico, **no sumes ninguna por tu cuenta** (ni Chart.js, ni
-  D3, ni SVG a mano) — avisá y esperá que se decida en conjunto. Mientras
-  tanto, mostrá los números en tarjetas `.kpi` o en una tabla.
+| Querés… | Va en |
+|---|---|
+| Estructura y textos del tablero | `index.html` |
+| Cargar datos y mostrarlos | `js/tablero.js` |
+| Tus datos ya agregados | `datos/` |
+| Un estilo propio de este tablero | `css/tablero.css` |
+| Cambiar la estética de todo el tablero | los **valores** de `css/tokens.css` |
+
+Esos cinco son tuyos: editalos con confianza, no hace falta pedir permiso.
+
+### Si necesitás un componente que el sistema no tiene
+
+Escribilo en **`css/tablero.css`**. Ese archivo se carga último y es local a
+este tablero. No lo metas en `componentes.css`: eso es lo compartido, y si
+cada uno le agrega cosas, los tableros del equipo dejan de parecerse entre sí
+— que es exactamente lo que esta plantilla existe para evitar.
+
+Si lo que escribiste le sirve a todos, decilo: se sube a `componentes.css` y
+pasa a ser parte del sistema.
 
 ---
 
-## 3. Seguridad: es lo más importante (detalle en `SECURITY.md`)
+## 2. Lo que ya está resuelto (reusalo, no lo rehagas)
 
-- **Ninguna credencial en el repositorio. Jamás.** Ni claves de API, ni tokens,
-  ni cadenas de conexión, ni la `service_role` de Supabase, ni un `.env`. Si una
-  tarea necesita datos de una base con clave, la consulta se corre **fuera** del
-  tablero (en la máquina del usuario) y acá solo entra el resultado agregado.
-- **Se publica el resumen, no la fila.** Nunca pongas en `datos/` datos que
-  identifiquen a una persona (nombre, DNI, CUIL, domicilio, teléfono, legajo,
-  expediente, patente, salud, datos de programas sociales). Solo totales,
-  promedios y porcentajes por área/barrio/mes/categoría.
-- **Regla de los 5:** si un cruce da menos de 5 casos, no publiques esa celda
-  (agrupala o ampliá el período). Un punto en un mapa es un domicilio: usá
-  polígonos, no puntos.
-- **Nada desde internet:** no enlaces recursos con `https://...` en el HTML o el
-  JS. Todo va en `css/`, `js/` o `assets/`.
-- Si detectás que un archivo de datos que te pasaron tiene información de
-  personas, **no lo proceses hacia `datos/`**: avisá al usuario y proponé cómo
-  agregarlo. Los datos crudos van a `datos-fuente/` (ignorada por git).
+- **Modo claro/oscuro.** Sigue el sistema operativo solo, y el botón
+  `#boton-tema` del header permite elegirlo a mano. Si armás una página
+  nueva, copiá el header entero: el botón, el `<script>` anti-titileo del
+  `<head>` y `js/tema.js` van juntos, o ninguno.
+- **Tipografía, íconos, botones, estados, tarjetas.** Están todos, en vivo,
+  en `guia-diseno.html` — abrila antes de escribir CSS nuevo, es probable que
+  lo que necesitás ya exista.
+- **Íconos:** `<span class="icono">nombre</span>`, con el nombre de
+  [fonts.google.com/icons](https://fonts.google.com/icons).
+- **Contraste de color.** La paleta ya pasó una auditoría WCAG AA. Dos cosas
+  que conviene saber para no romperla sin darte cuenta:
+  - `--marca` es para **fondos**; si el celeste va a ser el **texto**, usá
+    `--marca-enlace` (el oficial no tiene contraste suficiente como texto).
+  - En `.estado--*` el color va al fondo y al punto, **nunca al texto** — el
+    texto usa `--texto`. Si le ponés el color del estado, para que pase
+    contraste hay que oscurecerlo hasta que el amarillo se ve marrón.
 
----
-
-## 4. Cómo trabajar
-
-- **Rutas relativas siempre:** `css/tokens.css`, nunca `/css/tokens.css` (el
-  tablero se publica en un subpath, las rutas absolutas lo rompen).
-- **Vanilla, sin build:** HTML, CSS y JS que corren directo. No introduzcas
-  Node, npm, bundlers ni TypeScript.
-- **Cómo cargás tus datos es tu decisión** (`fetch` a un `.json`, un `<script>`
-  con un objeto JS, lo que te convenga). Si usás `fetch`, avisá al usuario que
-  para probarlo va a necesitar un servidor local (el archivo no va a andar
-  con doble clic) — no es un problema, solo algo para saber de antemano.
-- **Cambios chicos y explicados.** Después de cada cambio, decí en una línea qué
-  tocaste y por qué.
+  El detalle está en `ACCESIBILIDAD.md`.
 
 ---
 
-## 5. Antes de dar por terminada una tarea
+## 3. Las reglas que no se negocian
 
-Repasá que el cambio pasaría la revisión automática (`.github/workflows/ci.yml`):
+Estas tres son las que sí importan de verdad, porque los errores son caros o
+irreversibles:
 
-1. **Sin secretos:** no hay ninguna clave/token en ningún archivo.
-2. **Sin datos personales:** los archivos de `datos/` tienen solo datos agregados.
-3. **Sin recursos de internet:** no hay `src`/`href` con `http`/`https`.
-4. **Sin datos crudos ni planillas** versionados (nada en `datos-fuente/` va al repo, ningún `.xlsx`).
-5. **Design system intacto:** `index.html` sigue enlazando `fuentes.css`, `tokens.css`,
-   `base.css` y `tema.js`, y conserva el botón `#boton-tema`; no hay colores
-   escritos a mano.
-6. El tablero **carga y se ve** (abriendo el `.html` directo, o con un
-   servidor local si tu `tablero.js` usa `fetch`) y no hay errores en la
-   consola del navegador. Probá también el botón de modo oscuro: el tablero
-   entero tiene que cambiar de tema.
-7. **Si agregaste o cambiaste un color:** pasa el contraste mínimo (ver
-   `ACCESIBILIDAD.md`) en los dos temas.
+1. **Ninguna credencial en el repo. Nunca.** Ni claves, ni tokens, ni cadenas
+   de conexión, ni `.env`. Si hace falta consultar una base, la consulta se
+   corre afuera y acá entra solo el resultado agregado.
+2. **Se publica el resumen, no la fila.** Nada que identifique a una persona
+   (nombre, DNI, domicilio, expediente, salud…). Y **regla de los 5**: si un
+   cruce da menos de 5 casos, no publiques esa celda. Un dato personal
+   publicado no se despublica.
+3. **Todo se carga desde el repo.** Ningún `<link>`, `<script>` o `<img>`
+   apuntando a internet: se descarga y va en `css/`, `js/` o `assets/`. (Un
+   `<a href>` a un sitio externo sí está bien — eso es un link para leer, no
+   un recurso que la página carga.)
 
-Si algo de esto no se cumple, no cierres la tarea: arreglalo o avisá.
+El detalle de 1 y 2 está en `SECURITY.md`. Si un archivo de datos que te
+pasaron tiene información de personas, no lo proceses: avisá y acordá cómo
+agregarlo.
+
+---
+
+## 4. Dos decisiones que todavía no están tomadas
+
+No las resuelvas por tu cuenta — avisá y se define en conjunto:
+
+- **Librería de gráficos.** Todavía no hay una elegida. Mientras tanto, los
+  números van en tarjetas `.kpi` o en una tabla.
+- **Íconos de los ODS** (`assets/img/ods/`): se usan tal cual. No se
+  recolorean ni se deforman, es marca registrada de la ONU.
+
+---
+
+## 5. Antes de cerrar una tarea
+
+1. Ninguna clave ni dato personal en lo que tocaste.
+2. Nada cargado desde internet.
+3. El tablero abre y se ve, sin errores en la consola.
+4. El botón de modo oscuro sigue cambiando el tablero entero.
+5. Si agregaste un color, pasa contraste en los dos temas
+   ([WebAIM](https://webaim.org/resources/contrastchecker/) alcanza).
+
+Y decí en una línea qué tocaste y por qué.
 
 ---
 
 ## 6. Cuando dudes
 
-Ante la duda sobre **qué datos se pueden publicar**, la respuesta por defecto es
-**no publicar y preguntar**. Un tablero feo se corrige; un dato personal
-publicado no se despublica. Nadie del equipo se molesta por una pregunta.
+Sobre **qué datos se pueden publicar**, la respuesta por defecto es **no
+publicar y preguntar**. Un tablero feo se corrige; un dato personal
+publicado, no. Nadie se molesta por una pregunta.
+
+Sobre **todo lo demás** (dónde poner un estilo, cómo estructurar el HTML, si
+conviene una tabla o unas tarjetas): decidí vos y seguí. Si te equivocás se
+corrige, y avanzar vale más que consultar cada paso.

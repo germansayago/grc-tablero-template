@@ -1,0 +1,27 @@
+/* ==========================================================================
+   tablero.css — LOS ESTILOS PROPIOS DE TU TABLERO. Este archivo es tuyo.
+
+   Los otros CSS (tokens, base, componentes, iconos) son el sistema compartido
+   y salen iguales en todos los tableros del equipo. Cuando necesitás algo que
+   el sistema no tiene, va acá — no lo metas en componentes.css, porque eso
+   haría que tu tablero y el de tus compañeros dejen de ser el mismo diseño.
+
+   Este archivo se carga ÚLTIMO, así que puede ajustar cualquier cosa de los
+   anteriores sin pelearse con la especificidad.
+
+   DOS REGLAS, y son las mismas del resto del sistema:
+
+   1. Los colores salen de las variables de tokens.css (var(--marca),
+      var(--texto), etc.). Si necesitás un color que no existe, escribilo
+      igual pero avisá — puede que falte un token.
+   2. Si lo que escribís acá le sirve a todos (una tarjeta, un tipo de tabla),
+      comentalo en el equipo: eso se sube a componentes.css y deja de ser
+      tuyo para ser de todos.
+
+   Ejemplo — una variante de panel para este tablero:
+
+     .panel--destacado {
+       border-color: var(--marca);
+       border-width: 2px;
+     }
+   ========================================================================== */
