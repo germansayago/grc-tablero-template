@@ -1,7 +1,7 @@
 /* ==========================================================================
    base.css — Estructura visual del tablero: header, footer, grilla, tarjetas
-   y paneles de gráfico. No define colores propios: usa las variables de
-   tokens.css. Normalmente no necesitás tocar este archivo.
+   y paneles. No define colores propios: usa las variables de tokens.css.
+   Normalmente no necesitás tocar este archivo.
    ========================================================================== */
 
 * {

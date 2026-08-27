@@ -66,7 +66,7 @@ domicilio: usá polígonos por barrio, no puntos.
 Las librerías (como el helper de gráficos) van dentro del proyecto. No se
 enlaza nada con `https://...` desde el HTML o el JS: un CDN puede caerse o
 cambiar, y no controlás qué código te entrega. Todo lo que el tablero necesita
-tiene que estar en `css/`, `js/`, `vendor/` o `assets/`.
+tiene que estar en `css/`, `js/` o `assets/`.
 
 ---
 

@@ -95,7 +95,7 @@ abrí `guia-diseno.html`.
   (agrupala o ampliá el período). Un punto en un mapa es un domicilio: usá
   polígonos, no puntos.
 - **Nada desde internet:** no enlaces recursos con `https://...` en el HTML o el
-  JS. Todo va en `css/`, `js/`, `vendor/` o `assets/`.
+  JS. Todo va en `css/`, `js/` o `assets/`.
 - Si detectás que un archivo de datos que te pasaron tiene información de
   personas, **no lo proceses hacia `datos/`**: avisá al usuario y proponé cómo
   agregarlo. Los datos crudos van a `datos-fuente/` (ignorada por git).

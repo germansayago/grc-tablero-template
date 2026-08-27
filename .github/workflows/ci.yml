@@ -46,11 +46,10 @@ jobs:
           # carga solo). Un <a href="https://..."> normal — un link para que
           # alguien lo abra a mano, como los de las guías — no cuenta: eso no
           # es "cargar un recurso", es una referencia para leer.
-          # Se excluye vendor/ (librerías de terceros vendorizadas, de confianza).
           if grep -rnE '<(link|script|img)[^>]*(src|href)[[:space:]]*=[[:space:]]*["'"'"']https?://' \
                --include='*.html' --include='*.js' \
-               --exclude-dir=vendor --exclude-dir=.git . ; then
-            echo "::error::Hay un <link>, <script> o <img> que carga algo desde internet. Todo debe estar en el repo (css/, js/, vendor/, assets/)."
+               --exclude-dir=.git . ; then
+            echo "::error::Hay un <link>, <script> o <img> que carga algo desde internet. Todo debe estar en el repo (css/, js/, assets/)."
             exit 1
           fi
           echo "OK: no se carga nada desde internet."
@@ -76,9 +75,11 @@ jobs:
       - name: El tablero usa el design system
         run: |
           miss=0
-          grep -q 'css/fuentes.css' index.html || { echo "::error::index.html no enlaza css/fuentes.css (la tipografía Inter)"; miss=1; }
+          grep -q 'css/fuentes.css' index.html || { echo "::error::index.html no enlaza css/fuentes.css (la tipografía)"; miss=1; }
           grep -q 'css/tokens.css' index.html || { echo "::error::index.html no enlaza css/tokens.css"; miss=1; }
           grep -q 'css/base.css'   index.html || { echo "::error::index.html no enlaza css/base.css"; miss=1; }
+          grep -q 'css/componentes.css' index.html || { echo "::error::index.html no enlaza css/componentes.css (botones, estados, tipografía)"; miss=1; }
+          grep -q 'css/iconos.css' index.html || { echo "::error::index.html no enlaza css/iconos.css (los íconos quedan como texto suelto)"; miss=1; }
           grep -q 'js/tema.js'     index.html || { echo "::error::index.html no enlaza js/tema.js (el botón de modo oscuro queda sin función)"; miss=1; }
           grep -q 'id="boton-tema"' index.html || { echo "::error::index.html no tiene el botón #boton-tema del header"; miss=1; }
           [ "$miss" = 0 ] && echo "OK: el design system está enlazado."
