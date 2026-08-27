@@ -7,63 +7,81 @@
    ========================================================================== */
 
 :root {
-  color-scheme: light;
+   color-scheme: light;
 
-  /* --- Superficies y texto ------------------------------------------------ */
-  --fondo:       #f4f3f0;   /* fondo de la página */
-  --superficie:  #ffffff;   /* tarjetas, paneles */
-  --borde:       #e2e1dc;   /* líneas divisorias, bordes de tarjeta */
-  --texto:       #14140f;   /* texto principal */
-  --texto-suave: #57564f;   /* subtítulos, notas, ejes */
+   /* --- Superficies y texto ------------------------------------------------ */
+   --fondo: #f4f3f0;
+   /* fondo de la página */
+   --superficie: #ffffff;
+   /* tarjetas, paneles */
+   --borde: #e2e1dc;
+   /* líneas divisorias, bordes de tarjeta */
+   --texto: #14140f;
+   /* texto principal */
+   --texto-suave: #57564f;
+   /* subtítulos, notas, ejes */
 
-  /* --- Colores de marca (header / footer) ---------------------------------
+   /* --- Colores de marca (header / footer) ---------------------------------
      Paleta oficial del Gobierno de Río Cuarto (riocuarto.gob.ar). --marca es
      el celeste oficial tal cual, para fondos grandes (header, botón primario)
      con texto GRANDE (ver .encabezado .titulos h1) o con --texto-fijo-oscuro.
      --marca-enlace es una versión más oscura, solo para cuando el celeste se
      usa COMO TEXTO (links, .boton--sutil) — el oficial no tiene contraste
      suficiente para eso. Los dos pasan WCAG AA; ver ACCESIBILIDAD.md. */
-  --marca:         #009de0;  /* celeste institucional, para fondos */
-  --marca-texto:   #ffffff;  /* texto/ícono sobre --marca (a tamaño grande) */
-  --marca-enlace:  #007eb3;  /* celeste, para cuando ES el texto (links) */
-  --texto-fijo-oscuro: #14140f;  /* texto oscuro, fijo (no cambia con el tema):
+   --marca: #009de0;
+   /* celeste institucional, para fondos */
+   --marca-texto: #ffffff;
+   /* texto/ícono sobre --marca (a tamaño grande) */
+   --marca-enlace: #007eb3;
+   /* celeste, para cuando ES el texto (links) */
+   --texto-fijo-oscuro: #14140f;
+   /* texto oscuro, fijo (no cambia con el tema):
     para cuando un color de fondo vívido (marca, estados) necesita texto
     legible y el blanco no alcanza o no calza. Ver ACCESIBILIDAD.md. */
 
-  /* --- Colores de serie para los gráficos ---------------------------------
+   /* --- Colores de serie para los gráficos ---------------------------------
      Basados en la paleta oficial (celeste, naranja, verde, rosa). Usalos
      SIEMPRE en orden (serie-1, luego serie-2, etc.). Los primeros cuatro son
      los colores de marca; el resto se sumaron para que sigan distinguiéndose
      entre sí. No agregues colores nuevos: si necesitás más de 8 series, el
      gráfico es demasiado denso y conviene repensarlo. */
-  --serie-1: #009de0;  /* celeste (marca) */
-  --serie-2: #eb6e22;  /* naranja (oscurecido: el oficial no pasa 3:1 sobre blanco) */
-  --serie-3: #00a85a;  /* verde (marca) */
-  --serie-4: #ff3cb2;  /* rosa (marca) */
-  --serie-5: #6a4cff;  /* violeta */
-  --serie-6: #b88b04;  /* amarillo (oscurecido: el oficial no pasa 3:1 sobre blanco) */
-  --serie-7: #0a6079;  /* petróleo */
-  --serie-8: #e23b3b;  /* rojo */
+   --serie-1: #009de0;
+   /* celeste (marca) */
+   --serie-2: #eb6e22;
+   /* naranja (oscurecido: el oficial no pasa 3:1 sobre blanco) */
+   --serie-3: #00a85a;
+   /* verde (marca) */
+   --serie-4: #ff3cb2;
+   /* rosa (marca) */
+   --serie-5: #6a4cff;
+   /* violeta */
+   --serie-6: #b88b04;
+   /* amarillo (oscurecido: el oficial no pasa 3:1 sobre blanco) */
+   --serie-7: #0a6079;
+   /* petróleo */
+   --serie-8: #e23b3b;
+   /* rojo */
 
-  /* --- Estados (reservados: NO los uses como color de serie) ---------------
+   /* --- Estados (reservados: NO los uses como color de serie) ---------------
      Los colores reales (verde/amarillo/rojo), sin oscurecer: importa que se
      reconozcan de un vistazo (un warning tiene que verse amarillo, no
      marrón). Por eso .estado--* usa estos colores como FONDO SÓLIDO de la
      etiqueta (no como texto sobre un tinte pastel) — así el contraste lo
      pone el texto (blanco o --texto-fijo-oscuro, el que corresponda a cada
      uno), no el color en sí. Ver ACCESIBILIDAD.md. */
-  --ok:     #008300;
-  --alerta: #eda100;
-  --grave:  #d14342;  /* mismo valor que usa .boton--peligro */
+   --ok: #008300;
+   --alerta: #eda100;
+   --grave: #d14342;
+   /* mismo valor que usa .boton--peligro */
 
-  /* --- Tipografía, espaciado y formas -------------------------------------
-     Inter (declarada en css/fuentes.css) es la tipografía oficial del
-     Gobierno de Río Cuarto. Si por algún motivo no llega a cargar, el
-     navegador sigue con la tipografía del sistema — el tablero no se rompe. */
-  --fuente: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --radio:   12px;
-  --espacio: 16px;
-  --ancho-max: 1120px;
+   /* --- Tipografía, espaciado y formas -------------------------------------
+     Google Sans (declarada en css/fuentes.css). Si por algún motivo no llega
+     a cargar, el navegador sigue con la tipografía del sistema — el tablero
+     no se rompe. */
+   --fuente: 'Google Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+   --radio: 12px;
+   --espacio: 16px;
+   --ancho-max: 1120px;
 }
 
 /* ==========================================================================
@@ -81,56 +99,57 @@
    ========================================================================== */
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-tema="claro"]) {
-    color-scheme: dark;
-    --fondo:       #121211;
-    --superficie:  #1b1b19;
-    --borde:       #37372f;
-    --texto:       #f6f6f2;
-    --texto-suave: #b9b8ad;
+   :root:not([data-tema="claro"]) {
+      color-scheme: dark;
+      --fondo: #121211;
+      --superficie: #1b1b19;
+      --borde: #37372f;
+      --texto: #f6f6f2;
+      --texto-suave: #b9b8ad;
 
-    --marca:       #0a86bd;   /* celeste institucional, algo más profundo para fondo oscuro */
-    --marca-texto: #ffffff;
-    --marca-enlace: #148bc0;
-    --texto-fijo-oscuro: #14140f;
+      --marca: #0a86bd;
+      /* celeste institucional, algo más profundo para fondo oscuro */
+      --marca-texto: #ffffff;
+      --marca-enlace: #148bc0;
+      --texto-fijo-oscuro: #14140f;
 
-    --serie-1: #35b4ea;
-    --serie-2: #ff8f4d;
-    --serie-3: #1fc47c;
-    --serie-4: #ff63c4;
-    --serie-5: #9585ff;
-    --serie-6: #ffca3a;
-    --serie-7: #4fa6bf;
-    --serie-8: #ef6a6a;
+      --serie-1: #35b4ea;
+      --serie-2: #ff8f4d;
+      --serie-3: #1fc47c;
+      --serie-4: #ff63c4;
+      --serie-5: #9585ff;
+      --serie-6: #ffca3a;
+      --serie-7: #4fa6bf;
+      --serie-8: #ef6a6a;
 
-    /* --ok / --alerta / --grave: mismo valor que en modo claro (son fondos
+      /* --ok / --alerta / --grave: mismo valor que en modo claro (son fondos
        sólidos de etiqueta, no dependen del fondo de la página) — no hace
        falta redeclararlos acá. */
-  }
+   }
 }
 
 :root[data-tema="oscuro"] {
-  color-scheme: dark;
-  --fondo:       #121211;
-  --superficie:  #1b1b19;
-  --borde:       #37372f;
-  --texto:       #f6f6f2;
-  --texto-suave: #b9b8ad;
+   color-scheme: dark;
+   --fondo: #121211;
+   --superficie: #1b1b19;
+   --borde: #37372f;
+   --texto: #f6f6f2;
+   --texto-suave: #b9b8ad;
 
-  --marca:       #0a86bd;
-  --marca-texto: #ffffff;
-  --marca-enlace: #148bc0;
-  --texto-fijo-oscuro: #14140f;
+   --marca: #0a86bd;
+   --marca-texto: #ffffff;
+   --marca-enlace: #148bc0;
+   --texto-fijo-oscuro: #14140f;
 
-  --serie-1: #35b4ea;
-  --serie-2: #ff8f4d;
-  --serie-3: #1fc47c;
-  --serie-4: #ff63c4;
-  --serie-5: #9585ff;
-  --serie-6: #ffca3a;
-  --serie-7: #4fa6bf;
-  --serie-8: #ef6a6a;
+   --serie-1: #35b4ea;
+   --serie-2: #ff8f4d;
+   --serie-3: #1fc47c;
+   --serie-4: #ff63c4;
+   --serie-5: #9585ff;
+   --serie-6: #ffca3a;
+   --serie-7: #4fa6bf;
+   --serie-8: #ef6a6a;
 
-  /* --ok / --alerta / --grave: mismo valor que en modo claro (son fondos
+   /* --ok / --alerta / --grave: mismo valor que en modo claro (son fondos
      sólidos de etiqueta, no dependen del fondo de la página). */
 }

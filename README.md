@@ -16,7 +16,7 @@ simples, sin build.
 index.html          el tablero (la página). Editás el título y el contenido.
 guia-diseno.html    el sistema de diseño: colores, tipografía, botones, estados.
 css/
-  fuentes.css       la tipografía (Inter). NO se toca.
+  fuentes.css       la tipografía (Google Sans). NO se toca.
   tokens.css        ← la paleta y los tamaños. Se toca SOLO acá.
   base.css          header, footer, grilla, tarjetas. Casi nunca se toca.
   componentes.css   botones, estados y clases de texto. Casi nunca se toca.
@@ -28,7 +28,7 @@ datos/              ← TUS DATOS, ya agregados y publicables (el formato es tu 
 datos-fuente/       datos crudos — NO se suben (está en .gitignore).
 assets/img/         imágenes y el logo.
 assets/img/ods/     íconos oficiales de los Objetivos de Desarrollo Sostenible (ONU).
-assets/fonts/       tipografía (Inter) e íconos (Material Symbols), guardados en el repo. NO se toca.
+assets/fonts/       tipografía (Google Sans) e íconos (Material Symbols), guardados en el repo. NO se toca.
 SECURITY.md         las 3 reglas de seguridad. Leelo una vez.
 ACCESIBILIDAD.md    contraste de color y accesibilidad. Leelo si vas a tocar colores.
 AGENTS.md           las reglas que sigue el agente de IA. La fuente de verdad.
