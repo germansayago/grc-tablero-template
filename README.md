@@ -27,6 +27,7 @@ datos-fuente/       datos crudos — NO se suben (está en .gitignore).
 assets/img/         imágenes y el logo.
 assets/fonts/       la tipografía Inter, guardada en el repo. NO se toca.
 SECURITY.md         las 3 reglas de seguridad. Leelo una vez.
+ACCESIBILIDAD.md    contraste de color y accesibilidad. Leelo si vas a tocar colores.
 AGENTS.md           las reglas que sigue el agente de IA. La fuente de verdad.
 .github/workflows/  la revisión automática que corre en GitHub.
 ```
@@ -105,6 +106,10 @@ completo (incluye el botón y el script anti-titileo del `<head>`) y el
 - **Nombre del organismo / header:** el texto está en `index.html` (sección
   `<header>`); el color, en `--marca` dentro de `css/tokens.css`.
 - **Logo:** reemplazá `assets/img/logo-gobierno.webp` por el oficial (mismo nombre).
+- ⚠️ **Si tocás un color, revisá `ACCESIBILIDAD.md` primero.** Ya hubo una
+  ronda de ajustes por contraste (WCAG AA) — algunos tokens vienen duplicados
+  a propósito (`--marca`/`--marca-enlace`, `--grave`/`--grave-texto`) y no son
+  intercambiables.
 
 ---
 
@@ -113,3 +118,11 @@ completo (incluye el botón y el script anti-titileo del `<head>`) y el
 Tres reglas, explicadas en **[`SECURITY.md`](SECURITY.md)**. En una línea:
 **ninguna clave en el repo, se publica el resumen y no la fila, y todo se carga
 desde el repo (nada de internet).** GitHub lo revisa solo en cada cambio.
+
+---
+
+## Accesibilidad
+
+Explicado en **[`ACCESIBILIDAD.md`](ACCESIBILIDAD.md)**. La paleta ya pasó
+una auditoría de contraste (WCAG AA) — léelo antes de agregar o cambiar
+cualquier color.

@@ -27,7 +27,7 @@ entre. Eso condiciona todo lo que sigue.
 - `assets/fonts/` — la tipografía Inter, de terceros. Nunca se edita.
 - `guia-diseno.html` — página de referencia del sistema de diseño, no de tu
   tablero. Se puede mirar y copiar de ahí, no editar.
-- `.github/`, `.gitleaks.toml`, `.gitignore`, `SECURITY.md`, este archivo.
+- `.github/`, `.gitleaks.toml`, `.gitignore`, `SECURITY.md`, `ACCESIBILIDAD.md`, este archivo.
 
 Si una tarea parece necesitar editar `tema.js` o `base.css`, **pará y explicá
 por qué** antes de hacerlo. Casi siempre hay otra forma.
@@ -56,7 +56,13 @@ abrí `guia-diseno.html`.
   son para FONDOS (header, botones); `--marca-enlace` y `--grave-texto` son
   para cuando ese color ES el texto (links, `.boton--sutil`, etiquetas de
   estado). Si vas a usar alguno como color de texto sobre un fondo claro,
-  usá la variante `-enlace`/`-texto`; si es un fondo, la variante base.
+  usá la variante `-enlace`/`-texto`; si es un fondo, la variante base. El
+  porqué completo y cómo repetir la verificación están en `ACCESIBILIDAD.md`.
+- **Si agregás o cambiás un color, revisá el contraste antes de cerrar la
+  tarea** (ver `ACCESIBILIDAD.md`, sección 1) — con
+  [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+  alcanza. No repitas el error que ya se corrigió: un color de marca lindo
+  pero ilegible.
 - Los botones usan la clase `.boton` (+ variante); la tipografía, las clases
   `.titulo-*`. No inventes estilos: mirá `guia-diseno.html`.
 - No agregues dependencias de diseño (Bootstrap, Tailwind, fuentes de Google,
@@ -119,6 +125,8 @@ Repasá que el cambio pasaría la revisión automática (`.github/workflows/ci.y
    servidor local si tu `tablero.js` usa `fetch`) y no hay errores en la
    consola del navegador. Probá también el botón de modo oscuro: el tablero
    entero tiene que cambiar de tema.
+7. **Si agregaste o cambiaste un color:** pasa el contraste mínimo (ver
+   `ACCESIBILIDAD.md`) en los dos temas.
 
 Si algo de esto no se cumple, no cierres la tarea: arreglalo o avisá.
 
