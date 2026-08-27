@@ -58,12 +58,11 @@ abrí `guia-diseno.html`.
   `.boton--sutil`) — el oficial no tiene contraste suficiente para eso. Si
   vas a usar el celeste como color de texto sobre un fondo claro, usá
   `--marca-enlace`; si es un fondo, `--marca`.
-- **Las etiquetas de estado (`.estado--ok/--alerta/--grave`) usan fondo
-  SÓLIDO con el color real**, no un tinte pastel — así "alerta" se ve
-  amarillo de verdad, no marrón. El contraste lo pone el color del texto
-  (blanco o `--texto-fijo-oscuro`, ya elegido para cada uno), no el tono del
-  color de fondo. No cambies esto a un `color-mix` tenue "para que se vea
-  más suave": ya se probó y perdía legibilidad semántica.
+- **En las etiquetas de estado (`.estado--*`) el color va en el fondo y en el
+  punto, nunca en el texto.** El texto usa `--texto` (el neutro del tema) y
+  el punto usa `--color-estado`. Si ponés el color del estado en `color`,
+  para que pase contraste hay que oscurecerlo hasta que el amarillo se ve
+  marrón — ya pasó una vez. El porqué está en `ACCESIBILIDAD.md`.
 - El porqué completo de estas decisiones y cómo repetir la verificación de
   contraste están en `ACCESIBILIDAD.md`.
 - **Si agregás o cambiás un color, revisá el contraste antes de cerrar la

@@ -99,10 +99,10 @@
 
 /* Primario: acción principal. Usa el color de marca. Texto oscuro fijo (no
    blanco): a este tamaño de letra, el celeste no tiene contraste suficiente
-   para texto blanco — ver ACCESIBILIDAD.md. */
+   para texto blanco — ver --texto-sobre-marca en tokens.css. */
 .boton--primario {
   background: var(--marca);
-  color: var(--texto-fijo-oscuro);
+  color: var(--marca-texto);
   border-color: var(--marca);
 }
 
@@ -149,6 +149,12 @@
 
 /* --- Etiquetas de estado (badges) ---------------------------------------- */
 
+/* El color del estado va en el FONDO (un tinte) y en el PUNTO — nunca en el
+   texto. Motivo: para que un amarillo pase contraste como texto hay que
+   oscurecerlo tanto que deja de verse amarillo, y un "alerta" marrón no se
+   reconoce de un vistazo. Con el texto en el neutro del tema, el color se
+   mantiene real y de paso el contraste sube a 12-16:1. Ver ACCESIBILIDAD.md. */
+
 .estado {
   display: inline-flex;
   align-items: center;
@@ -158,38 +164,35 @@
   padding: 3px 10px;
   border-radius: 999px;
   border: 1px solid transparent;
+  color: var(--texto);
 }
 
+/* El punto lleva --color-estado, que define cada variante de abajo. No usa
+   currentColor: tomaría el neutro del texto y la etiqueta perdería el color. */
 .estado::before {
   content: "";
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: currentColor;
+  background: var(--color-estado);
 }
 
-/* Fondo SÓLIDO con el color real (no un tinte pastel): así "alerta" se ve
-   amarillo de verdad, no un marrón deslavado. El contraste lo pone el color
-   del texto, blanco o --texto-fijo-oscuro según cuál se lea mejor sobre cada
-   fondo — ver ACCESIBILIDAD.md. */
 .estado--ok {
-  color: #ffffff;
-  background: var(--ok);
+  --color-estado: var(--ok);
+  background: color-mix(in srgb, var(--ok) 14%, transparent);
 }
 
 .estado--alerta {
-  color: var(--texto-fijo-oscuro);
-  background: var(--alerta);
+  --color-estado: var(--alerta);
+  background: color-mix(in srgb, var(--alerta) 14%, transparent);
 }
 
 .estado--grave {
-  color: #ffffff;
-  background: var(--grave);
+  --color-estado: var(--grave);
+  background: color-mix(in srgb, var(--grave) 14%, transparent);
 }
 
-/* Neutro se queda con el tinte suave: no es un color que necesite "leerse"
-   de un vistazo como los otros tres. */
 .estado--neutro {
-  color: var(--texto-suave);
+  --color-estado: var(--texto-suave);
   background: color-mix(in srgb, var(--texto-suave) 12%, transparent);
 }

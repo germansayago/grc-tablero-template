@@ -23,21 +23,13 @@
 
    /* --- Colores de marca (header / footer) ---------------------------------
      Paleta oficial del Gobierno de Río Cuarto (riocuarto.gob.ar). --marca es
-     el celeste oficial tal cual, para fondos grandes (header, botón primario)
-     con texto GRANDE (ver .encabezado .titulos h1) o con --texto-fijo-oscuro.
+     el celeste oficial tal cual, para FONDOS (header, botón primario).
      --marca-enlace es una versión más oscura, solo para cuando el celeste se
      usa COMO TEXTO (links, .boton--sutil) — el oficial no tiene contraste
-     suficiente para eso. Los dos pasan WCAG AA; ver ACCESIBILIDAD.md. */
-   --marca: #009de0;
-   /* celeste institucional, para fondos */
-   --marca-texto: #ffffff;
-   /* texto/ícono sobre --marca (a tamaño grande) */
-   --marca-enlace: #007eb3;
-   /* celeste, para cuando ES el texto (links) */
-   --texto-fijo-oscuro: #14140f;
-   /* texto oscuro, fijo (no cambia con el tema):
-    para cuando un color de fondo vívido (marca, estados) necesita texto
-    legible y el blanco no alcanza o no calza. Ver ACCESIBILIDAD.md. */
+     suficiente para eso. Ver ACCESIBILIDAD.md. */
+   --marca: #009de0;                /* celeste institucional, para fondos */
+   --marca-texto: #ffffff;          /* texto/ícono sobre --marca */
+   --marca-enlace: #007eb3;         /* celeste, para cuando ES el texto (links) */
 
    /* --- Colores de serie para los gráficos ---------------------------------
      Basados en la paleta oficial (celeste, naranja, verde, rosa). Usalos
@@ -65,14 +57,11 @@
    /* --- Estados (reservados: NO los uses como color de serie) ---------------
      Los colores reales (verde/amarillo/rojo), sin oscurecer: importa que se
      reconozcan de un vistazo (un warning tiene que verse amarillo, no
-     marrón). Por eso .estado--* usa estos colores como FONDO SÓLIDO de la
-     etiqueta (no como texto sobre un tinte pastel) — así el contraste lo
-     pone el texto (blanco o --texto-fijo-oscuro, el que corresponda a cada
-     uno), no el color en sí. Ver ACCESIBILIDAD.md. */
+     marrón). En .estado--* van al fondo y al punto, nunca al texto — el
+     texto es el neutro del tema. Ver ACCESIBILIDAD.md. */
    --ok: #008300;
    --alerta: #eda100;
-   --grave: #d14342;
-   /* mismo valor que usa .boton--peligro */
+   --grave: #d14342;                /* mismo valor que usa .boton--peligro */
 
    /* --- Tipografía, espaciado y formas -------------------------------------
      Google Sans (declarada en css/fuentes.css). Si por algún motivo no llega
@@ -111,7 +100,6 @@
       /* celeste institucional, algo más profundo para fondo oscuro */
       --marca-texto: #ffffff;
       --marca-enlace: #148bc0;
-      --texto-fijo-oscuro: #14140f;
 
       --serie-1: #35b4ea;
       --serie-2: #ff8f4d;
@@ -122,9 +110,9 @@
       --serie-7: #4fa6bf;
       --serie-8: #ef6a6a;
 
-      /* --ok / --alerta / --grave: mismo valor que en modo claro (son fondos
-       sólidos de etiqueta, no dependen del fondo de la página) — no hace
-       falta redeclararlos acá. */
+      /* --ok / --alerta / --grave: mismo valor que en modo claro. El tinte
+       del fondo se calcula con color-mix sobre la superficie del tema, así
+       que se adaptan solos — no hace falta redeclararlos acá. */
    }
 }
 
@@ -139,7 +127,6 @@
    --marca: #0a86bd;
    --marca-texto: #ffffff;
    --marca-enlace: #148bc0;
-   --texto-fijo-oscuro: #14140f;
 
    --serie-1: #35b4ea;
    --serie-2: #ff8f4d;
@@ -150,6 +137,7 @@
    --serie-7: #4fa6bf;
    --serie-8: #ef6a6a;
 
-   /* --ok / --alerta / --grave: mismo valor que en modo claro (son fondos
-     sólidos de etiqueta, no dependen del fondo de la página). */
+   /* --ok / --alerta / --grave: mismo valor que en modo claro. El tinte del
+     fondo se calcula con color-mix sobre la superficie del tema, así que se
+     adaptan solos. */
 }

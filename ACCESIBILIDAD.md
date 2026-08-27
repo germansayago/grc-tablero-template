@@ -46,25 +46,27 @@ el texto mismo? Fondo → `--marca`. Texto → `--marca-enlace`.
 
 ### Las etiquetas de estado (`.estado--ok/--alerta/--grave`) usan fondo sólido, no un tinte
 
-La primera versión de este ajuste oscurecía el color de estado y lo usaba
-como texto sobre un tinte pastel del mismo color — la forma más común de
-hacer una "etiqueta" en un design system. El problema: para que un amarillo
-pase 4.5:1 *como texto*, hay que oscurecerlo tanto que deja de leerse como
-amarillo — terminaba pareciendo marrón. Un "alerta" que no se reconoce como
-alerta de un vistazo es un problema real de uso, no solo estético.
+La forma más común de hacer una "etiqueta" en un design system es texto del
+color del estado sobre un tinte pastel de ese mismo color. El problema: para
+que un amarillo pase 4.5:1 **como texto** hay que oscurecerlo tanto que deja
+de leerse como amarillo — termina pareciendo marrón. Un "alerta" que no se
+reconoce como alerta de un vistazo es un problema real de uso, no estético.
 
-La solución: el color de estado (`--ok`, `--alerta`, `--grave`) es el
-**fondo sólido** de la etiqueta, tal cual, sin oscurecer — así se sigue
-viendo verde, amarillo o rojo de verdad. El contraste lo pone el color del
-*texto* encima: blanco donde alcanza (`--ok`, `--grave`) o
-`--texto-fijo-oscuro` donde el fondo es demasiado claro para el blanco
-(`--alerta`). Los tres pasan 4.5:1 así, sin perder el color real.
+La solución fue sacar el color del texto. En `.estado--*`:
 
-**Si agregás un estado nuevo:** no repitas el patrón "texto de color sobre
-tinte pastel" — probá primero fondo sólido + texto blanco, y si no alcanza
-4.5:1, fondo sólido + `--texto-fijo-oscuro`. Casi siempre alguno de los dos
-funciona, porque ahí el contraste lo decide un blanco o un negro puro contra
-un solo color, no dos tonos parecidos entre sí.
+- El **fondo** es un tinte del color real (`color-mix` al 14%) — se sigue
+  viendo verde, amarillo o rojo.
+- El **punto** (`.estado::before`) lleva el color pleno, vía la variable
+  `--color-estado` que define cada variante. Ojo: **no usa `currentColor`**,
+  porque tomaría el neutro del texto y la etiqueta perdería el color.
+- El **texto** va en `--texto`, el neutro del tema. Eso da 12-16:1 en los dos
+  temas — muy por encima del mínimo — y libera al color de tener que ser
+  legible como texto.
+
+**Si agregás un estado nuevo:** seguí el mismo molde — definí
+`--color-estado` con el color pleno y el fondo con `color-mix` al 14%. No
+pongas el color del estado en `color`: ahí es donde empieza el problema del
+amarillo.
 
 ### Si agregás un color nuevo
 
