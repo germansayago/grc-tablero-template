@@ -17,9 +17,17 @@
   --texto-suave: #57564f;   /* subtítulos, notas, ejes */
 
   /* --- Colores de marca (header / footer) ---------------------------------
-     Paleta oficial del Gobierno de Río Cuarto (riocuarto.gob.ar). */
-  --marca:         #009de0;  /* celeste institucional */
-  --marca-texto:   #ffffff;  /* texto/logo sobre el color de marca */
+     Paleta oficial del Gobierno de Río Cuarto (riocuarto.gob.ar). --marca es
+     el celeste oficial tal cual, para fondos grandes (header, botón primario)
+     con texto GRANDE (ver .encabezado .titulos h1) o con --texto-sobre-marca.
+     --marca-enlace es una versión más oscura, solo para cuando el celeste se
+     usa COMO TEXTO (links, .boton--sutil) — el oficial no tiene contraste
+     suficiente para eso. Los dos pasan WCAG AA; ver auditoría en el historial
+     de git si hace falta repetirla. */
+  --marca:         #009de0;  /* celeste institucional, para fondos */
+  --marca-texto:   #ffffff;  /* texto/ícono sobre --marca (a tamaño grande) */
+  --marca-enlace:  #007eb3;  /* celeste, para cuando ES el texto (links) */
+  --texto-sobre-marca: #14140f;  /* texto de .boton--primario: fijo, no cambia con el tema */
 
   /* --- Colores de serie para los gráficos ---------------------------------
      Basados en la paleta oficial (celeste, naranja, verde, rosa). Usalos
@@ -28,18 +36,25 @@
      entre sí. No agregues colores nuevos: si necesitás más de 8 series, el
      gráfico es demasiado denso y conviene repensarlo. */
   --serie-1: #009de0;  /* celeste (marca) */
-  --serie-2: #ff7825;  /* naranja (marca) */
+  --serie-2: #eb6e22;  /* naranja (oscurecido: el oficial no pasa 3:1 sobre blanco) */
   --serie-3: #00a85a;  /* verde (marca) */
   --serie-4: #ff3cb2;  /* rosa (marca) */
   --serie-5: #6a4cff;  /* violeta */
-  --serie-6: #f2b705;  /* amarillo */
+  --serie-6: #b88b04;  /* amarillo (oscurecido: el oficial no pasa 3:1 sobre blanco) */
   --serie-7: #0a6079;  /* petróleo */
   --serie-8: #e23b3b;  /* rojo */
 
-  /* --- Estados (reservados: NO los uses como color de serie) --------------- */
-  --ok:     #008300;
-  --alerta: #eda100;
-  --grave:  #e34948;
+  /* --- Estados (reservados: NO los uses como color de serie) ---------------
+     --ok / --alerta son el color de estado Y el texto de su propia etiqueta
+     (.estado--ok, etc.): ya vienen ajustados para pasar 4.5:1 sobre su fondo
+     tenue. --grave es distinto: se usa también como FONDO SÓLIDO con texto
+     blanco (.boton--peligro), un uso que pide un valor más oscuro que el que
+     necesita el texto de la etiqueta — por eso --grave-texto existe aparte,
+     solo para .estado--grave. */
+  --ok:     #007a00;
+  --alerta: #895d00;
+  --grave:      #d14342;  /* fondo de .boton--peligro y bordes; NO usar como texto */
+  --grave-texto: #ba3c3b; /* SOLO para el texto de .estado--grave */
 
   /* --- Tipografía, espaciado y formas -------------------------------------
      Inter (declarada en css/fuentes.css) es la tipografía oficial del
@@ -76,6 +91,8 @@
 
     --marca:       #0a86bd;   /* celeste institucional, algo más profundo para fondo oscuro */
     --marca-texto: #ffffff;
+    --marca-enlace: #148bc0;
+    --texto-sobre-marca: #14140f;
 
     --serie-1: #35b4ea;
     --serie-2: #ff8f4d;
@@ -85,6 +102,11 @@
     --serie-6: #ffca3a;
     --serie-7: #4fa6bf;
     --serie-8: #ef6a6a;
+
+    --ok:     #45a445;
+    --alerta: #eda100;
+    --grave:      #d14342;
+    --grave-texto: #e86a69;
   }
 }
 
@@ -98,6 +120,8 @@
 
   --marca:       #0a86bd;
   --marca-texto: #ffffff;
+  --marca-enlace: #148bc0;
+  --texto-sobre-marca: #14140f;
 
   --serie-1: #35b4ea;
   --serie-2: #ff8f4d;
@@ -107,4 +131,9 @@
   --serie-6: #ffca3a;
   --serie-7: #4fa6bf;
   --serie-8: #ef6a6a;
+
+  --ok:     #45a445;
+  --alerta: #eda100;
+  --grave:      #d14342;
+  --grave-texto: #e86a69;
 }

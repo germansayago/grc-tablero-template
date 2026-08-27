@@ -57,10 +57,12 @@
   filter: none;
 }
 
-/* Primario: acción principal. Usa el color de marca. */
+/* Primario: acción principal. Usa el color de marca. Texto oscuro fijo (no
+   blanco): a este tamaño de letra, el celeste no tiene contraste suficiente
+   para texto blanco — ver --texto-sobre-marca en tokens.css. */
 .boton--primario {
   background: var(--marca);
-  color: var(--marca-texto);
+  color: var(--texto-sobre-marca);
   border-color: var(--marca);
 }
 
@@ -72,10 +74,11 @@
 }
 .boton--secundario:hover { background: var(--fondo); }
 
-/* Sutil: para acciones terciarias, sin caja. */
+/* Sutil: para acciones terciarias, sin caja. --marca-enlace (no --marca): acá
+   el celeste ES el texto, y el oficial no tiene contraste suficiente para eso. */
 .boton--sutil {
   background: transparent;
-  color: var(--marca);
+  color: var(--marca-enlace);
   border-color: transparent;
 }
 .boton--sutil:hover { background: color-mix(in srgb, var(--marca) 12%, transparent); }
@@ -112,5 +115,7 @@
 
 .estado--ok     { color: var(--ok);     background: color-mix(in srgb, var(--ok) 14%, transparent); }
 .estado--alerta { color: var(--alerta); background: color-mix(in srgb, var(--alerta) 16%, transparent); }
-.estado--grave  { color: var(--grave);  background: color-mix(in srgb, var(--grave) 14%, transparent); }
+/* --grave-texto, no --grave: acá es el color del texto de la etiqueta, un uso
+   distinto (y con otro valor necesario) que el de fondo de .boton--peligro. */
+.estado--grave  { color: var(--grave-texto);  background: color-mix(in srgb, var(--grave-texto) 14%, transparent); }
 .estado--neutro { color: var(--texto-suave); background: color-mix(in srgb, var(--texto-suave) 12%, transparent); }

@@ -52,10 +52,14 @@ body {
   opacity: 0.4;
 }
 
+/* 1.25rem (20px) + 700: cuenta como "texto grande" para WCAG (necesita 3:1,
+   no 4.5:1) — el blanco sobre --marca no llega a 4.5:1 a este tamaño de
+   fondo, así que el texto tiene que calificar como grande. No lo achiques
+   ni le bajes el peso sin volver a revisar el contraste. */
 .encabezado .titulos h1 {
   margin: 0;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   line-height: 1.2;
 }
 
@@ -204,7 +208,7 @@ td.numero, th.numero { text-align: right; font-variant-numeric: tabular-nums; }
   border-top: 1px solid var(--borde);
 }
 .enlaces-paginas a {
-  color: var(--marca);
+  color: var(--marca-enlace);
   text-decoration: none;
   font-weight: 600;
 }

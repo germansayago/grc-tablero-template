@@ -208,7 +208,8 @@
 
     function pintarTodosLosSwatches() {
       pintarSwatches('sw-base', [
-        { n: 'Marca',      v: '--marca' },
+        { n: 'Marca (fondos)',      v: '--marca' },
+        { n: 'Marca (como texto)',  v: '--marca-enlace' },
         { n: 'Fondo',      v: '--fondo' },
         { n: 'Superficie', v: '--superficie' },
         { n: 'Borde',      v: '--borde' },
@@ -220,7 +221,8 @@
       pintarSwatches('sw-estados', [
         { n: 'OK',     v: '--ok' },
         { n: 'Alerta', v: '--alerta' },
-        { n: 'Grave',  v: '--grave' }
+        { n: 'Grave (fondos)',       v: '--grave' },
+        { n: 'Grave (texto etiqueta)', v: '--grave-texto' }
       ]);
     }
 

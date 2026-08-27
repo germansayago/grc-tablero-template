@@ -50,6 +50,13 @@ abrí `guia-diseno.html`.
   CSS. Todo color sale de las variables de `css/tokens.css` (`--marca`, `--texto`,
   etc.). Si necesitás un color que no existe, es señal de que algo está mal:
   preguntá.
+- **Ojo con `--marca` / `--marca-enlace` y `--grave` / `--grave-texto`: no son
+  intercambiables.** Cada par existe porque el mismo color no pasa el
+  contraste mínimo (WCAG AA) en sus dos usos distintos. `--marca` y `--grave`
+  son para FONDOS (header, botones); `--marca-enlace` y `--grave-texto` son
+  para cuando ese color ES el texto (links, `.boton--sutil`, etiquetas de
+  estado). Si vas a usar alguno como color de texto sobre un fondo claro,
+  usá la variante `-enlace`/`-texto`; si es un fondo, la variante base.
 - Los botones usan la clase `.boton` (+ variante); la tipografía, las clases
   `.titulo-*`. No inventes estilos: mirá `guia-diseno.html`.
 - No agregues dependencias de diseño (Bootstrap, Tailwind, fuentes de Google,
