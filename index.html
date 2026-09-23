@@ -3,8 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- CAMBIÁ el título por el de tu tablero -->
+
+  <!-- METADATA — CAMBIÁ estas cuatro líneas por las de tu tablero.
+       (revisar-tablero.sh chequea que estén y que no sigan siendo el ejemplo) -->
   <title>Tablero — Gobierno de Río Cuarto</title>
+  <meta name="description" content="Una línea que describe qué muestra este tablero y para qué sirve.">
+  <meta name="author" content="Equipo de Estadísticas — Gobierno de Río Cuarto">
+  <meta name="dcterms.modified" content="2026-09">  <!-- año-mes de los datos -->
+  <!-- Si tu tablero se vincula a un Objetivo de Desarrollo Sostenible, sumá:
+       <meta name="ods" content="11, 16"> y mostrá sus íconos (assets/img/ods/). -->
+  <!-- Si el tablero se va a compartir por chat/redes, sumá también og:title y og:description. -->
 
   <!-- Aplica el tema guardado ANTES de pintar la página, para que no se vea
        primero claro y después oscuro (o al revés) por un instante. No se toca. -->
@@ -58,10 +66,11 @@
   <main>
     <div class="contenedor">
 
-      <!-- CAMBIÁ el título y la bajada por los de tu tablero -->
+      <!-- CAMBIÁ el título, la bajada y la fecha por los de tu tablero -->
       <section class="intro">
         <h2>Título del tablero</h2>
         <p class="bajada">Una línea que explica qué muestra este tablero y para qué sirve.</p>
+        <p class="actualizado">Actualizá esta fecha: datos a mes/año.</p>
       </section>
 
       <!-- Empezá tu tablero acá. Usá las clases de css/componentes.css
