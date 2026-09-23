@@ -33,6 +33,11 @@ assets/fonts/       tipografía (Google Sans) e íconos (Material Symbols), guar
 SECURITY.md         las 3 reglas de seguridad. Leelo una vez.
 ACCESIBILIDAD.md    contraste de color y accesibilidad. Leelo si vas a tocar colores.
 AGENTS.md           las reglas que sigue el agente de IA. La fuente de verdad.
+CHECKLIST.md        qué tiene que cumplir el tablero antes de publicarse.
+scripts/
+  revisar-tablero.sh   corré esto antes de commitear. Lo mismo que corre GitHub.
+  sistema.sha256       huellas de los archivos que no se tocan.
+PLANTILLA           borralo al crear tu tablero (ver "Empezar", paso 1).
 .github/workflows/  la revisión automática que corre en GitHub.
 ```
 
@@ -60,7 +65,11 @@ define más adelante. Mientras tanto, para mostrar números usá tarjetas `.kpi`
    "Create a new repository"** en GitHub. Ponele un nombre (ej. `tablero-tramites`).
    Vas a tener tu propia copia, con el diseño y la seguridad ya adentro.
 
-2. **Cloná tu repo.**
+2. **Cloná tu repo e instancialo.** Con un asistente de IA: escribile
+   `iniciar:` — te pregunta el nombre, la descripción y la fecha de los datos,
+   completa la metadata de `index.html` y borra el archivo `PLANTILLA`. A mano:
+   editá esos textos y borrá `PLANTILLA` vos. Mientras ese archivo exista, los
+   controles no bloquean por textos de ejemplo; al borrarlo, empiezan a exigir.
 
 3. **Vé la plantilla funcionando.** Abrí `index.html` en el navegador. Si tu
    `tablero.js` termina usando `fetch` para traer datos, vas a necesitar un
@@ -68,17 +77,24 @@ define más adelante. Mientras tanto, para mostrar números usá tarjetas `.kpi`
    Server de VS Code, o cualquiera que prefieras) — el navegador bloquea esa
    carga si abrís el archivo directo. No es un problema, solo algo para saber.
 
-4. **Poné tus datos en `datos/`.** Ya agregados y publicables, sin datos de
-   personas — ver `SECURITY.md`. El formato es tu decisión.
+4. **Poné tus datos en `datos/`.** La gestión de datos la seguís haciendo como
+   la venías haciendo — las reglas de seguridad están en `SECURITY.md`. El
+   formato es tu decisión.
 
 5. **Editá `js/tablero.js`.** Es el único archivo con lógica: cargá tus datos
    y mostralos (tarjetas `.kpi`, una tabla, lo que necesites).
 
-6. **Editá los textos de `index.html`:** el título y la bajada.
+6. **Terminá los textos de `index.html`:** el `<h2>` y la bajada de la intro (el
+   `iniciar:` ya dejó el `<title>` y la metadata). Si tu tablero se vincula a un
+   ODS, con IA escribile `ods:` para que te sugiera cuáles y cómo declararlo.
 
-7. **Subí el cambio.** Al hacer push, GitHub revisa solo que no se filtre
-   ninguna clave y que el tablero cumpla las reglas. Verde = listo para publicar
-   en Dokploy.
+7. **Revisá antes de subir.** Corré `bash scripts/revisar-tablero.sh` (lo mismo
+   que corre GitHub) y después el repaso a mano de [`CHECKLIST.md`](CHECKLIST.md).
+   Con un asistente de IA, el atajo **`revisar:`** hace los dos y te devuelve un
+   informe con **LISTO / NO LISTO**. Los atajos están definidos en `AGENTS.md` §7.
+
+8. **Subí el cambio.** Al hacer push, GitHub corre el mismo script más el
+   escaneo de claves. Verde = listo para publicar en Dokploy.
 
 ---
 

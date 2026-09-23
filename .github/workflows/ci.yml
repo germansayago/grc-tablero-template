@@ -2,7 +2,16 @@ name: Revisar tablero
 
 # Corre solo, en GitHub, cada vez que alguien sube algo o abre un Pull Request.
 # Si algo falla, el cambio queda marcado en rojo y no debería publicarse hasta
-# arreglarlo. El equipo no ejecuta nada a mano: esto es la red de seguridad.
+# arreglarlo. El equipo no ejecuta nada a mano.
+#
+# Dos jobs, independientes:
+#   1) secretos  — escaneo de claves (gitleaks). Control de seguridad de base,
+#                  ya existía; no es parte de la unificación visual.
+#   2) reglas    — bash scripts/revisar-tablero.sh: unificación visual
+#                  (header/footer iguales, design system, metadata, accesibilidad).
+#                  Lo mismo se puede correr local antes de commitear.
+#
+# Qué revisa el job 2 (y qué queda a criterio de una persona): CHECKLIST.md
 
 on:
   push:
@@ -15,7 +24,8 @@ permissions:
 jobs:
 
   # ---------------------------------------------------------------------------
-  # 1) SEGURIDAD: busca claves/secretos filtrados, incluso en el historial.
+  # 1) SEGURIDAD (de base, no toca la unificación visual): busca claves y
+  #    secretos filtrados, incluso en el historial de git.
   # ---------------------------------------------------------------------------
   secretos:
     name: Escaneo de claves (gitleaks)
@@ -32,64 +42,14 @@ jobs:
           GITLEAKS_CONFIG: .gitleaks.toml
 
   # ---------------------------------------------------------------------------
-  # 2) GUARDARRAÍLES: reglas simples del framework, revisadas con bash.
+  # 2) UNIFICACIÓN VISUAL: lo mecanizable de CHECKLIST.md, en un script.
   # ---------------------------------------------------------------------------
-  guardarrailes:
-    name: Reglas del tablero
+  reglas:
+    name: Unificación visual (scripts/revisar-tablero.sh)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Nada cargado desde internet (sin CDN externo)
-        run: |
-          # Solo mira <link>, <script src> e <img src> (lo que el navegador
-          # carga solo). Un <a href="https://..."> normal — un link para que
-          # alguien lo abra a mano, como los de las guías — no cuenta: eso no
-          # es "cargar un recurso", es una referencia para leer.
-          if grep -rnE '<(link|script|img)[^>]*(src|href)[[:space:]]*=[[:space:]]*["'"'"']https?://' \
-               --include='*.html' --include='*.js' \
-               --exclude-dir=.git . ; then
-            echo "::error::Hay un <link>, <script> o <img> que carga algo desde internet. Todo debe estar en el repo (css/, js/, assets/)."
-            exit 1
-          fi
-          echo "OK: no se carga nada desde internet."
-
-      - name: No hay archivos de credenciales versionados
-        run: |
-          if git ls-files | grep -qiE '(^|/)(\.env($|\.)|credenciales.*\.json|secretos.*\.json|.*\.pem$|.*\.key$|.*\.p12$)'; then
-            echo "::error::Hay un archivo de credenciales trackeado por git. Sacalo (y cambiá esa clave: quedó en el historial)."
-            exit 1
-          fi
-          echo "OK: no hay archivos de credenciales versionados."
-
-      - name: No se subieron datos crudos ni planillas
-        run: |
-          # datos-fuente/LEEME.md es la única excepción permitida (el instructivo
-          # de la carpeta; por eso sigue versionado pese al .gitignore).
-          if git ls-files | grep -iE '(^datos-fuente/|\.xlsx?$)' | grep -qvi '^datos-fuente/LEEME\.md$'; then
-            echo "::error::Hay datos crudos o una planilla en el repo. Solo se publica el resultado agregado en datos/."
-            exit 1
-          fi
-          echo "OK: no hay datos crudos versionados."
-
-      - name: El tablero usa el design system
-        run: |
-          miss=0
-          grep -q 'css/fuentes.css' index.html || { echo "::error::index.html no enlaza css/fuentes.css (la tipografía)"; miss=1; }
-          grep -q 'css/tokens.css' index.html || { echo "::error::index.html no enlaza css/tokens.css"; miss=1; }
-          grep -q 'css/base.css'   index.html || { echo "::error::index.html no enlaza css/base.css"; miss=1; }
-          grep -q 'css/componentes.css' index.html || { echo "::error::index.html no enlaza css/componentes.css (botones, estados, tipografía)"; miss=1; }
-          grep -q 'css/iconos.css' index.html || { echo "::error::index.html no enlaza css/iconos.css (los íconos quedan como texto suelto)"; miss=1; }
-          grep -q 'css/tablero.css' index.html || { echo "::error::index.html no enlaza css/tablero.css (tus estilos propios no cargarían, y sin aviso)"; miss=1; }
-          grep -q 'js/tema.js'     index.html || { echo "::error::index.html no enlaza js/tema.js (el botón de modo oscuro queda sin función)"; miss=1; }
-          grep -q 'id="boton-tema"' index.html || { echo "::error::index.html no tiene el botón #boton-tema del header"; miss=1; }
-          [ "$miss" = 0 ] && echo "OK: el design system está enlazado."
-          exit $miss
-
-      - name: Aviso si hay colores escritos a mano (deberían salir de tokens.css)
-        run: |
-          if grep -rnE '#[0-9a-fA-F]{3,6}\b' js/tablero.js 2>/dev/null; then
-            echo "::warning::Hay colores escritos a mano en js/tablero.js. Los colores salen de css/tokens.css; en el tablero no deberías necesitar ninguno."
-          else
-            echo "OK: sin colores a mano en tablero.js."
-          fi
+      # ubuntu-latest ya trae bash, grep y shasum — no hace falta instalar nada.
+      - name: Correr los controles
+        run: bash scripts/revisar-tablero.sh

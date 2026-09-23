@@ -100,6 +100,13 @@ No las resuelvas por tu cuenta — avisá y se define en conjunto:
 5. Si agregaste un color, pasa contraste en los dos temas
    ([WebAIM](https://webaim.org/resources/contrastchecker/) alcanza).
 
+Para la **unificación visual** (que el tablero se vea como los demás: header y
+footer iguales, design system, metadata, accesibilidad) corré
+**`bash scripts/revisar-tablero.sh`** — es lo mismo que corre GitHub. La lista
+completa, con la guía del repaso a mano, está en **`CHECKLIST.md`**; el atajo
+**`revisar:`** (§7) la recorre de una. Esto **no** cubre seguridad ni datos:
+eso sigue siendo el punto 1-2 de acá arriba y `SECURITY.md`.
+
 Y decí en una línea qué tocaste y por qué.
 
 ---
@@ -113,3 +120,65 @@ publicado, no. Nadie se molesta por una pregunta.
 Sobre **todo lo demás** (dónde poner un estilo, cómo estructurar el HTML, si
 conviene una tabla o unas tarjetas): decidí vos y seguí. Si te equivocás se
 corrige, y avanzar vale más que consultar cada paso.
+
+---
+
+## 7. Atajos
+
+Palabras para escribirle al asistente de IA (Claude Code, Cursor, Antigravity…),
+al principio del mensaje y con dos puntos. No son magia de ninguna herramienta:
+son procedimientos definidos acá. Quien no usa IA hace lo mismo a mano siguiendo
+`CHECKLIST.md`.
+
+### `iniciar:`
+
+Instancia el tablero a partir de la plantilla. El asistente:
+
+1. Te pregunta: nombre del tablero, una línea de qué muestra, mes de los datos.
+2. Completa en `index.html` el `<title>`, los `<meta>` (`description`, `author`,
+   `dcterms.modified`), el `<h2>` y la `.bajada` de la intro, y la línea
+   `.actualizado`.
+3. Borra el archivo `PLANTILLA` y los comentarios de andamiaje
+   (`<!-- CAMBIÁ… -->`, `<!-- Empezá tu tablero acá… -->`).
+4. Corre `bash scripts/revisar-tablero.sh` y te muestra cómo quedó.
+
+No toca `datos/` ni `js/tablero.js` — eso lo hacés vos.
+
+### `revisar:`
+
+El control de **unificación visual** antes de publicar: que el tablero se vea
+como los demás. No toca seguridad ni datos (eso es `SECURITY.md` y criterio de
+cada equipo). El asistente:
+
+1. Corre `bash scripts/revisar-tablero.sh`.
+2. Recorre `CHECKLIST.md` punto por punto, incluida la guía del repaso a mano
+   (header/footer, metadata, design system, contraste, teclado).
+3. Devuelve un informe: cada punto con ✅ / ❌ / ⚠️, y para lo que no pasa, el
+   archivo, la línea y cómo se corrige.
+4. Cierra con **LISTO** o **NO LISTO** y cuántos bloqueantes quedan.
+
+No edita nada.
+
+### `ods:`
+
+Sugiere a qué Objetivos de Desarrollo Sostenible se vincula el tablero. El
+asistente lee el tema (título, bajada) y los archivos de `datos/`, y te dice qué
+ODS aplican (número + nombre), qué íconos usar (`assets/img/ods/ods-NN.png`) y
+cómo declararlo (`<meta name="ods" content="11, 16">`). Los íconos van tal cual:
+sin recolorear ni deformar (marca registrada de la ONU — ver
+`assets/img/ods/LEEME.md`).
+
+### `accesibilidad:`
+
+El repaso de accesibilidad (WCAG 2.1 AA — ver `ACCESIBILIDAD.md`). El asistente
+revisa y te informa qué falla y cómo se corrige:
+
+- Contraste de cualquier color nuevo contra `--fondo` y `--superficie`, **en los
+  dos temas** (mín. 4.5:1 texto normal, 3:1 texto grande o borde).
+- `aria-label` en los botones que son solo un ícono.
+- Jerarquía de títulos sin saltos.
+- Que se llegue con Tab a todo lo interactivo y se vea el foco.
+- Que la información no dependa solo del color.
+- `prefers-reduced-motion` si hay animaciones.
+
+No edita.
